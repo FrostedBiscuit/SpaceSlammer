@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: f6113acfe52bab64ebe1a92d61af660d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Titillium Web Light
+  fontNames:
+  - Titillium Web Light
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e75144bb1b568844786ee27733a3fb1a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

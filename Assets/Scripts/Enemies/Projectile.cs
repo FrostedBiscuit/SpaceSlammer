@@ -1,0 +1,38 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Projectile : MonoBehaviour
+{
+    [SerializeField]
+    float Speed = 10f;
+    [SerializeField]
+    float Damage = 20f;
+
+    [SerializeField]
+    AudioClip ShootSound;
+    [SerializeField]
+    AudioClip ImpactSound;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        GetComponent<Rigidbody2D>().AddForce(transform.up * Speed);
+
+        SoundManager.instance.PlaySFXClip(ShootSound);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider) {
+
+        if (collider.tag == "Player") {
+            Player.instance.TakeDamage(Damage);
+        }
+
+        if (collider.isTrigger == false) {
+
+            SoundManager.instance.PlaySFXClip(ImpactSound);
+
+            Destroy(gameObject);
+        }
+    }
+}
