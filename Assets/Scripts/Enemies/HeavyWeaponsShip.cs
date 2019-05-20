@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeavyWeaponsShip : Enemy
 {
     public float BackoffRange = 3f;
+    public float Speed = 10f;
     public float BeamDuration = 2f;
     public float BeamLenght = 3f;
     public float BeamDamageInterval = 0.25f;
@@ -42,11 +43,23 @@ public class HeavyWeaponsShip : Enemy
 
     protected override void FixedUpdate() {
         base.FixedUpdate();
+
+        move();
     }
 
     protected override void Die() {
         base.Die();
 
         ObjectPool.instance.ReturnObject(gameObject);
+    }
+
+    void move() {
+        
+        if (distanceToPlayer < AttackRange / 2) {
+            rigidbody.velocity = Vector2.zero;
+        }
+        else {
+            rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime;
+        }
     }
 }

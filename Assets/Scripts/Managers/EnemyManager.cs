@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
 
     public int sumEnemyDied;
 
-    public GameObject Enemy;
+    public List<GameObject> Enemies = new List<GameObject>();
 
     List<Enemy> activeEnemies = new List<Enemy>();
     
@@ -75,11 +75,12 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < enemyCount; i++) {
 
+            int randomIndex = Random.Range(0, Enemies.Count - 1);
             float randomAngle = Random.Range(0f, 2f * Mathf.PI);
 
             Vector3 offset = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(EnemySpawnNearDist, EnemySpawnFarDist); 
 
-            Enemy e = ObjectPool.instance.RequestObject(Enemy, offset + Player.instance.transform.position, Quaternion.identity).GetComponent<Enemy>();
+            Enemy e = ObjectPool.instance.RequestObject(Enemies[randomIndex], offset + Player.instance.transform.position, Quaternion.identity).GetComponent<Enemy>();
 
             e.RegisterOnDeathCallback(onEnemyDeath);
 

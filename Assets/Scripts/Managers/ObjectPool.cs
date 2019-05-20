@@ -21,9 +21,14 @@ public class ObjectPool : MonoBehaviour {
     }
     #endregion
 
-    public int NumInitialObjects = 100;
+    [SerializeField]
+    int NumInitialObjects = 100;
 
-    public List<GameObject> Objects;
+    [SerializeField]
+    Transform PoolParentTransform = null;
+
+    [SerializeField]
+    List<GameObject> Objects;
 
     List<GameObject> activeObjects;
     List<GameObject> inactiveObjects;
@@ -42,7 +47,7 @@ public class ObjectPool : MonoBehaviour {
 
                 obj.SetActive(false);
 
-                GameObject instance = Instantiate(obj, resetPosition, Quaternion.identity);
+                GameObject instance = Instantiate(obj, resetPosition, Quaternion.identity, PoolParentTransform == null ? null : PoolParentTransform);
 
                 inactiveObjects.Add(instance);
             }
@@ -67,7 +72,7 @@ public class ObjectPool : MonoBehaviour {
         if (Objects.Contains(go)) {
 
             // Find object
-            GameObject obj = inactiveObjects.Find(x => x.name == go.name + "(Clone)");
+            GameObject obj = inactiveObjects.Find(x => x.name == go.name + "(Clone)"); 
 
             // Reset it's properties
             obj.SetActive(true);
@@ -95,20 +100,18 @@ public class ObjectPool : MonoBehaviour {
     public GameObject ReturnObject(GameObject go) {
 
         // Check if GO exists
-        if (Objects.Contains(go)) {
-            // Find the object
-            GameObject obj = activeObjects.Find(x => x == go); // TODO: FIX THIS ABOMINATION
-
+        if (activeObjects.Contains(go)) {
+       
             // Deactivate said object
-            obj.SetActive(false);
+            go.SetActive(false);
 
-            obj.transform.position = resetPosition;
+            go.transform.position = resetPosition;
 
             // Move it to inactiveObjects
-            inactiveObjects.Add(obj);
-            activeObjects.Remove(obj);
+            inactiveObjects.Add(go);
+            activeObjects.Remove(go);
 
-            return obj;
+            return go;
         }
 
         // Seeing it wasn't found, we log the error and return null
