@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6812092723991730536
 Transform:
   m_ObjectHideFlags: 0
@@ -322,7 +322,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentShip: {fileID: 6812092723991730539}
-  AudioSource: {fileID: 1333083076714568065}
   BeamSound: {fileID: 8300000, guid: ac8930bd78d5a7f4b92d84e5abcd51f2, type: 3}
 --- !u!61 &6812092725846631887
 BoxCollider2D:

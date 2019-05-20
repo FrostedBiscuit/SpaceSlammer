@@ -29,11 +29,11 @@ public abstract class Enemy : MonoBehaviour
 
     protected Action<Enemy> enemyDeathCallback;
 
-    protected virtual void Start() {
+    protected virtual void OnEnable() {
 
         currentHealth = MaxHealth;
 
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = rigidbody == null ? GetComponent<Rigidbody2D>() : rigidbody;
 
         if (rigidbody == null) Debug.LogError("Enemy::Start() => No Rigidbody found!!!");
     }

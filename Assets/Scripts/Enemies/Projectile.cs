@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
 
             SoundManager.instance.PlaySFXClip(ImpactSound);
 
-            Destroy(gameObject);
+            ObjectPool.instance.ReturnObject(gameObject);
         }
     }
 }

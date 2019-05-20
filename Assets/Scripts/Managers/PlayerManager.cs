@@ -34,7 +34,7 @@ public class PlayerManager : MonoBehaviour {
 
         if (Player.instance == null) {
 
-            GameObject go = Instantiate(PlayerGO, Spawn.position, Spawn.rotation);
+            GameObject go = ObjectPool.instance.RequestObject(PlayerGO, Spawn.position, Spawn.rotation);
 
             cameraFollow.FollowTransform = go.transform;
         }

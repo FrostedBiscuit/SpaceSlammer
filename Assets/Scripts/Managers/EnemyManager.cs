@@ -79,7 +79,7 @@ public class EnemyManager : MonoBehaviour
 
             Vector3 offset = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(EnemySpawnNearDist, EnemySpawnFarDist); 
 
-            Enemy e = Instantiate(Enemy, offset + Player.instance.transform.position, Quaternion.identity).GetComponent<Enemy>();
+            Enemy e = ObjectPool.instance.RequestObject(Enemy, offset + Player.instance.transform.position, Quaternion.identity).GetComponent<Enemy>();
 
             e.RegisterOnDeathCallback(onEnemyDeath);
 

@@ -12,8 +12,8 @@ public class HeavyWeaponsShip : Enemy
     [SerializeField]
     GameObject Beam = null;
 
-    protected override void Start() {
-        base.Start();
+    protected override void OnEnable() {
+        base.OnEnable();
 
         Beam.SetActive(false);
     }
@@ -47,6 +47,6 @@ public class HeavyWeaponsShip : Enemy
     protected override void Die() {
         base.Die();
 
-        Destroy(gameObject);
+        ObjectPool.instance.ReturnObject(gameObject);
     }
 }

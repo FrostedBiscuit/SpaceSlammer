@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3206315831531689927
 Transform:
   m_ObjectHideFlags: 0
@@ -146,7 +146,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 30
   Damage: 20
-  AudioSource: {fileID: 7721354343677138860}
   ShootSound: {fileID: 8300000, guid: a89a3e74cd555954381c725ddd44d7f9, type: 3}
   ImpactSound: {fileID: 8300000, guid: e583fb7ffa48f834cb5acc8332d03164, type: 3}
 --- !u!82 &7721354343677138860

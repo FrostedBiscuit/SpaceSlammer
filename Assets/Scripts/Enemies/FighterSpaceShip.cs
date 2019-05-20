@@ -23,7 +23,7 @@ public class FighterSpaceShip : Enemy {
 
         if (distanceToPlayer <= AttackRange) {
 
-            Instantiate(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
+            ObjectPool.instance.RequestObject(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
         }
 
         nextFire = FireRate + Time.time;
@@ -32,14 +32,13 @@ public class FighterSpaceShip : Enemy {
     protected override void Die() {
         base.Die(); 
 
-        Debug.Log("Basic space ship has died!!!");
+        Debug.Log("Fighter space ship has died!!!");
 
-        // ONLY FOR TESTING
-        Destroy(gameObject);
+        ObjectPool.instance.ReturnObject(gameObject);
     }
 
-    protected override void Start() {
-        base.Start();
+    protected override void OnEnable() {
+        base.OnEnable();
 
         if (Projectile == null) {
             Debug.LogError("BasicSpaceShip::Start() => No projectile game object found!!!");
