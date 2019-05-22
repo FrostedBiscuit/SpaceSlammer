@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler/*, IEndDragHandler*/{
 
     Vector2 beginDragPosition;
 
@@ -20,13 +20,13 @@ public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         if (Player.instance == null) { return; }
 
-        Player.instance.GetRigidbody().velocity = (Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(beginDragPosition)).normalized * Player.instance.FollowSpeed;
+        Player.instance.GetRigidbody().velocity = Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(beginDragPosition);
     }
-
+    /*
     public void OnEndDrag(PointerEventData eventData) {
 
         if (Player.instance == null) { return; }
 
         Player.instance.GetRigidbody().AddForce((Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(beginDragPosition)).normalized * Player.instance.Speed);
-    }
+    }*/
 }
