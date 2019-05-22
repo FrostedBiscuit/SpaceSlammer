@@ -376,12 +376,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 15
+  m_fontSize: 18
   m_fontSizeBase: 15
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 18
   m_fontStyle: 0
   m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
@@ -2332,26 +2332,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7066962960279195789, guid: cb0649589cfb2804ca045a4de312122b,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066962960279195789, guid: cb0649589cfb2804ca045a4de312122b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066962960279195789, guid: cb0649589cfb2804ca045a4de312122b,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066962960279195789, guid: cb0649589cfb2804ca045a4de312122b,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2509700044553563221, guid: cb0649589cfb2804ca045a4de312122b,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -2386,6 +2366,26 @@ PrefabInstance:
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066962960279195789, guid: cb0649589cfb2804ca045a4de312122b,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066962960279195789, guid: cb0649589cfb2804ca045a4de312122b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066962960279195789, guid: cb0649589cfb2804ca045a4de312122b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066962960279195789, guid: cb0649589cfb2804ca045a4de312122b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb0649589cfb2804ca045a4de312122b, type: 3}
@@ -2811,7 +2811,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.07}
   m_AnchorMax: {x: 1, y: 0.44000003}
-  m_AnchoredPosition: {x: -0.000053406, y: -0.13417053}
+  m_AnchoredPosition: {x: -0.00005340576, y: -0.13417053}
   m_SizeDelta: {x: -0.00012207, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &932340303
@@ -3069,7 +3069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.56}
   m_AnchorMax: {x: 1, y: 0.94000006}
-  m_AnchoredPosition: {x: -0.000053406, y: 0.12194252}
+  m_AnchoredPosition: {x: -0.00005340576, y: 0.12194252}
   m_SizeDelta: {x: -0.00012207, y: -0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1015031852
@@ -4207,9 +4207,9 @@ MonoBehaviour:
   m_fontSize: 15
   m_fontSizeBase: 15
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 15
+  m_fontSizeMax: 15
   m_fontStyle: 0
   m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
