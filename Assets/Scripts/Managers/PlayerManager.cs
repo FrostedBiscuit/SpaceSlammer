@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     [SerializeField]
-    List<GameObject> PlayerGOs = new List<GameObject>();
+    GameObject PlayerGO;
+
+    [SerializeField]
+    List<Sprite> PlayerSkins = new List<Sprite>();
 
     [SerializeField]
     Transform Spawn;
@@ -14,7 +17,7 @@ public class PlayerManager : MonoBehaviour {
     CameraFollow cameraFollow;
 #if UNITY_EDITOR
     [SerializeField]
-    int DEBUG_TestPlayerGOIndex = 0;
+    int DEBUG_TestPlayerSkinIndex = 0;
 #endif
     int currentIndex {
         get {
@@ -29,37 +32,33 @@ public class PlayerManager : MonoBehaviour {
 
     int _currIndex = 0;
 
+    SpriteRenderer playerSpriteRenderer = null;
+
     // Start is called before the first frame update
     void Start() {
 #if UNITY_EDITOR
-        if (PlayerPrefs.HasKey("CurrentPlayerGOIndex") == true && PlayerPrefs.GetInt("CurrentPlayerGOIndex") == DEBUG_TestPlayerGOIndex) {
-            currentIndex = PlayerPrefs.GetInt("CurrentPlayerGOIndex");
-        }
-        else {
-            PlayerPrefs.SetInt("CurrentPlayerGOIndex", DEBUG_TestPlayerGOIndex);
-            currentIndex = DEBUG_TestPlayerGOIndex;
-        }
-
-        if (Player.instance == null || PlayerGOs.IndexOf(Player.instance.gameObject) != DEBUG_TestPlayerGOIndex) {
-
-            SpawnPlayer();
-        }
+        PlayerPrefs.SetInt("CurrentPlayerSkinIndex", DEBUG_TestPlayerSkinIndex);
+        currentIndex = DEBUG_TestPlayerSkinIndex;
 #else
-        if (PlayerPrefs.HasKey("CurrentPlayerGOIndex") == true) {
-            currentIndex = PlayerPrefs.GetInt("CurrentPlayerGOIndex");
+        if (PlayerPrefs.HasKey("CurrentPlayerSkinIndex") == true) {
+            currentIndex = PlayerPrefs.GetInt("CurrentPlayerSkinIndex");
         }
         else {
-            PlayerPrefs.SetInt("CurrentPlayerGOIndex", 0);
-        }
-
-        if (Player.instance == null) {
-            SpawnPlayer();
+            PlayerPrefs.SetInt("CurrentPlayerSkinIndex", 0);
         }
 #endif
+        if (Player.instance != null) {
+            playerSpriteRenderer = Player.instance.transform.GetComponentInChildren<SpriteRenderer>();
+        }
+        else {
+            SpawnPlayer();
+        }
     }
 
     // Update is called once per frame
     void Update() {
+
+        updatePlayerSprite();
         
         if (Player.instance == null) {
             // Player has died, do something
@@ -73,23 +72,35 @@ public class PlayerManager : MonoBehaviour {
     public void SpawnPlayer() {
 
         if (Player.instance != null) {
-            
-            ObjectPool.instance.ReturnObject(Player.instance.gameObject);
+            return;
         }
 
-        GameObject go = ObjectPool.instance.RequestObject(PlayerGOs[currentIndex], Spawn.position, Spawn.rotation);
+        GameObject go = ObjectPool.instance.RequestObject(PlayerGO, Spawn.position, Spawn.rotation);
+
+        playerSpriteRenderer = Player.instance.transform.GetComponentInChildren<SpriteRenderer>();
+        playerSpriteRenderer.sprite = PlayerSkins[currentIndex];
 
         cameraFollow.FollowTransform = go.transform;
 
-        PlayerPrefs.SetInt("CurrentPlayerGOIndex", currentIndex);
+        PlayerPrefs.SetInt("CurrentPlayerSkinIndex", currentIndex);
     }
 
-    public void IncreasePlayerGOIndex() {
-        currentIndex = (currentIndex + 1) % PlayerGOs.Count;
+    public void IncreasePlayerSkinIndex() {
+        currentIndex = (currentIndex + 1) % PlayerSkins.Count;
     }
 
-    public void DecreasePlayerGOIndex() {
+    public void DecreasePlayerSkinIndex() {
 
-        currentIndex = (currentIndex - 1) < 0 ? PlayerGOs.Count - 1 : currentIndex - 1;
+        currentIndex = (currentIndex - 1) < 0 ? PlayerSkins.Count - 1 : currentIndex - 1;
+    }
+
+    void updatePlayerSprite() {
+
+        if (playerSpriteRenderer != null) {
+            playerSpriteRenderer.sprite = PlayerSkins[currentIndex];
+        }
+        else {
+            Debug.LogWarning("PlayerManager::updatePlayerSprite() => No playerSpriteRenderer found!");
+        }
     }
 }
