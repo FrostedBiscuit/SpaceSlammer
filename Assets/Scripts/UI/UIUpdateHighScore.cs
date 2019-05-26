@@ -6,11 +6,9 @@ using TMPro;
 public class UIUpdateHighScore : MonoBehaviour {
 
     [SerializeField]
-    TextMeshProUGUI HighScoreText;
+    TextMeshProUGUI HighScoreText = null;
 
     private void OnEnable() {
-
-        Debug.Log(ScoreManager.instance == null);
 
         HighScoreText.text = ScoreManager.instance.GetHighScore().ToString();
     }

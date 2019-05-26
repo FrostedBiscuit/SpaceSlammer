@@ -9,10 +9,10 @@ public class FighterSpaceShip : Enemy {
     public float Speed = 20f;
 
     [SerializeField]
-    GameObject Projectile;
+    GameObject Projectile = null;
 
     [SerializeField]
-    Transform ProjectileSpawnPoint;
+    Transform ProjectileSpawnPoint = null;
 
     float nextFire;
 

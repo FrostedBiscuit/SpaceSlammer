@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     [SerializeField]
-    GameObject PlayerGO;
+    GameObject PlayerGO = null;
 
     [SerializeField]
     List<Sprite> PlayerSkins = new List<Sprite>();
 
     [SerializeField]
-    Transform Spawn;
+    Transform Spawn = null;
 
     [SerializeField]
-    CameraFollow cameraFollow;
+    CameraFollow cameraFollow = null;
 #if UNITY_EDITOR
     [SerializeField]
     int DEBUG_TestPlayerSkinIndex = 0;
@@ -26,7 +26,7 @@ public class PlayerManager : MonoBehaviour {
         set {
             _currIndex = value;
 
-            SpawnPlayer();
+            updatePlayerSprite();
         }
     }
 
@@ -53,12 +53,12 @@ public class PlayerManager : MonoBehaviour {
         else {
             SpawnPlayer();
         }
+
+        updatePlayerSprite();
     }
 
     // Update is called once per frame
     void Update() {
-
-        updatePlayerSprite();
         
         if (Player.instance == null) {
             // Player has died, do something
@@ -83,6 +83,8 @@ public class PlayerManager : MonoBehaviour {
         cameraFollow.FollowTransform = go.transform;
 
         PlayerPrefs.SetInt("CurrentPlayerSkinIndex", currentIndex);
+
+        updatePlayerSprite();
     }
 
     public void IncreasePlayerSkinIndex() {

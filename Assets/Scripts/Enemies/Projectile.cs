@@ -10,9 +10,9 @@ public class Projectile : MonoBehaviour
     float Damage = 20f;
 
     [SerializeField]
-    AudioClip ShootSound;
+    AudioClip ShootSound = null;
     [SerializeField]
-    AudioClip ImpactSound;
+    AudioClip ImpactSound = null;
 
     // Start is called before the first frame update
     void Start()

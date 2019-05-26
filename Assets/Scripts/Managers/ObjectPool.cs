@@ -28,7 +28,7 @@ public class ObjectPool : MonoBehaviour {
     Transform PoolParentTransform = null;
 
     [SerializeField]
-    List<GameObject> Objects;
+    List<GameObject> Objects = null;
 
     List<GameObject> activeObjects;
     List<GameObject> inactiveObjects;

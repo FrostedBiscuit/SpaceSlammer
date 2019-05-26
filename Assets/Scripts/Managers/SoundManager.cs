@@ -62,7 +62,7 @@ public class SoundManager : MonoBehaviour {
 
                 Source.PlayOneShot(MusicTracks[trackNumber]);
 
-                trackNumber = trackNumber > (MusicTracks.Count - 1) ? 0 : trackNumber + 1;
+                trackNumber = (trackNumber + 1) % MusicTracks.Count;
             }
         }
         else {

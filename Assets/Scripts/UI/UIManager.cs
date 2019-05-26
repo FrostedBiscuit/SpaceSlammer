@@ -21,11 +21,11 @@ public class UIManager : MonoBehaviour {
     #endregion
 
     [SerializeField]
-    GameObject MainMenu;
+    GameObject MainMenu = null;
     [SerializeField]
-    GameObject HUD;
+    GameObject HUD = null;
     [SerializeField]
-    GameObject EndScreen;
+    GameObject EndScreen = null;
 
     // Start is called before the first frame update
     void Start() {

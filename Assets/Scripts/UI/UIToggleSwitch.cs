@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIToggleSwitch : MonoBehaviour {
 
     [SerializeField]
-    Animator Animator;
+    Animator Animator = null;
 
     [SerializeField]
     Toggle Toggle;
@@ -28,9 +28,11 @@ public class UIToggleSwitch : MonoBehaviour {
 
         Toggle.onValueChanged.Invoke(Toggle.isOn);
     }
-    
+
     public void ToggleSwitchAnimate(bool value) {
 
-        Animator.SetBool("IsToggled", value);
+        if (Animator.gameObject.activeSelf) {
+            Animator.SetBool("IsToggled", value);
+        }
     }
 }
