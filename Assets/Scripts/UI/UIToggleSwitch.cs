@@ -12,7 +12,7 @@ public class UIToggleSwitch : MonoBehaviour {
     Toggle Toggle;
 
     // Start is called before the first frame update
-    void OnEnable() {
+    private void OnEnable() {
         
         if (Animator == null) {
             Debug.LogError("UIToggleSwitch::Start() => No Animator assigned!!!");
@@ -24,9 +24,7 @@ public class UIToggleSwitch : MonoBehaviour {
             return;
         }
 
-        ToggleSwitchAnimate(Toggle.isOn);
-
-        Toggle.onValueChanged.Invoke(Toggle.isOn);
+        //Toggle.onValueChanged.Invoke(Toggle.isOn);
     }
 
     public void ToggleSwitchAnimate(bool value) {
