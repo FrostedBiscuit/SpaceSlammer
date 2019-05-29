@@ -280,7 +280,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281743159
+    rgba: 4293125091
   m_fontColor: {r: 0.8901961, g: 0.8901961, b: 0.8901961, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -377,7 +377,6 @@ GameObject:
   - component: {fileID: 7066962960279195789}
   - component: {fileID: 7001442140569310527}
   - component: {fileID: 7915282460918338296}
-  - component: {fileID: 2487482686982952273}
   m_Layer: 5
   m_Name: Cover
   m_TagString: Untagged
@@ -441,25 +440,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!95 &2487482686982952273
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444088486353979843}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5c55c5349faa96541aef93a3fc34efbb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4514471587535058883
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +663,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293125091
+    rgba: 4281743159
   m_fontColor: {r: 0.21568628, g: 0.21568628, b: 0.21176471, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

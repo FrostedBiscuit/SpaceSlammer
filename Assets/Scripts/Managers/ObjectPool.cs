@@ -22,13 +22,10 @@ public class ObjectPool : MonoBehaviour {
     #endregion
 
     [SerializeField]
-    int NumInitialObjects = 100;
-
-    [SerializeField]
     Transform PoolParentTransform = null;
 
     [SerializeField]
-    List<GameObject> Objects = null;
+    List<PoolObject> Objects = null;
 
     List<GameObject> activeObjects;
     List<GameObject> inactiveObjects;
@@ -43,20 +40,15 @@ public class ObjectPool : MonoBehaviour {
 
         foreach (var obj in Objects) {
 
-            for (int i = 0; i < NumInitialObjects; i++) {
+            for (int i = 0; i < obj.NumToSpawn; i++) {
 
-                obj.SetActive(false);
+                obj.Object.SetActive(false);
 
-                GameObject instance = Instantiate(obj, resetPosition, Quaternion.identity, PoolParentTransform == null ? null : PoolParentTransform);
+                GameObject instance = Instantiate(obj.Object, resetPosition, Quaternion.identity, PoolParentTransform == null ? null : PoolParentTransform);
 
                 inactiveObjects.Add(instance);
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update() {
-        
     }
 
     /// <summary>
@@ -68,11 +60,10 @@ public class ObjectPool : MonoBehaviour {
     /// <returns>Instance of requested object</returns>
     public GameObject RequestObject(GameObject go, Vector3 position, Quaternion rotation) {
 
-        // Check if requested GO exists in the system
-        if (Objects.Contains(go)) {
+        // Try to find object
+        GameObject obj = inactiveObjects.Find(x => x.name == go.name + "(Clone)");
 
-            // Find object
-            GameObject obj = inactiveObjects.Find(x => x.name == go.name + "(Clone)"); 
+        if (obj != null) {
 
             // Reset it's properties
             obj.SetActive(true);
@@ -88,7 +79,7 @@ public class ObjectPool : MonoBehaviour {
         }
 
         // Logging an error if the requested object is not found and returning null
-        Debug.LogError("ObjectPool::GetObject() => No object found!!! Name: " + go.name + " Objects.Contains(): " + Objects.Contains(go));
+        Debug.LogError("ObjectPool::GetObject() => No object found!!! Name: " + go.name);
         return null;
     }
     // lmao
@@ -118,4 +109,12 @@ public class ObjectPool : MonoBehaviour {
         Debug.LogError("ObjectPool::ReturnObject() => Returned an invalid object!!!");
         return null;
     }
+}
+
+[System.Serializable]
+public struct PoolObject {
+
+    public int NumToSpawn;
+
+    public GameObject Object;
 }

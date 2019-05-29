@@ -19,8 +19,8 @@ public class SoundManager : MonoBehaviour {
     }
     #endregion
 
-    bool playSFX = true;
-    bool playMusic = true;
+    bool playSFX = false;
+    bool playMusic = false;
 
     public bool PlaySFX { get { return playSFX; } }
     public bool PlayMusic { get { return playMusic; } }
@@ -49,11 +49,6 @@ public class SoundManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
-        // if we want SFX
-        if (playSFX == true) {
-
-        }
 
         // if we want music
         if (playMusic == true && MusicTracks.Count != 0) {
