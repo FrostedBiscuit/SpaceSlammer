@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler/*, IEndDragHandler*/{
 
+    public float AccelerationMultiplier = 3.5f;
+
     Vector2 beginDragPosition;
 
     public void OnBeginDrag(PointerEventData eventData) {
@@ -20,7 +22,7 @@ public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler/*, IEnd
 
         if (Player.instance == null) { return; }
 
-        Player.instance.GetRigidbody().velocity = Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(beginDragPosition);
+        Player.instance.GetRigidbody().velocity = (Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(beginDragPosition)) * AccelerationMultiplier;
     }
     /*
     public void OnEndDrag(PointerEventData eventData) {

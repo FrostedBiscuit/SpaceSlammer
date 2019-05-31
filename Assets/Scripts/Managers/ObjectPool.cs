@@ -49,6 +49,16 @@ public class ObjectPool : MonoBehaviour {
                 inactiveObjects.Add(instance);
             }
         }
+
+        for (int i = 0; i < PoolParentTransform.childCount; i++) {
+
+            if (PoolParentTransform.GetChild(i).gameObject.activeSelf == true) {
+                activeObjects.Add(PoolParentTransform.GetChild(i).gameObject);
+            }
+            else {
+                inactiveObjects.Add(PoolParentTransform.GetChild(i).gameObject);
+            }
+        }
     }
 
     /// <summary>

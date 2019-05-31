@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 80
   FollowSpeed: 15
-  MaxHealth: 100
+  MaxHealth: 10
   Rigidbody: {fileID: 6698449171826953434}
   Health: 0
 --- !u!50 &6698449171826953434

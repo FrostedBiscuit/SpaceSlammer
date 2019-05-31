@@ -24,7 +24,7 @@ public class LaserBeam : MonoBehaviour {
             return;
         }
         
-        if (damagePlayer == true && nextDamageTime <= Time.time && Player.instance != null) {
+        if (damagePlayer == true && nextDamageTime <= Time.time && Player.instance.gameObject.activeSelf == true) {
 
             Player.instance.TakeDamage(ParentShip.AttackDamage * Random.Range(0f, 1f));
 

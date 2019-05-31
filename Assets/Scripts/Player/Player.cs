@@ -38,8 +38,10 @@ public class Player : MonoBehaviour {
     public void TakeDamage(float dmg) {
 
         if (Health <= dmg) {
-            // TODO: change this to something less shitty
-            Destroy(gameObject);
+
+            Health = 0;
+
+            ObjectPool.instance.ReturnObject(gameObject);
         }
         else {
             Health -= dmg;

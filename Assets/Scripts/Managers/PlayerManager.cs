@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour {
             PlayerPrefs.SetInt("CurrentPlayerSkinIndex", 0);
         }
 #endif
-        if (Player.instance != null) {
+        if (Player.instance.gameObject.activeSelf == true) {
             playerSpriteRenderer = Player.instance.transform.GetComponentInChildren<SpriteRenderer>();
         }
         else {
@@ -59,8 +59,8 @@ public class PlayerManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
-        if (Player.instance == null) {
+
+        if (Player.instance.gameObject.activeSelf == false) {
             // Player has died, do something
 
             EnemyManager.instance.EndSpawning();
@@ -71,7 +71,7 @@ public class PlayerManager : MonoBehaviour {
 
     public void SpawnPlayer() {
 
-        if (Player.instance != null) {
+        if (Player.instance.gameObject.activeSelf == true) {
             return;
         }
 
