@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
 
             Health = 0;
 
-            ObjectPool.instance.ReturnObject(gameObject);
+            PlayerManager.instance.DespawnPlayer();
         }
         else {
             Health -= dmg;

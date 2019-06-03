@@ -40,7 +40,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate() {
 
-        if (Player.instance != null) pointOfInterest = Player.instance.transform.position;
+        if (Player.instance.gameObject.activeSelf == true) pointOfInterest = Player.instance.transform.position;
         else pointOfInterest = getRandomPointOfInterest();
 
         lookAtPointOfInterest();

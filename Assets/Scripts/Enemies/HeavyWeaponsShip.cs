@@ -36,7 +36,7 @@ public class HeavyWeaponsShip : Enemy
 
     protected override void Update() {
 
-        if (Player.instance != null) pointOfInterest = Player.instance.transform.position;
+        if (Player.instance.gameObject.activeSelf == true) pointOfInterest = Player.instance.transform.position;
 
         Attack();
     }
@@ -50,7 +50,7 @@ public class HeavyWeaponsShip : Enemy
     protected override void Die() {
         base.Die();
 
-        ObjectPool.instance.ReturnObject(gameObject);
+        EnemyManager.instance.DespawnEnemy(this);
     }
 
     void move() {

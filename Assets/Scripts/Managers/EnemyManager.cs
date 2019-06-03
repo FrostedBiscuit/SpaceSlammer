@@ -23,20 +23,28 @@ public class EnemyManager : MonoBehaviour
 
     public int sumEnemyDied;
 
-    public List<GameObject> Enemies = new List<GameObject>();
+    public List<PooledEnemy> Enemies = new List<PooledEnemy>();
 
+    Vector3 inactiveCoords = new Vector3(0f, 0f, 20f);
+
+    List<Enemy> inactiveEnemies = new List<Enemy>();
     List<Enemy> activeEnemies = new List<Enemy>();
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+    [SerializeField]
+    Transform PooledEnemyParent = null;
+
+    // Start is called before the first frame update
+    void Start() {
         
+        foreach(PooledEnemy pe in Enemies) {
+            for (int i = 0; i < pe.NumToSpawn; i++) {
+
+                Enemy e = Instantiate(pe.Enemy.gameObject, inactiveCoords, Quaternion.identity, PooledEnemyParent).GetComponent<Enemy>();
+                e.gameObject.SetActive(false);
+
+                inactiveEnemies.Add(e);
+            }
+        }
     }
 
     bool canSpawn = false;
@@ -80,11 +88,7 @@ public class EnemyManager : MonoBehaviour
 
             Vector3 offset = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(EnemySpawnNearDist, EnemySpawnFarDist); 
 
-            Enemy e = ObjectPool.instance.RequestObject(Enemies[randomIndex], offset + Player.instance.transform.position, Quaternion.identity).GetComponent<Enemy>();
-
-            e.RegisterOnDeathCallback(onEnemyDeath);
-
-            activeEnemies.Add(e);
+            SpawnEnemy(Enemies[randomIndex].Enemy, offset, Quaternion.identity).RegisterOnDeathCallback(onEnemyDeath);
         }
     }
 
@@ -102,5 +106,60 @@ public class EnemyManager : MonoBehaviour
 
             spawnNumEnemies(Random.Range(1, 4));
         }
+    }
+
+    /// <summary>
+    /// Spawns a pooled enemy.
+    /// </summary>
+    /// <param name="enemy">Enemy to spawn.</param>
+    /// <param name="position">Enemy's position</param>
+    /// <param name="rotation">Enemy's rotation</param>
+    /// <returns>Spawned enemy instance</returns>
+    public Enemy SpawnEnemy(Enemy enemy, Vector3 position, Quaternion rotation) {
+
+        // Try to find requested enemy
+        // THIS MUST ALSO IMPROVE!!!!!
+        Enemy e = inactiveEnemies.Find(x => x.name == enemy.name + "(Clone)");
+
+        if (e != null) {
+
+            e.transform.position = position;
+            e.transform.rotation = rotation;
+            e.gameObject.SetActive(true);
+
+            inactiveEnemies.Remove(e);
+            activeEnemies.Add(e);
+
+            return e;
+        }
+
+        Debug.LogError("EnemyManager::spawnEnemy() => Could not find requested enemy in inactiveEnemies.");
+
+        return null;
+    }
+
+    /// <summary>
+    /// Despawns an enemy that HAS to be pooled;
+    /// </summary>
+    /// <param name="enemy">Enemy to despawn</param>
+    /// <returns>Despawned enemy instance</returns>
+    public Enemy DespawnEnemy(Enemy enemy) {
+
+        enemy.gameObject.SetActive(false);
+        enemy.transform.position = inactiveCoords;
+        enemy.transform.rotation = Quaternion.identity;
+
+        activeEnemies.Remove(enemy);
+        inactiveEnemies.Add(enemy);
+
+        return enemy;
+    }
+
+    [System.Serializable]
+    public struct PooledEnemy {
+
+        public int NumToSpawn;
+
+        public Enemy Enemy;
     }
 }

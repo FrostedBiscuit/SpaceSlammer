@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour {
 
     void Update() {
 
-        if (Player.instance == null) {
+        if (Player.instance.gameObject.activeSelf == false) {
 
             PlayerPrefs.Save();
 

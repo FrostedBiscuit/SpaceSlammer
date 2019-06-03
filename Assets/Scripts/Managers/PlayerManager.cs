@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
+    #region Singelton
+    public static PlayerManager instance;
+
+    private void Awake() {
+        
+        if (instance != null) {
+
+            Debug.LogError("PlayerManager::Awake() => More than 1 instance of PlayerManager in the scene!!!");
+
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
     [SerializeField]
     GameObject PlayerGO = null;
 
@@ -13,8 +29,6 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField]
     Transform Spawn = null;
 
-    [SerializeField]
-    CameraFollow cameraFollow = null;
 #if UNITY_EDITOR
     [SerializeField]
     int DEBUG_TestPlayerSkinIndex = 0;
@@ -26,16 +40,23 @@ public class PlayerManager : MonoBehaviour {
         set {
             _currIndex = value;
 
+            PlayerPrefs.SetInt("CurrentPlayerSkinIndex", currentIndex);
+
             updatePlayerSprite();
         }
     }
 
     int _currIndex = 0;
 
-    SpriteRenderer playerSpriteRenderer = null;
+    //SpriteRenderer playerSpriteRenderer = null;
 
     // Start is called before the first frame update
     void Start() {
+
+        SpawnPlayer();
+
+        Debug.Log("spriteIndex " + currentIndex);
+
 #if UNITY_EDITOR
         PlayerPrefs.SetInt("CurrentPlayerSkinIndex", DEBUG_TestPlayerSkinIndex);
         currentIndex = DEBUG_TestPlayerSkinIndex;
@@ -47,14 +68,6 @@ public class PlayerManager : MonoBehaviour {
             PlayerPrefs.SetInt("CurrentPlayerSkinIndex", 0);
         }
 #endif
-        if (Player.instance.gameObject.activeSelf == true) {
-            playerSpriteRenderer = Player.instance.transform.GetComponentInChildren<SpriteRenderer>();
-        }
-        else {
-            SpawnPlayer();
-        }
-
-        updatePlayerSprite();
     }
 
     // Update is called once per frame
@@ -75,16 +88,19 @@ public class PlayerManager : MonoBehaviour {
             return;
         }
 
-        GameObject go = ObjectPool.instance.RequestObject(PlayerGO, Spawn.position, Spawn.rotation);
-
-        playerSpriteRenderer = Player.instance.transform.GetComponentInChildren<SpriteRenderer>();
-        playerSpriteRenderer.sprite = PlayerSkins[currentIndex];
-
-        cameraFollow.FollowTransform = go.transform;
-
-        PlayerPrefs.SetInt("CurrentPlayerSkinIndex", currentIndex);
+        PlayerGO.SetActive(true);
+        PlayerGO.transform.position = Spawn.position;
 
         updatePlayerSprite();
+    }
+
+    public void DespawnPlayer() {
+
+        if (Player.instance.gameObject.activeSelf == false) {
+            return;
+        }
+
+        PlayerGO.SetActive(false);
     }
 
     public void IncreasePlayerSkinIndex() {
@@ -97,6 +113,8 @@ public class PlayerManager : MonoBehaviour {
     }
 
     void updatePlayerSprite() {
+
+        SpriteRenderer playerSpriteRenderer = PlayerGO.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         if (playerSpriteRenderer != null) {
             playerSpriteRenderer.sprite = PlayerSkins[currentIndex];

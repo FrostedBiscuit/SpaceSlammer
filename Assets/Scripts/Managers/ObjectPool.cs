@@ -42,9 +42,9 @@ public class ObjectPool : MonoBehaviour {
 
             for (int i = 0; i < obj.NumToSpawn; i++) {
 
-                obj.Object.SetActive(false);
-
                 GameObject instance = Instantiate(obj.Object, resetPosition, Quaternion.identity, PoolParentTransform == null ? null : PoolParentTransform);
+
+                instance.SetActive(false);
 
                 inactiveObjects.Add(instance);
             }
@@ -70,7 +70,12 @@ public class ObjectPool : MonoBehaviour {
     /// <returns>Instance of requested object</returns>
     public GameObject RequestObject(GameObject go, Vector3 position, Quaternion rotation) {
 
+        if (inactiveObjects == null) {
+            Debug.LogError("obj is null");
+        }
+
         // Try to find object
+        // THIS HAS TO BE IMPROVED!!!!
         GameObject obj = inactiveObjects.Find(x => x.name == go.name + "(Clone)");
 
         if (obj != null) {
@@ -100,24 +105,16 @@ public class ObjectPool : MonoBehaviour {
     /// <returns>Instance of deactivated object</returns>
     public GameObject ReturnObject(GameObject go) {
 
-        // Check if GO exists
-        if (activeObjects.Contains(go)) {
-       
-            // Deactivate said object
-            go.SetActive(false);
+        // Deactivate said object
+        go.SetActive(false);
 
-            go.transform.position = resetPosition;
+        go.transform.position = resetPosition;
 
-            // Move it to inactiveObjects
-            inactiveObjects.Add(go);
-            activeObjects.Remove(go);
+        // Move it to inactiveObjects
+        inactiveObjects.Add(go);
+        activeObjects.Remove(go);
 
-            return go;
-        }
-
-        // Seeing it wasn't found, we log the error and return null
-        Debug.LogError("ObjectPool::ReturnObject() => Returned an invalid object!!!");
-        return null;
+        return go;
     }
 }
 

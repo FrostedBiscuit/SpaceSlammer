@@ -19,7 +19,7 @@ public class FighterSpaceShip : Enemy {
     protected override void Attack() {
         base.Attack();
 
-        if (nextFire > Time.time || Player.instance == null) return;
+        if (nextFire > Time.time || Player.instance.gameObject.activeSelf == false) return;
 
         if (distanceToPlayer <= AttackRange) {
 
@@ -34,7 +34,7 @@ public class FighterSpaceShip : Enemy {
 
         Debug.Log("Fighter space ship has died!!!");
 
-        ObjectPool.instance.ReturnObject(gameObject);
+        EnemyManager.instance.DespawnEnemy(this);
     }
 
     protected override void OnEnable() {
@@ -82,7 +82,7 @@ public class FighterSpaceShip : Enemy {
 
     void move() {
 
-        if (Player.instance != null) {
+        if (Player.instance.gameObject.activeSelf == true) {
             if (rigidbody.velocity.magnitude < Speed && distanceToPlayer > AttackRange) {
                 rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime;
             }
