@@ -116,6 +116,17 @@ public class ObjectPool : MonoBehaviour {
 
         return go;
     }
+
+    public void ClearObjects() {
+
+        foreach (GameObject go in activeObjects) {
+            go.SetActive(false);
+
+            inactiveObjects.Add(go);
+        }
+
+        activeObjects.Clear();
+    }
 }
 
 [System.Serializable]
