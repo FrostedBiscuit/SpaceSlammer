@@ -69,12 +69,10 @@ public class EnemyManager : MonoBehaviour
 
         if (activeEnemies.Count == 0) return;
 
-        foreach (var enemy in activeEnemies) {
+        for (int i = activeEnemies.Count - 1; i >= 0; i--) {
 
-            Destroy(enemy.gameObject);
+            DespawnEnemy(activeEnemies[i]);
         }
-
-        activeEnemies.Clear();
     }
 
     // TEST CODE FOR GATHERING IDEAS!!!!

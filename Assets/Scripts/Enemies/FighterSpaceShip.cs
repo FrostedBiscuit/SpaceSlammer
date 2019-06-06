@@ -32,7 +32,7 @@ public class FighterSpaceShip : Enemy {
     protected override void Die() {
         base.Die(); 
 
-        Debug.Log("Fighter space ship has died!!!");
+        //Debug.Log("Fighter space ship has died!!!");
 
         EnemyManager.instance.DespawnEnemy(this);
     }
@@ -66,7 +66,7 @@ public class FighterSpaceShip : Enemy {
     protected override void TakeDamage(float dmg) {
         base.TakeDamage(dmg);
 
-        Debug.Log("BasicSpaceShip::TakeDamage() => Damage taken: " + dmg);
+        //Debug.Log("BasicSpaceShip::TakeDamage() => Damage taken: " + dmg);
     }
 
     protected override void Update() {

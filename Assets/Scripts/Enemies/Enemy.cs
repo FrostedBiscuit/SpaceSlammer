@@ -29,6 +29,8 @@ public abstract class Enemy : MonoBehaviour
 
     protected Action<Enemy> enemyDeathCallback;
 
+    protected UIEnemyIndicator indicator;
+
     protected virtual void OnEnable() {
 
         currentHealth = MaxHealth;
@@ -36,6 +38,11 @@ public abstract class Enemy : MonoBehaviour
         rigidbody = rigidbody == null ? GetComponent<Rigidbody2D>() : rigidbody;
 
         if (rigidbody == null) Debug.LogError("Enemy::Start() => No Rigidbody found!!!");
+    }
+
+    private void Start() {
+        indicator = UIManager.instance.RequestEnemyIndicator();
+        indicator.SetTarget(transform);
     }
 
     protected virtual void FixedUpdate() {
@@ -71,6 +78,12 @@ public abstract class Enemy : MonoBehaviour
         if (Sounds.Length > 0) {
 
             SoundManager.instance.PlaySFXClip(Sounds[1]);
+        }
+    }
+
+    protected virtual void OnDisable() {
+        if (indicator != null) {
+            UIManager.instance.ReturnEnemyIndicator(indicator);
         }
     }
 
