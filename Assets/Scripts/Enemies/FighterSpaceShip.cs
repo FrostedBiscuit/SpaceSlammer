@@ -63,7 +63,7 @@ public class FighterSpaceShip : Enemy {
         Gizmos.DrawRay(transform.position, rigidbody.velocity);
     }
 
-    protected override void TakeDamage(float dmg) {
+    public override void TakeDamage(float dmg) {
         base.TakeDamage(dmg);
 
         //Debug.Log("BasicSpaceShip::TakeDamage() => Damage taken: " + dmg);

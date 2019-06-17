@@ -1,0 +1,151 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class KamikazeShip : Enemy {
+
+    public float BombTimer = 3f;
+    public float FocusTimer = 3f;
+    public float Speed = 30f;
+    public float ChargeForce = 20f;
+    public float ExplosionRadius = 3f;
+
+    bool focusingTarget = false;
+    bool hot = false;
+
+    Coroutine expTimer;
+
+    protected override void OnEnable() {
+        base.OnEnable();
+
+        focusingTarget = false;
+        hot = false;
+
+        expTimer = null;
+    }
+
+    protected override void FixedUpdate() {
+
+        if (hot == true) {
+            return;
+        }
+
+        base.FixedUpdate();
+
+        move();
+    }
+
+    float focusTimer;
+
+    protected override void Update() {
+
+        if (hot == true) {
+            return;
+        }
+
+        if (distanceToPlayer <= AttackRange) {
+
+            Debug.Log("player is in range");
+
+            focusingTarget = true;
+
+            if (focusTimer == 0f) {
+
+                focusTimer = Time.time + FocusTimer;
+
+                rigidbody.velocity = Vector2.zero;
+
+                Debug.Log("startig focus timer: " + focusTimer);
+            }
+
+        }
+
+        if (focusTimer <= Time.time && focusTimer != 0f) {
+
+            Attack();
+
+            Debug.Log("Attacking");
+        }
+    }
+
+    protected override void Attack() {
+        base.Attack();
+
+        if (hot == true) {
+            return;
+        }
+
+        hot = true;
+
+        rigidbody.AddForce(transform.up * ChargeForce, ForceMode2D.Force);
+
+        Debug.Log("added force = " + (transform.up * ChargeForce).ToString());
+
+        expTimer = StartCoroutine(explosionTimer());
+    }
+
+    protected override void Die() {
+        base.Die();
+
+        EnemyManager.instance.DespawnEnemy(this);
+    }
+
+    private void move() {
+        
+        if (focusingTarget == false) { 
+            
+            rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime;
+        }
+    }
+
+    private void explode() {
+
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
+
+        Debug.Log("Boom!");
+
+        for (int i = 0; i < cols.Length; i++) {
+
+            if (cols[i].transform.tag == "Player") {
+                Player.instance.TakeDamage(AttackDamage);
+            }
+            else {
+                cols[i].gameObject.GetComponent<Enemy>().TakeDamage(AttackDamage);
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D() {
+
+        if (hot == false) {
+            return;
+        }
+
+        if (expTimer != null) {
+            StopCoroutine(expTimer);
+        }
+
+        explode();
+
+        Die();
+    }
+
+    bool isRunning = false;
+
+    IEnumerator explosionTimer() {
+
+        if (isRunning == true) {
+            yield return null;
+        }
+
+        Debug.Log("Explosion in " + BombTimer + " seconds");
+
+        yield return new WaitForSeconds(BombTimer);
+
+        explode();
+
+        isRunning = false;
+
+        Die();
+    }
+}

@@ -58,8 +58,6 @@ public class UIManager : MonoBehaviour {
 
             UIEnemyIndicator indicator = Instantiate(EnemyIndicatorPrefab, EnemyIndicatorsParent).GetComponent<UIEnemyIndicator>();
 
-            Debug.Log(indicator.name);
-
             indicator.gameObject.SetActive(false);
 
             inactiveIndicators.Add(indicator);

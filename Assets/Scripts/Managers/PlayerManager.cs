@@ -55,7 +55,7 @@ public class PlayerManager : MonoBehaviour {
 
         SpawnPlayer();
 
-        Debug.Log("spriteIndex " + currentIndex);
+        //Debug.Log("spriteIndex " + currentIndex);
 
 #if UNITY_EDITOR
         PlayerPrefs.SetInt("CurrentPlayerSkinIndex", DEBUG_TestPlayerSkinIndex);

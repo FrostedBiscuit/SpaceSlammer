@@ -61,7 +61,7 @@ public abstract class Enemy : MonoBehaviour
 #endif
     }
 
-    protected virtual void TakeDamage(float dmg) {
+    public virtual void TakeDamage(float dmg) {
 
         currentHealth = (currentHealth - dmg) < 0f ? 0f : currentHealth - dmg;
 
@@ -107,7 +107,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
 
-        Debug.Log("Collision");
+        //Debug.Log("Collision");
 
         if (collision.transform.tag == "Player") {
 

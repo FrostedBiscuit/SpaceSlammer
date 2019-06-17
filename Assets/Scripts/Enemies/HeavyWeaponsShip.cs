@@ -30,7 +30,7 @@ public class HeavyWeaponsShip : Enemy
 
             beamCurrentLifetime = Time.time + BeamDuration;
 
-            Debug.Log("Firing beam");
+            //Debug.Log("Firing beam");
         }
     }
 
@@ -55,11 +55,17 @@ public class HeavyWeaponsShip : Enemy
 
     void move() {
         
-        if (distanceToPlayer < AttackRange / 2) {
+        if (distanceToPlayer < AttackRange) {
+
             rigidbody.velocity = Vector2.zero;
+
+            RotationSmoothing = RotationSmoothing / 2f;
         }
         else {
+
             rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime;
+
+            RotationSmoothing = RotationSmoothing * 2f;
         }
     }
 }

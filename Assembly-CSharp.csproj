@@ -60,11 +60,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ParallaxBackground.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Camera\ParallaxBackground.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\FighterSpaceShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\HeavyWeaponsShip.cs" />
+    <Compile Include="Assets\Scripts\Enemies\KamikazeShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\LaserBeam.cs" />
     <Compile Include="Assets\Scripts\Enemies\Projectile.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
@@ -73,11 +74,13 @@
     <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\RotatePlayerSprite.cs" />
     <Compile Include="Assets\Scripts\Player\SwipeInput.cs" />
+    <Compile Include="Assets\Scripts\UI\UICollapsablePanel.cs" />
     <Compile Include="Assets\Scripts\UI\UIEnemyIndicator.cs" />
     <Compile Include="Assets\Scripts\UI\UIFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
-    <Compile Include="Assets\Scripts\UI\UISettingsPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\UIToggleScoreButton.cs" />
     <Compile Include="Assets\Scripts\UI\UIToggleSwitch.cs" />
     <Compile Include="Assets\Scripts\UI\UIUpdateHealthSlider.cs" />
     <Compile Include="Assets\Scripts\UI\UIUpdateHighScore.cs" />

@@ -21,6 +21,8 @@ public class EnemyManager : MonoBehaviour
     public float EnemySpawnNearDist = 5f;
     public float EnemySpawnFarDist = 10f;
 
+    public int MinEnemyNum = 1;
+    public int MaxEnemyNum = 4;
     public int sumEnemyDied;
 
     public List<PooledEnemy> Enemies = new List<PooledEnemy>();
@@ -57,7 +59,7 @@ public class EnemyManager : MonoBehaviour
 
         sumEnemyDied = 0;
 
-        spawnNumEnemies(Random.Range(1, 4));
+        spawnNumEnemies(Random.Range(MinEnemyNum, MaxEnemyNum));
     }
 
     public void EndSpawning() {
@@ -102,7 +104,7 @@ public class EnemyManager : MonoBehaviour
 
         if (activeEnemies.Count == 0 && canSpawn == true) {
 
-            spawnNumEnemies(Random.Range(1, 4));
+            spawnNumEnemies(Random.Range(MinEnemyNum, MaxEnemyNum));
         }
     }
 
