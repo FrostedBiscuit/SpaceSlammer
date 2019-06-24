@@ -4551,6 +4551,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6698449172501014720, guid: 6795c24ca4df86e4d85c00734934ffff,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a3f54915c722bc0409be41039f541f8b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6795c24ca4df86e4d85c00734934ffff, type: 3}
 --- !u!1 &1216424417
@@ -5441,7 +5447,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657187149}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!1 &1737166096
 GameObject:
   m_ObjectHideFlags: 0
