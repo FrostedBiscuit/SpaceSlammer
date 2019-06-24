@@ -62,7 +62,7 @@ public class SkinManager : MonoBehaviour {
             PlayerPrefs.SetInt("SelectedSkinIndex", 0);
         }
 
-        playerSR.sprite = Skins[currentSkinIndex].SkinSprite;
+        updatePlayerSprite();
     }
 
     public void IncreaseSkinIndex() {
@@ -90,7 +90,12 @@ public class SkinManager : MonoBehaviour {
 
     private void updatePlayerSprite() {
 
-        playerSR.sprite = Skins[currentSkinIndex].GetUnlockState() ? Skins[currentSkinIndex].SkinSprite : playerSR.sprite;
+        if (Skins[currentSkinIndex].GetUnlockState() == true) {
+
+            playerSR.sprite = Skins[currentSkinIndex].SkinSprite;
+
+            PlayerPrefs.SetInt("SelectedSkinIndex", currentSkinIndex);
+        }
 
         CurrentSkin = Skins[currentSkinIndex];
     }
