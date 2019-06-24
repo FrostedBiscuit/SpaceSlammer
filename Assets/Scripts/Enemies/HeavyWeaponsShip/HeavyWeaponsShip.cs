@@ -17,9 +17,12 @@ public class HeavyWeaponsShip : Enemy
         base.OnEnable();
 
         Beam.SetActive(false);
+
+        initialRotationSmoothing = RotationSmoothing;
     }
 
     float beamCurrentLifetime;
+    float initialRotationSmoothing;
 
     protected override void Attack() {
         base.Attack();
@@ -30,7 +33,10 @@ public class HeavyWeaponsShip : Enemy
 
             beamCurrentLifetime = Time.time + BeamDuration;
 
-            //Debug.Log("Firing beam");
+            RotationSmoothing = RotationSmoothing * 10f;
+        }
+        else {
+            RotationSmoothing = initialRotationSmoothing;
         }
     }
 
@@ -58,14 +64,10 @@ public class HeavyWeaponsShip : Enemy
         if (distanceToPlayer < AttackRange) {
 
             rigidbody.velocity = Vector2.zero;
-
-            RotationSmoothing = RotationSmoothing / 2f;
         }
         else {
 
             rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime;
-
-            RotationSmoothing = RotationSmoothing * 2f;
         }
     }
 }

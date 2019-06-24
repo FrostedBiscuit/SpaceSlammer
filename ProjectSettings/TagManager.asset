@@ -42,3 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 246162205
+    locked: 0
+  - name: PlayerTrail
+    uniqueID: 665122077
+    locked: 0

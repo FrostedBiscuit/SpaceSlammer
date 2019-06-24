@@ -47,8 +47,6 @@ public class UIEnemyIndicator : MonoBehaviour {
 
             //transform.position = cam.ScreenToWorldPoint(finalpos);
             transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-
-            Debug.Log("Enemy indicator should be visible");
         }
         else {
 

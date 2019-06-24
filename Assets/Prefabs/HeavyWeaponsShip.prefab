@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 30
   AttackDamage: 70
-  AttackRange: 2.15
+  AttackRange: 5.225
   RotationSmoothing: 0.5
   ScoreValue: 30
   DEBUG_Fight: 1

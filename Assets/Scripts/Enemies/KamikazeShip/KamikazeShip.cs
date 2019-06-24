@@ -10,13 +10,28 @@ public class KamikazeShip : Enemy {
     public float ChargeForce = 20f;
     public float ExplosionRadius = 3f;
 
+    public Color PassiveCircleColor = Color.green;
+    public Color AimingCircleColor = Color.yellow;
+    public Color HotCircleColor = Color.red;
+
     bool focusingTarget = false;
     bool hot = false;
+
+    [SerializeField]
+    RadiusVisualizer ExplosionRadiusCircle = null;
 
     Coroutine expTimer;
 
     protected override void OnEnable() {
         base.OnEnable();
+
+        if (ExplosionRadiusCircle == null) {
+            Debug.LogError("KamikazeShip::OnEnable() => No RadiusVisualizer found!!!");
+        }
+        else {
+            ExplosionRadiusCircle.SetColor(PassiveCircleColor);
+            ExplosionRadiusCircle.SetRange(AttackRange);
+        }
 
         focusingTarget = false;
         hot = false;
@@ -45,17 +60,17 @@ public class KamikazeShip : Enemy {
 
         if (distanceToPlayer <= AttackRange) {
 
-            Debug.Log("player is in range");
-
             focusingTarget = true;
+
+            if (ExplosionRadiusCircle != null) {
+                ExplosionRadiusCircle.SetColor(AimingCircleColor);
+            }
 
             if (focusTimer == 0f) {
 
                 focusTimer = Time.time + FocusTimer;
 
                 rigidbody.velocity = Vector2.zero;
-
-                Debug.Log("startig focus timer: " + focusTimer);
             }
 
         }
@@ -63,8 +78,6 @@ public class KamikazeShip : Enemy {
         if (focusTimer <= Time.time && focusTimer != 0f) {
 
             Attack();
-
-            Debug.Log("Attacking");
         }
     }
 
@@ -73,6 +86,10 @@ public class KamikazeShip : Enemy {
 
         if (hot == true) {
             return;
+        }
+
+        if (ExplosionRadiusCircle != null) {
+            ExplosionRadiusCircle.SetColor(HotCircleColor);
         }
 
         hot = true;

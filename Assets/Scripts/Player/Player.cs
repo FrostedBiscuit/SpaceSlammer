@@ -23,6 +23,9 @@ public class Player : MonoBehaviour {
     [SerializeField]
     Rigidbody2D Rigidbody = null;
 
+    [SerializeField]
+    GameObject CollisionParticles = null;
+
     [HideInInspector]
     public float Health;
 
@@ -51,5 +54,13 @@ public class Player : MonoBehaviour {
     public Rigidbody2D GetRigidbody() {
 
         return Rigidbody;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        
+        if (collision.transform.tag == "Enemy") {
+
+            ObjectPool.instance.RequestObject(CollisionParticles, (Vector3)collision.GetContact(0).point, Quaternion.identity);
+        }
     }
 }
