@@ -23,32 +23,23 @@ public class SkinManager : MonoBehaviour {
     public Skin CurrentSkin { get; protected set; }
 
     [SerializeField]
-    List<Skin> Skins = new List<Skin>();
-    
-    int currentSkinIndex {
+    List<Skin> SkinConfig = new List<Skin>();
 
-        get {
-            return _currentSkinIndex;
-        }
-        set {
+    List<Skin> skins = new List<Skin>();
 
-            updatePlayerSprite();
-
-            _currentSkinIndex = value;
-        }
-    }
-
-    int _currentSkinIndex = 0;
+    int currentSkinIndex;
 
     SpriteRenderer playerSR;
 
     // Start is called before the first frame update
     void Start() {
 
+        skins = SkinConfig;
+
         playerSR = Player.instance.GetComponentInChildren<SpriteRenderer>();
 
-        for (int i = 0; i < Skins.Count; i++) {
-            Skins[i].Init();
+        for (int i = 0; i < skins.Count; i++) {
+            skins[i].Init();
         }
 
         if (PlayerPrefs.HasKey("SelectedSkinIndex")) {
@@ -67,41 +58,47 @@ public class SkinManager : MonoBehaviour {
 
     public void IncreaseSkinIndex() {
 
-        currentSkinIndex = (currentSkinIndex + 1) % Skins.Count;
+        currentSkinIndex = (currentSkinIndex + 1) % skins.Count;
+
+        updatePlayerSprite();
     }
 
     public void DecreaseSkinindex() {
 
-        currentSkinIndex = currentSkinIndex - 1 == -1 ? Skins.Count - 1 : currentSkinIndex - 1;
+        currentSkinIndex = currentSkinIndex - 1 == -1 ? skins.Count - 1 : currentSkinIndex - 1;
+
+        updatePlayerSprite();
     }
 
     public void UnlockSelected() {
 
-        if (Skins[currentSkinIndex].GetUnlockState()) {
+        if (skins[currentSkinIndex].GetUnlockState()) {
             return;
         }
 
         // Some kind of score validation...
 
-        Skins[currentSkinIndex].Unlock();
+        skins[currentSkinIndex].Unlock();
 
         updatePlayerSprite();
     }
 
     private void updatePlayerSprite() {
 
-        if (Skins[currentSkinIndex].GetUnlockState() == true) {
+        if (skins[currentSkinIndex].GetUnlockState() == true) {
 
-            playerSR.sprite = Skins[currentSkinIndex].SkinSprite;
+            playerSR.sprite = skins[currentSkinIndex].SkinSprite;
 
             PlayerPrefs.SetInt("SelectedSkinIndex", currentSkinIndex);
+
+            Debug.Log("Updating unlocked skin.");
         }
 
-        CurrentSkin = Skins[currentSkinIndex];
+        CurrentSkin = skins[currentSkinIndex];
     }
 
     [System.Serializable]
-    public struct Skin {
+    public class Skin {
 
         public Sprite SkinSprite;
 
@@ -109,29 +106,34 @@ public class SkinManager : MonoBehaviour {
 
         public string Name;
 
+        private bool unlocked;
+
         [SerializeField]
-        bool Unlocked;
+        bool LockStatus;
 
         public void Init() {
 
             if (PlayerPrefs.HasKey(SkinSprite.name + "LockState")) {
 
-                Unlocked = PlayerPrefs.GetInt(SkinSprite.name + "LockState") == 1;
+                unlocked = PlayerPrefs.GetInt(SkinSprite.name + "LockState") == 1;
             }
             else { 
-                PlayerPrefs.SetInt(SkinSprite.name + "LockState", Unlocked ? 1 : 0);
+
+                PlayerPrefs.SetInt(SkinSprite.name + "LockState", LockStatus ? 1 : 0);
+
+                unlocked = LockStatus;
             }
         }
 
         public void Unlock() {
 
-            Unlocked = true;
+            unlocked = true;
 
             PlayerPrefs.SetInt(SkinSprite.name + "LockState", 1);
         }
 
         public bool GetUnlockState() {
-            return Unlocked;
+            return unlocked;
         }
     }
 }

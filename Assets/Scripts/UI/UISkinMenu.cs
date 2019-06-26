@@ -10,7 +10,9 @@ public class UISkinMenu : MonoBehaviour {
     [SerializeField]
     TextMeshProUGUI SkinPriceTag = null;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    GameObject Lock = null;
+
     void Start() {
         
         if (SkinNameTag == null) {
@@ -19,10 +21,22 @@ public class UISkinMenu : MonoBehaviour {
         if (SkinPriceTag == null) {
             Debug.LogError("UISkinMenu::Start() => No skin price tag found!!!");
         }
+
+        if (Lock == null) {
+            Debug.LogError("UISkinMenu::Start() => No Lock GO found!!!");
+        }
+
+        UpdateSkinMenu();
     }
 
-    // Update is called once per frame
-    void Update() {
+    public void UpdateSkinMenu() {
+
+        if (SkinManager.instance.CurrentSkin.GetUnlockState() == false) {
+            Lock.SetActive(true);
+        }
+        else {
+            Lock.SetActive(false);
+        }
 
         SkinNameTag.text = SkinManager.instance.CurrentSkin.Name;
         SkinPriceTag.text = SkinManager.instance.CurrentSkin.Cost.ToString();
