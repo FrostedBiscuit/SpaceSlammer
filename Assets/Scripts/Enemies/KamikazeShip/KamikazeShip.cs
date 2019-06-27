@@ -126,7 +126,7 @@ public class KamikazeShip : Enemy {
             if (cols[i].transform.tag == "Player") {
                 Player.instance.TakeDamage(AttackDamage);
             }
-            else {
+            else if (cols[i] != null) {
                 cols[i].gameObject.GetComponent<Enemy>().TakeDamage(AttackDamage);
             }
         }

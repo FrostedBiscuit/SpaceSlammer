@@ -82,9 +82,11 @@
     <Compile Include="Assets\Scripts\UI\UIEnemyIndicator.cs" />
     <Compile Include="Assets\Scripts\UI\UIFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
+    <Compile Include="Assets\Scripts\UI\UIPauseButton.cs" />
     <Compile Include="Assets\Scripts\UI\UISkinMenu.cs" />
     <Compile Include="Assets\Scripts\UI\UIToggleScoreButton.cs" />
     <Compile Include="Assets\Scripts\UI\UIToggleSwitch.cs" />
+    <Compile Include="Assets\Scripts\UI\UIUnpauseButton.cs" />
     <Compile Include="Assets\Scripts\UI\UIUpdateHealthSlider.cs" />
     <Compile Include="Assets\Scripts\UI\UIUpdateHighScore.cs" />
     <Compile Include="Assets\Scripts\Utility\DestroyAfter.cs" />
