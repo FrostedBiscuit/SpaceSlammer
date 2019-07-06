@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
     public float Speed = 10f;
     public float FollowSpeed = 1.5f;
     public float MaxHealth = 50f;
+    public float ParticleInterval = 1.25f;
 
     [SerializeField]
     Rigidbody2D Rigidbody = null;
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour {
         }
 
         Health = MaxHealth;
+
+        Rigidbody.velocity = Vector2.zero;
     }
 
     public void TakeDamage(float dmg) {
@@ -56,11 +59,15 @@ public class Player : MonoBehaviour {
         return Rigidbody;
     }
 
+    float nextParticleTime;
+
     private void OnCollisionEnter2D(Collision2D collision) {
         
-        if (collision.transform.tag == "Enemy") {
+        if (collision.transform.tag == "Enemy" && Time.time >= nextParticleTime) {
 
             ObjectPool.instance.RequestObject(CollisionParticles, (Vector3)collision.GetContact(0).point, Quaternion.identity);
+
+            nextParticleTime = Time.time + ParticleInterval;
         }
     }
 }

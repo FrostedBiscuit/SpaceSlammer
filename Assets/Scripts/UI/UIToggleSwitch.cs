@@ -24,7 +24,8 @@ public class UIToggleSwitch : MonoBehaviour {
             return;
         }
 
-        Toggle.onValueChanged.Invoke(Toggle.isOn);
+        //Toggle.onValueChanged.Invoke(Toggle.isOn);
+        ToggleSwitchAnimate(Toggle.isOn);
     }
 
     public void ToggleSwitchAnimate(bool value) {

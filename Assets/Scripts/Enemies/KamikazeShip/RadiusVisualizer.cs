@@ -39,7 +39,7 @@ public class RadiusVisualizer : MonoBehaviour {
 
     private void Update() {
 #if UNITY_EDITOR
-        generateNormalizedVerticies();
+        //generateNormalizedVerticies();
 #endif
         Vector3[] newVerticies = new Vector3[normalizedVerticies.Length];
 

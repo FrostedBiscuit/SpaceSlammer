@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour {
 
@@ -19,14 +20,41 @@ public class SoundManager : MonoBehaviour {
     }
     #endregion
 
-    bool playSFX = false;
-    bool playMusic = false;
+    public bool PlaySFX {
+        get {
+            return _playSFX;
+        }
+        set {
 
-    public bool PlaySFX { get { return playSFX; } }
-    public bool PlayMusic { get { return playMusic; } }
+            _playSFX = value;
+
+            updateSFXToggles();
+        }
+    }
+
+    bool _playSFX = false;
+
+    public bool PlayMusic {
+        get {
+            return _playMusic;
+        }
+        set {
+
+            _playMusic = value;
+
+            updateMusicToggles();
+        }
+    }
+
+    bool _playMusic = false;
 
     [SerializeField]
     AudioSource Source = null;
+
+    [SerializeField]
+    List<GameObject> SFXToggleSwitches = new List<GameObject>();
+    [SerializeField]
+    List<GameObject> MusicToggleSwitches = new List<GameObject>();
 
     [SerializeField]
     List<AudioClip> MusicTracks = new List<AudioClip>();
@@ -51,7 +79,7 @@ public class SoundManager : MonoBehaviour {
     void Update() {
 
         // if we want music
-        if (playMusic == true && MusicTracks.Count != 0) {
+        if (PlayMusic == true && MusicTracks.Count != 0) {
 
             if (Source.isPlaying == false) {
 
@@ -66,13 +94,29 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    public void SetPlaySFX(bool value) { playSFX = value; }
+    void updateSFXToggles() {
 
-    public void SetPlayMusic(bool value) { playMusic = value; }
+        for (int i = 0; i < SFXToggleSwitches.Count; i++) {
+
+            SFXToggleSwitches[i].GetComponent<Toggle>().isOn = PlaySFX;
+        }
+    }
+
+    void updateMusicToggles() {
+
+        for (int i = 0; i < MusicToggleSwitches.Count; i++) {
+
+            MusicToggleSwitches[i].GetComponent<Toggle>().isOn = PlayMusic;
+        }
+    }
+
+    public void SetPlaySFX(bool value) { PlaySFX = value; }
+
+    public void SetPlayMusic(bool value) { PlayMusic = value; }
 
     public void PlaySFXClip(AudioClip clip) {
 
-        if (playSFX == false) return;
+        if (PlaySFX == false) return;
 
         Source.PlayOneShot(clip);
     }

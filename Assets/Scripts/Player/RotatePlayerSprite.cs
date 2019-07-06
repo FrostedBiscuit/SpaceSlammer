@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RotatePlayerSprite : MonoBehaviour {
 
-    private void Start() {
+    private void OnEnable() {
 
         transform.rotation = Quaternion.identity;
     }

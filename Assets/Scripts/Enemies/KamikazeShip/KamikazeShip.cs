@@ -127,7 +127,13 @@ public class KamikazeShip : Enemy {
                 Player.instance.TakeDamage(AttackDamage);
             }
             else if (cols[i] != null) {
-                cols[i].gameObject.GetComponent<Enemy>().TakeDamage(AttackDamage);
+
+                Enemy e = cols[i].gameObject.GetComponent<Enemy>();
+
+                if (e != null) {
+
+                    e.TakeDamage(AttackDamage);
+                }
             }
         }
     }
