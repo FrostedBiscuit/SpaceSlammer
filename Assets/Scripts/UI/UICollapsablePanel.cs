@@ -7,7 +7,7 @@ public class UICollapsablePanel : MonoBehaviour {
     bool isActive = false;
 
     [SerializeField]
-    Animator Animator;
+    Animator Animator = null;
 
     public void Toggle() {
 

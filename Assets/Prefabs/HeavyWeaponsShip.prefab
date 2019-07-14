@@ -55,6 +55,7 @@ MonoBehaviour:
   ScoreValue: 30
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
+  Source: {fileID: 2697276965730943013}
   Sounds:
   - {fileID: 8300000, guid: 744c0f266633db846a8e271e51c80eb4, type: 3}
   - {fileID: 8300000, guid: d71b9fa01d812324a918073de009827e, type: 3}
@@ -323,6 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentShip: {fileID: 6812092723991730539}
+  Source: {fileID: 1333083076714568065}
   BeamSound: {fileID: 8300000, guid: ac8930bd78d5a7f4b92d84e5abcd51f2, type: 3}
 --- !u!61 &6812092725846631887
 BoxCollider2D:

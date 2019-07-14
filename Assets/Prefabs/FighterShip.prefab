@@ -55,6 +55,7 @@ MonoBehaviour:
   ScoreValue: 10
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
+  Source: {fileID: 697102162746869131}
   Sounds:
   - {fileID: 8300000, guid: c3f7a8a0b5d1e7243912eb4f85039d5d, type: 3}
   - {fileID: 8300000, guid: 0a5b62a89b30bf94087cd7c1b76ed07b, type: 3}

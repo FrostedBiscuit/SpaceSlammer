@@ -12,10 +12,10 @@ public class RadiusVisualizer : MonoBehaviour {
     float Range = 2.5f;
 
     [SerializeField]
-    LineRenderer lineRenderer;
+    LineRenderer lineRenderer = null;
 
     Vector3[] normalizedVerticies;
-    //
+
     public void SetRange(float r) {
         Range = Mathf.Abs(r);
     }
@@ -39,7 +39,7 @@ public class RadiusVisualizer : MonoBehaviour {
 
     private void Update() {
 #if UNITY_EDITOR
-        //generateNormalizedVerticies();
+        generateNormalizedVerticies();
 #endif
         Vector3[] newVerticies = new Vector3[normalizedVerticies.Length];
 
@@ -52,11 +52,15 @@ public class RadiusVisualizer : MonoBehaviour {
 
     private void generateNormalizedVerticies() {
 
+        if (normalizedVerticies != null && normalizedVerticies.Length + 1 == NumVerticies) {
+            return;
+        }
+
         normalizedVerticies = new Vector3[NumVerticies];
 
-        for (int i = 0; i < NumVerticies - 1; i++) {
+        for (int i = 0; i < NumVerticies; i++) {
 
-            float angle = ((float)(i + 1) / (float)NumVerticies) * Mathf.PI * 2f;
+            float angle = ((float)(i) / (float)(NumVerticies - 1)) * Mathf.PI * 2f;
 
             normalizedVerticies[i] = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
         }
@@ -64,7 +68,5 @@ public class RadiusVisualizer : MonoBehaviour {
         normalizedVerticies[NumVerticies - 1] = normalizedVerticies[0];
 
         lineRenderer.positionCount = NumVerticies;
-
-        Debug.Log("Drew circle");
     }
 }

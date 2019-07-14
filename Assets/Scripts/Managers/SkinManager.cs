@@ -109,7 +109,7 @@ public class SkinManager : MonoBehaviour {
         private bool unlocked;
 
         [SerializeField]
-        bool LockStatus;
+        bool LockStatus = false;
 
         public void Init() {
 

@@ -56,7 +56,7 @@ public class HeavyWeaponsShip : Enemy
     protected override void Die() {
         base.Die();
 
-        EnemyManager.instance.DespawnEnemy(this);
+        ObjectPool.instance.ReturnObject(gameObject);
     }
 
     void move() {

@@ -499,8 +499,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 858634180}
-        m_MethodName: StartSpawning
+      - m_Target: {fileID: 858634186}
+        m_MethodName: ClearObjects
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -510,8 +510,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 858634186}
-        m_MethodName: ClearObjects
+      - m_Target: {fileID: 858634180}
+        m_MethodName: StartSpawning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1537,6 +1537,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 519420033}
+        m_MethodName: set_mute
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &299528126
@@ -2015,6 +2026,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 519420033}
+        m_MethodName: set_mute
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -3295,13 +3317,9 @@ MonoBehaviour:
   MaxEnemyNum: 6
   sumEnemyDied: 0
   Enemies:
-  - NumToSpawn: 20
-    Enemy: {fileID: 3418791834924672651, guid: 62f9703242603784087fdab26fd75c94, type: 3}
-  - NumToSpawn: 20
-    Enemy: {fileID: 2212956285521098134, guid: 819516c831b948d42be25c96cc2e00c1, type: 3}
-  - NumToSpawn: 20
-    Enemy: {fileID: 6812092723991730539, guid: 3a80c66d5e1d89d4ba489d5217b15aa7, type: 3}
-  PooledEnemyParent: {fileID: 1359993768}
+  - Enemy: {fileID: 3418791834924672651, guid: 62f9703242603784087fdab26fd75c94, type: 3}
+  - Enemy: {fileID: 2212956285521098134, guid: 819516c831b948d42be25c96cc2e00c1, type: 3}
+  - Enemy: {fileID: 6812092723991730539, guid: 3a80c66d5e1d89d4ba489d5217b15aa7, type: 3}
 --- !u!4 &858634181
 Transform:
   m_ObjectHideFlags: 0
@@ -3404,6 +3422,15 @@ MonoBehaviour:
       type: 3}
   - NumToSpawn: 20
     Object: {fileID: 5704734517573977378, guid: a6a2cd32a6424364d82c9b5219fe805d,
+      type: 3}
+  - NumToSpawn: 20
+    Object: {fileID: 2212956285521098133, guid: 819516c831b948d42be25c96cc2e00c1,
+      type: 3}
+  - NumToSpawn: 20
+    Object: {fileID: 6812092723991730533, guid: 3a80c66d5e1d89d4ba489d5217b15aa7,
+      type: 3}
+  - NumToSpawn: 20
+    Object: {fileID: 3223592968829430084, guid: 62f9703242603784087fdab26fd75c94,
       type: 3}
 --- !u!114 &858634187
 MonoBehaviour:
@@ -4781,7 +4808,7 @@ PrefabInstance:
     - target: {fileID: 6698449171826953433, guid: 6795c24ca4df86e4d85c00734934ffff,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6698449171826953433, guid: 6795c24ca4df86e4d85c00734934ffff,
         type: 3}
@@ -5134,36 +5161,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347873029}
   m_CullTransparentMesh: 0
---- !u!1 &1359993767
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1359993768}
-  m_Layer: 0
-  m_Name: EnemyPoolParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1359993768
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359993767}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1418731557
 GameObject:
   m_ObjectHideFlags: 0
@@ -6065,6 +6062,17 @@ MonoBehaviour:
       - m_Target: {fileID: 1230510185}
         m_MethodName: Unpause
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 519420033}
+        m_MethodName: set_mute
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7034,7 +7042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1956952469}
   m_Layer: 0
-  m_Name: ProjectilePoolParent
+  m_Name: PooledObjectParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7872,7 +7880,7 @@ PrefabInstance:
     - target: {fileID: 3223592968829430091, guid: 62f9703242603784087fdab26fd75c94,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3223592968829430091, guid: 62f9703242603784087fdab26fd75c94,
         type: 3}
@@ -9350,7 +9358,7 @@ PrefabInstance:
     - target: {fileID: 5704734517573977375, guid: a6a2cd32a6424364d82c9b5219fe805d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5704734517573977375, guid: a6a2cd32a6424364d82c9b5219fe805d,
         type: 3}

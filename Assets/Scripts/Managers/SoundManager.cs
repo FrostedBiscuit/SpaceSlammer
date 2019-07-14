@@ -114,7 +114,7 @@ public class SoundManager : MonoBehaviour {
 
     public void SetPlayMusic(bool value) { PlayMusic = value; }
 
-    public void PlaySFXClip(AudioClip clip) {
+    public void PlayRemoteSFXClip(AudioClip clip) {
 
         if (PlaySFX == false) return;
 

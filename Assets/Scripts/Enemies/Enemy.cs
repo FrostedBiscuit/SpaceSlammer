@@ -23,6 +23,9 @@ public abstract class Enemy : MonoBehaviour
     float DEBUG_newRandomDestinationTime = 2f;
 
     [SerializeField]
+    protected AudioSource Source = null;
+
+    [SerializeField]
     protected AudioClip[] Sounds;
 
     new protected Rigidbody2D rigidbody;
@@ -77,7 +80,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (Sounds.Length > 0) {
 
-            SoundManager.instance.PlaySFXClip(Sounds[1]);
+            SoundManager.instance.PlayRemoteSFXClip(Sounds[1]);
         }
     }
 
@@ -112,11 +115,15 @@ public abstract class Enemy : MonoBehaviour
         if (collision.transform.tag == "Player") {
 
             TakeDamage(collision.relativeVelocity.magnitude);
+
+            if (currentHealth == 0f) {
+                return;
+            }
         }
 
         if (Sounds.Length > 0) {
 
-            SoundManager.instance.PlaySFXClip(Sounds[0]);
+            Source.PlayOneShot(Sounds[0]);
         }
 
         rigidbody.AddForce(collision.relativeVelocity, ForceMode2D.Impulse);

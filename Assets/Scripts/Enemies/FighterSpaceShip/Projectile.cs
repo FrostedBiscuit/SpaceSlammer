@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().AddForce(transform.up * Speed);
 
-        SoundManager.instance.PlaySFXClip(ShootSound);
+        SoundManager.instance.PlayRemoteSFXClip(ShootSound);
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
 
         if (collider.isTrigger == false) {
 
-            SoundManager.instance.PlaySFXClip(ImpactSound);
+            SoundManager.instance.PlayRemoteSFXClip(ImpactSound);
 
             ObjectPool.instance.ReturnObject(gameObject);
         }

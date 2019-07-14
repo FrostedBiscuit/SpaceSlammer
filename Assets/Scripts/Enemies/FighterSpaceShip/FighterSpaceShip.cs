@@ -30,11 +30,11 @@ public class FighterSpaceShip : Enemy {
     }
 
     protected override void Die() {
-        base.Die(); 
+        base.Die();
 
         //Debug.Log("Fighter space ship has died!!!");
 
-        EnemyManager.instance.DespawnEnemy(this);
+        ObjectPool.instance.ReturnObject(gameObject);
     }
 
     protected override void OnEnable() {

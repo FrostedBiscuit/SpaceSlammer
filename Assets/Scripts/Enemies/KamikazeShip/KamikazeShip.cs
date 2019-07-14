@@ -94,6 +94,7 @@ public class KamikazeShip : Enemy {
 
         hot = true;
 
+        rigidbody.velocity = Vector2.zero;
         rigidbody.AddForce(transform.up * ChargeForce, ForceMode2D.Force);
 
         Debug.Log("added force = " + (transform.up * ChargeForce).ToString());
@@ -104,7 +105,7 @@ public class KamikazeShip : Enemy {
     protected override void Die() {
         base.Die();
 
-        EnemyManager.instance.DespawnEnemy(this);
+        ObjectPool.instance.ReturnObject(gameObject);
     }
 
     private void move() {

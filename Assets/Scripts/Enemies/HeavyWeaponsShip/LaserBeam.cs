@@ -8,6 +8,9 @@ public class LaserBeam : MonoBehaviour {
     HeavyWeaponsShip ParentShip = null;
 
     [SerializeField]
+    AudioSource Source = null;
+
+    [SerializeField]
     AudioClip BeamSound = null;
 
     bool damagePlayer = false;
@@ -31,7 +34,9 @@ public class LaserBeam : MonoBehaviour {
             nextDamageTime = Time.time + ParentShip.BeamDamageInterval;
         }
 
-        SoundManager.instance.PlaySFXClip(BeamSound);
+        if (SoundManager.instance.PlaySFX == true && Source.isPlaying == false) {
+            Source.PlayOneShot(BeamSound);
+        }
     }
 
     private void OnEnable() {

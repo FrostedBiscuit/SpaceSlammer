@@ -27,37 +27,16 @@ public class ObjectPool : MonoBehaviour {
     [SerializeField]
     List<PoolObject> Objects = null;
 
-    List<GameObject> activeObjects;
-    List<GameObject> inactiveObjects;
+    List<GameObject> activeObjects = new List<GameObject>();
 
-    Vector3 resetPosition = new Vector3(0f, 0f, -10f);
+    Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
     // Start is called before the first frame update
     void Start() {
 
-        activeObjects = new List<GameObject>();
-        inactiveObjects = new List<GameObject>();
-
         foreach (var obj in Objects) {
 
-            for (int i = 0; i < obj.NumToSpawn; i++) {
-
-                GameObject instance = Instantiate(obj.Object, resetPosition, Quaternion.identity, PoolParentTransform == null ? null : PoolParentTransform);
-
-                instance.SetActive(false);
-
-                inactiveObjects.Add(instance);
-            }
-        }
-
-        for (int i = 0; i < PoolParentTransform.childCount; i++) {
-
-            if (PoolParentTransform.GetChild(i).gameObject.activeSelf == true) {
-                activeObjects.Add(PoolParentTransform.GetChild(i).gameObject);
-            }
-            else {
-                inactiveObjects.Add(PoolParentTransform.GetChild(i).gameObject);
-            }
+            createPool(obj.Object, obj.NumToSpawn);
         }
     }
 
@@ -70,31 +49,30 @@ public class ObjectPool : MonoBehaviour {
     /// <returns>Instance of requested object</returns>
     public GameObject RequestObject(GameObject go, Vector3 position, Quaternion rotation) {
 
-        if (inactiveObjects == null) {
-            Debug.LogError("obj is null");
+        string key = go.name;
+
+        if (poolDictionary.ContainsKey(key)) {
+
+            if (poolDictionary[key].Count == 0) {
+
+                GameObject newObj = Instantiate(go, PoolParentTransform);
+                newObj.SetActive(false);
+
+                poolDictionary[key].Enqueue(newObj);
+            }
+
+            GameObject result = poolDictionary[key].Dequeue();
+            result.transform.position = position;
+            result.transform.rotation = rotation;
+            result.SetActive(true);
+
+            activeObjects.Add(result);
+
+            return result;
         }
 
-        // Try to find object
-        // THIS HAS TO BE IMPROVED!!!!
-        GameObject obj = inactiveObjects.Find(x => x.name == go.name + "(Clone)");
+        Debug.LogError("ObjectPool::RequestObject() => Requested an invalid object!!!");
 
-        if (obj != null) {
-
-            // Reset it's properties
-            obj.SetActive(true);
-    
-            obj.transform.position = position;
-            obj.transform.rotation = rotation;
-
-            // Move it to activeObjects
-            activeObjects.Add(obj);
-            inactiveObjects.Remove(obj);
-
-            return obj;
-        }
-
-        // Logging an error if the requested object is not found and returning null
-        Debug.LogError("ObjectPool::GetObject() => No object found!!! Name: " + go.name);
         return null;
     }
     // lmao
@@ -105,27 +83,67 @@ public class ObjectPool : MonoBehaviour {
     /// <returns>Instance of deactivated object</returns>
     public GameObject ReturnObject(GameObject go) {
 
-        // Deactivate said object
-        go.SetActive(false);
+        string key = go.name.Remove(go.name.Length - 7);
 
-        go.transform.position = resetPosition;
+        if (poolDictionary.ContainsKey(key)) {
 
-        // Move it to inactiveObjects
-        inactiveObjects.Add(go);
-        activeObjects.Remove(go);
+            activeObjects.Remove(go);
 
-        return go;
+            go.SetActive(false);
+
+            poolDictionary[key].Enqueue(go);
+
+            // TODO: MAKE THIS DYNAMIC!!!
+            if (poolDictionary[key].Count > 50) {
+
+                for (int i = 0; i < (poolDictionary[key].Count - 50); i++) {
+
+                    Destroy(poolDictionary[key].Dequeue());
+                }
+            }
+
+            return go;
+        }
+
+        Debug.Log("ObjectPool::ReturnObject() => Returned an invalid object!!!");
+
+        return null;
     }
 
     public void ClearObjects() {
 
-        foreach (GameObject go in activeObjects) {
-            go.SetActive(false);
+        for (int i = activeObjects.Count - 1; i > -1; i--) {
 
-            inactiveObjects.Add(go);
+            ReturnObject(activeObjects[i]);
         }
 
         activeObjects.Clear();
+    }
+
+    /// <summary>
+    /// Creates new pool for a desired prefab. It will
+    /// prewarm it to initialSize.
+    /// </summary>
+    /// <param name="prefab">Object you want to pool</param>
+    /// <param name="initialSize">Number of initial instances of prefab</param>
+    private void createPool(GameObject prefab, int initialSize) {
+
+        string key = prefab.name;
+
+
+        if (poolDictionary.ContainsKey(key) == false) {
+
+            poolDictionary.Add(key, new Queue<GameObject>());
+
+            for (int i = 0; i < initialSize; i++) {
+
+                GameObject go = Instantiate(prefab, PoolParentTransform);
+
+                go.SetActive(false);
+
+                poolDictionary[key].Enqueue(go);
+            }
+        }
     }
 }
 
