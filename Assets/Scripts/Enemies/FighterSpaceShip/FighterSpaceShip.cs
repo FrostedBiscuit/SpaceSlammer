@@ -19,12 +19,7 @@ public class FighterSpaceShip : Enemy {
     protected override void Attack() {
         base.Attack();
 
-        if (nextFire > Time.time || Player.instance.gameObject.activeSelf == false) return;
-
-        if (distanceToPlayer <= AttackRange) {
-
-            ObjectPool.instance.RequestObject(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
-        }
+        ObjectPool.instance.RequestObject(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
 
         nextFire = FireRate + Time.time;
     }
@@ -71,7 +66,11 @@ public class FighterSpaceShip : Enemy {
 
     protected override void Update() {
 
-        Attack();
+        if (nextFire < Time.time                          && 
+            Player.instance.gameObject.activeSelf == true && 
+            distanceToPlayer < AttackRange) {
+            Attack();
+        }
     }
 
     protected override void FixedUpdate() {

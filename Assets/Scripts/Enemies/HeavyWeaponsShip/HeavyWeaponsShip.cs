@@ -6,6 +6,7 @@ public class HeavyWeaponsShip : Enemy
 {
     public float BackoffRange = 3f;
     public float Speed = 10f;
+    public float BeamCooldown = 5f;
     public float BeamDuration = 2f;
     public float BeamLenght = 3f;
     public float BeamDamageInterval = 0.25f;
@@ -21,30 +22,36 @@ public class HeavyWeaponsShip : Enemy
         initialRotationSmoothing = RotationSmoothing;
     }
 
+    float beamCurrentCooldown;
     float beamCurrentLifetime;
     float initialRotationSmoothing;
 
     protected override void Attack() {
         base.Attack();
 
-        if (distanceToPlayer <= AttackRange && beamCurrentLifetime <= Time.time) {
+        Beam.SetActive(true);
 
-            Beam.SetActive(true);
+        beamCurrentCooldown = Time.time + BeamCooldown;
 
-            beamCurrentLifetime = Time.time + BeamDuration;
+        beamCurrentLifetime = Time.time + BeamDuration;
 
-            RotationSmoothing = RotationSmoothing * 10f;
-        }
-        else {
-            RotationSmoothing = initialRotationSmoothing;
-        }
+        RotationSmoothing = RotationSmoothing / 100f;
     }
 
     protected override void Update() {
 
         if (Player.instance.gameObject.activeSelf == true) pointOfInterest = Player.instance.transform.position;
 
-        Attack();
+        if (beamCurrentLifetime < Time.time               &&
+            beamCurrentCooldown < Time.time               &&
+            Player.instance.gameObject.activeSelf == true &&
+            distanceToPlayer < AttackRange                &&
+            Beam.activeSelf == false) {
+            Attack();
+        }
+        else {
+            RotationSmoothing = initialRotationSmoothing;
+        }
     }
 
     protected override void FixedUpdate() {

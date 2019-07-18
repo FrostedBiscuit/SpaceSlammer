@@ -20,7 +20,7 @@ public class KamikazeShip : Enemy {
     [SerializeField]
     RadiusVisualizer ExplosionRadiusCircle = null;
 
-    Coroutine expTimer;
+    Coroutine expTimerCoroutine;
 
     protected override void OnEnable() {
         base.OnEnable();
@@ -36,7 +36,7 @@ public class KamikazeShip : Enemy {
         focusingTarget = false;
         hot = false;
 
-        expTimer = null;
+        expTimerCoroutine = null;
     }
 
     protected override void FixedUpdate() {
@@ -99,7 +99,7 @@ public class KamikazeShip : Enemy {
 
         Debug.Log("added force = " + (transform.up * ChargeForce).ToString());
 
-        expTimer = StartCoroutine(explosionTimer());
+        expTimerCoroutine = StartCoroutine(explosionTimer());
     }
 
     protected override void Die() {
@@ -145,8 +145,8 @@ public class KamikazeShip : Enemy {
             return;
         }
 
-        if (expTimer != null) {
-            StopCoroutine(expTimer);
+        if (expTimerCoroutine != null) {
+            StopCoroutine(expTimerCoroutine);
         }
 
         explode();
