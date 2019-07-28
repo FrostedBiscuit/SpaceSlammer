@@ -80,7 +80,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (Sounds.Length > 0) {
 
-            SoundManager.instance.PlayRemoteSFXClip(Sounds[1]);
+            SoundManager.instance.PlayRemoteSFXClip(Sounds[1], transform.position);
         }
     }
 
@@ -109,8 +109,6 @@ public abstract class Enemy : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-
-        //Debug.Log("Collision");
 
         if (collision.transform.tag == "Player") {
 

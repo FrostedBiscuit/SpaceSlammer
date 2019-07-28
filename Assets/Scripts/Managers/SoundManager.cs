@@ -52,6 +52,9 @@ public class SoundManager : MonoBehaviour {
     AudioSource Source = null;
 
     [SerializeField]
+    GameObject SoundSource = null;
+
+    [SerializeField]
     List<GameObject> SFXToggleSwitches = new List<GameObject>();
     [SerializeField]
     List<GameObject> MusicToggleSwitches = new List<GameObject>();
@@ -114,10 +117,13 @@ public class SoundManager : MonoBehaviour {
 
     public void SetPlayMusic(bool value) { PlayMusic = value; }
 
-    public void PlayRemoteSFXClip(AudioClip clip) {
+    public void PlayRemoteSFXClip(AudioClip clip, Vector3 position) {
 
-        if (PlaySFX == false) return;
+        if (PlaySFX == false) {
+            return;
+        }
 
-        Source.PlayOneShot(clip);
+        SoundSource ss = ObjectPool.instance.RequestObject(SoundSource, position, Quaternion.identity).GetComponent<SoundSource>();
+        ss.Play(clip);
     }
 }

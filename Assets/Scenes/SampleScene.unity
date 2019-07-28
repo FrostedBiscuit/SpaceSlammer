@@ -3393,6 +3393,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 519420033}
+  SoundSource: {fileID: 2001442978278586190, guid: 96ce328cbfdaf254a9090c189ec19e6d,
+    type: 3}
   SFXToggleSwitches:
   - {fileID: 1638864124}
   - {fileID: 509591352}
@@ -3431,6 +3433,9 @@ MonoBehaviour:
       type: 3}
   - NumToSpawn: 20
     Object: {fileID: 3223592968829430084, guid: 62f9703242603784087fdab26fd75c94,
+      type: 3}
+  - NumToSpawn: 20
+    Object: {fileID: 2001442978278586190, guid: 96ce328cbfdaf254a9090c189ec19e6d,
       type: 3}
 --- !u!114 &858634187
 MonoBehaviour:
