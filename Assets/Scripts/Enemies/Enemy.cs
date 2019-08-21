@@ -121,7 +121,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (Sounds.Length > 0 && SoundManager.instance.PlaySFX == true) {
 
-            Source.PlayOneShot(Sounds[0]);
+            SoundManager.instance.PlayRemoteSFXClip(Sounds[0], transform.position);
         }
 
         rigidbody.AddForce(collision.relativeVelocity, ForceMode2D.Impulse);

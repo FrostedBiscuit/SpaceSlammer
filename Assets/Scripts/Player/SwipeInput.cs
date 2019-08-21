@@ -7,7 +7,7 @@ public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler/*, IEnd
 
     public float AccelerationMultiplier = 3.5f;
 
-    Vector2 beginDragPosition;
+    Vector2 lastDragPos;
 
     public void OnBeginDrag(PointerEventData eventData) {
 
@@ -15,14 +15,17 @@ public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler/*, IEnd
 
         Player.instance.GetRigidbody().velocity = Vector2.zero;
 
-        beginDragPosition = eventData.position;
+        lastDragPos = eventData.position;
     }
 
     public void OnDrag(PointerEventData eventData) {
 
         if (Player.instance.gameObject.activeSelf == false) { return; }
 
-        Player.instance.GetRigidbody().velocity = (Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(beginDragPosition)) * AccelerationMultiplier;
+        Player.instance.GetRigidbody().AddForce((Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(lastDragPos)) * AccelerationMultiplier);
+        Player.instance.GetRigidbody().velocity = Vector2.ClampMagnitude(Player.instance.GetRigidbody().velocity, Player.instance.Speed);
+
+        lastDragPos = eventData.position;
     }
     /*
     public void OnEndDrag(PointerEventData eventData) {

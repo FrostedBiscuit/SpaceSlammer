@@ -149,6 +149,12 @@ public class KamikazeShip : Enemy {
             StopCoroutine(expTimerCoroutine);
         }
 
+        if (Sounds.Length > 0 && SoundManager.instance.PlaySFX == true) {
+
+            SoundManager.instance.PlayRemoteSFXClip(Sounds[0], transform.position);
+        }
+
+
         explode();
 
         Die();
