@@ -82,18 +82,20 @@ public class FighterSpaceShip : Enemy {
     void move() {
 
         if (Player.instance.gameObject.activeSelf == true) {
-            if (rigidbody.velocity.magnitude < Speed && distanceToPlayer > AttackRange) {
-                rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime;
+            if (distanceToPlayer > AttackRange) {
+                rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime);
             }
             else if (distanceToPlayer < AttackRange && distanceToPlayer > BackoffRange) {
-                rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime * (distanceToPlayer / AttackRange);
+                rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime * (distanceToPlayer / AttackRange));
             }
             else if (distanceToPlayer < BackoffRange) {
                 rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime * (AttackRange / distanceToPlayer) * -1f);
             }
         }
         else {
-            rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime;
+            rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime);
         }
+
+        rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Speed);
     }
 }

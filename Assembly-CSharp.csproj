@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Enemies\HeavyWeaponsShip\LaserBeam.cs" />
     <Compile Include="Assets\Scripts\Enemies\KamikazeShip\KamikazeShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\KamikazeShip\RadiusVisualizer.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Mine\Mine.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />

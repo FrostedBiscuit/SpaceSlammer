@@ -44,7 +44,6 @@ public class UIEnemyIndicator : MonoBehaviour {
 
             img.enabled = true;
 
-            Vector3 camPos = new Vector3(cam.transform.position.x, cam.transform.position.y);
             Vector3 dir = (target.position - Player.instance.transform.position).normalized;
             
             transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);

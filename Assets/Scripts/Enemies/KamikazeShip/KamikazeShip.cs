@@ -81,6 +81,13 @@ public class KamikazeShip : Enemy {
         }
     }
 
+    protected override void CheckForReposition() {
+
+        if (hot == false) {
+            base.CheckForReposition();
+        }
+    }
+
     protected override void Attack() {
         base.Attack();
 
@@ -112,8 +119,10 @@ public class KamikazeShip : Enemy {
         
         if (focusingTarget == false) { 
             
-            rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime;
+            rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime);
         }
+
+        rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Speed);
     }
 
     private void explode() {
@@ -177,5 +186,10 @@ public class KamikazeShip : Enemy {
         isRunning = false;
 
         Die();
+    }
+
+    protected override void OnDrawGizmosSelected() {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(transform.position, rigidbody.velocity);
     }
 }

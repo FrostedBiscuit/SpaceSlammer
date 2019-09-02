@@ -74,7 +74,9 @@ public class HeavyWeaponsShip : Enemy
         }
         else {
 
-            rigidbody.velocity = transform.up * Speed * Time.fixedDeltaTime;
+            rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime);
         }
+
+        rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Speed);
     }
 }

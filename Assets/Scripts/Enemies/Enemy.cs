@@ -7,11 +7,13 @@ public abstract class Enemy : MonoBehaviour
     public float AttackDamage = 30f;
     public float AttackRange = 7.5f;
     public float RotationSmoothing = 0.5f;
+    public float MaxDistanceFromPlayer = 30f;
 
     public int ScoreValue = 0;
 
     protected float currentHealth;
     protected float distanceToPlayer;
+    protected float distanceCheckInterval = 3f;
 
     protected Vector3 pointOfInterest;
 
@@ -41,11 +43,17 @@ public abstract class Enemy : MonoBehaviour
         rigidbody = rigidbody == null ? GetComponent<Rigidbody2D>() : rigidbody;
 
         if (rigidbody == null) Debug.LogError("Enemy::Start() => No Rigidbody found!!!");
+
     }
 
     private void Start() {
+
+        Debug.Log($"{name} is getting it's EnemyIndicator");
+
         indicator = UIManager.instance.RequestEnemyIndicator();
         indicator.SetTarget(transform);
+
+        InvokeRepeating("CheckForReposition", distanceCheckInterval, distanceCheckInterval);
     }
 
     protected virtual void FixedUpdate() {
@@ -56,6 +64,19 @@ public abstract class Enemy : MonoBehaviour
         lookAtPointOfInterest();
 
         calculateDistanceToPlayer();
+    }
+
+    protected virtual void CheckForReposition() {
+
+        if (distanceToPlayer >= MaxDistanceFromPlayer) {
+        
+            float randomAngle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+        
+            Vector3 newPos = Player.instance.transform.position +
+                             new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * UnityEngine.Random.Range(EnemyManager.instance.EnemySpawnNearDist, EnemyManager.instance.EnemySpawnFarDist);
+        
+            transform.position = newPos;
+        }
     }
 
     protected virtual void Attack() {
@@ -82,12 +103,12 @@ public abstract class Enemy : MonoBehaviour
 
             SoundManager.instance.PlayRemoteSFXClip(Sounds[1], transform.position);
         }
-    }
 
-    protected virtual void OnDisable() {
         if (indicator != null) {
             UIManager.instance.ReturnEnemyIndicator(indicator);
         }
+
+        CancelInvoke();
     }
 
     protected virtual void OnDrawGizmosSelected() {
@@ -96,7 +117,10 @@ public abstract class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
 
+    protected virtual void OnDisable() { }
+
     protected abstract void Update();
+
 
     public void RegisterOnDeathCallback(Action<Enemy> cb) {
 

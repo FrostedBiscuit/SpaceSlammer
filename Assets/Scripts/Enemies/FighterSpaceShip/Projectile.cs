@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody2D>().AddForce(transform.up * Speed);
+        GetComponent<Rigidbody2D>().velocity = transform.up * Speed;
 
         SoundManager.instance.PlayRemoteSFXClip(ShootSound, transform.position);
     }

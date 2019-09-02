@@ -52,6 +52,7 @@ MonoBehaviour:
   AttackDamage: 70
   AttackRange: 5.225
   RotationSmoothing: 0.5
+  MaxDistanceFromPlayer: 30
   ScoreValue: 30
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
@@ -61,6 +62,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d71b9fa01d812324a918073de009827e, type: 3}
   BackoffRange: 3
   Speed: 10
+  BeamCooldown: 5
   BeamDuration: 2
   BeamLenght: 3
   BeamDamageInterval: 0.25
@@ -78,8 +80,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 6
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 3
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 2d60eb97f33a1ac4ba3547defd56f968, type: 2}
   m_Interpolate: 0
