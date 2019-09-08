@@ -9,9 +9,6 @@ public class FighterSpaceShip : Enemy {
     public float Speed = 20f;
 
     [SerializeField]
-    GameObject Projectile = null;
-
-    [SerializeField]
     Transform ProjectileSpawnPoint = null;
 
     float nextFire;
@@ -19,25 +16,21 @@ public class FighterSpaceShip : Enemy {
     protected override void Attack() {
         base.Attack();
 
-        ObjectPool.instance.RequestObject(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
-
         nextFire = FireRate + Time.time;
+
+        Debug.Log("Fighter ship attacking");
+
+        ProjectilePool.instance.RequestObject(ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
     }
 
     protected override void Die() {
         base.Die();
 
-        //Debug.Log("Fighter space ship has died!!!");
-
-        ObjectPool.instance.ReturnObject(gameObject);
+        FighterSpaceShipPool.instance.ReturnObject(this);
     }
 
     protected override void OnEnable() {
         base.OnEnable();
-
-        if (Projectile == null) {
-            Debug.LogError("BasicSpaceShip::Start() => No projectile game object found!!!");
-        }
 
         if (ProjectileSpawnPoint == null) {
             Debug.LogError("BasicSpaceShip::Start() => No projectile spawn point found!!!");
@@ -62,6 +55,11 @@ public class FighterSpaceShip : Enemy {
         base.TakeDamage(dmg);
 
         //Debug.Log("BasicSpaceShip::TakeDamage() => Damage taken: " + dmg);
+    }
+
+    public override void Dispose() {
+
+        FighterSpaceShipPool.instance.ReturnObject(this);
     }
 
     protected override void Update() {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyAfter : MonoBehaviour {
+public class Particles : MonoBehaviour {
 
-    public float Delay = 2f;
+    public float DestoryAfter = 2f;
 
     private void OnEnable() {
 
@@ -13,8 +13,8 @@ public class DestroyAfter : MonoBehaviour {
 
     IEnumerator destroyAfter() {
 
-        yield return new WaitForSeconds(Delay);
+        yield return new WaitForSeconds(DestoryAfter);
 
-        ObjectPool.instance.ReturnObject(gameObject);
+        ParticlesPool.instance.ReturnObject(this);
     }
 }

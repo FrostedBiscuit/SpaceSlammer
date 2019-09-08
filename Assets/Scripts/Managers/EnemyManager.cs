@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,13 +8,21 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
 
     private void Awake() {
-        
+
         if (instance != null) {
             Debug.LogError("EnemyManager::Awake() => More than 1 instance of EnemyManager in the scene!!!");
             return;
         }
 
         instance = this;
+
+        EnemyObjectPools = FindObjectsOfType<ObjectPool<Enemy>>().ToList();
+
+        Debug.Log(EnemyObjectPools.Count);
+
+        for (int i = 0; i < EnemyObjectPools.Count; i++) {
+            Debug.Log(EnemyObjectPools[i].name);
+        }
     }
     #endregion
 
@@ -27,9 +35,7 @@ public class EnemyManager : MonoBehaviour
     public int MaxMines = 5;
     public int sumEnemyDied;
 
-    public List<PooledEnemy> Enemies = new List<PooledEnemy>();
-
-    public GameObject Mine = null;
+    public List<ObjectPool<Enemy>> EnemyObjectPools = new List<ObjectPool<Enemy>>();
 
     bool canSpawn = false;
 
@@ -64,7 +70,7 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < activeEnemies.Count; i++) {
 
-            ObjectPool.instance.ReturnObject(activeEnemies[i].gameObject);
+            activeEnemies[i].Dispose();
         }
 
         activeEnemies.Clear();
@@ -73,41 +79,22 @@ public class EnemyManager : MonoBehaviour
     }
 
     private void spawnMines() {
+        
+        int mineDelta = MaxMines - currentMines;
+        int numMinesToSpawn = Random.Range(0, mineDelta);
 
-        if (currentMines == 0) {
+        for (int i = 0; i < numMinesToSpawn; i++) {
 
-            for (int i = 0; i < MaxMines; i++) {
+            float randomAngle = Random.Range(0f, Mathf.PI * 2f);
+            Vector3 newPos = Player.instance.transform.position +
+                             new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(EnemySpawnNearDist, EnemySpawnFarDist);
 
-                float randomAngle = Random.Range(0f, Mathf.PI * 2f);
-                Vector3 newPos = Player.instance.transform.position + 
-                                 new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(EnemySpawnNearDist, EnemySpawnFarDist);
+            Mine m = MinePool.instance.RequestObject(newPos, Quaternion.identity);
+            m.RegisterOnExplosionCallback(onMineExplosion);
 
-                Mine m = ObjectPool.instance.RequestObject(Mine, newPos, Quaternion.identity).GetComponent<Mine>();
-                m.RegisterOnExplosionCallback(onMineExplosion);
+            activeMines.Add(m);
 
-                activeMines.Add(m);
-
-                currentMines++;
-            }
-        }
-        else if (currentMines < MaxMines) {
-
-            int mineDelta = MaxMines - currentMines;
-            int numMinesToSpawn = Random.Range(0, mineDelta);
-
-            for (int i = 0; i < numMinesToSpawn; i++) {
-
-                float randomAngle = Random.Range(0f, Mathf.PI * 2f);
-                Vector3 newPos = Player.instance.transform.position +
-                                 new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(EnemySpawnNearDist, EnemySpawnFarDist);
-
-                Mine m = ObjectPool.instance.RequestObject(Mine, newPos, Quaternion.identity).GetComponent<Mine>();
-                m.RegisterOnExplosionCallback(onMineExplosion);
-
-                activeMines.Add(m);
-
-                currentMines++;
-            }
+            currentMines++;
         }
     }
 
@@ -115,7 +102,7 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < activeMines.Count; i++) {
 
-            ObjectPool.instance.ReturnObject(activeMines[i].gameObject);
+            MinePool.instance.ReturnObject(activeMines[i]);
         }
     }
 
@@ -127,12 +114,12 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < enemyCount; i++) {
 
-            int randomIndex = Random.Range(0, Enemies.Count);
+            int randomIndex = Random.Range(0, EnemyObjectPools.Count);
             float randomAngle = Random.Range(0f, 2f * Mathf.PI);
 
             Vector3 offset = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(EnemySpawnNearDist, EnemySpawnFarDist);
 
-            Enemy e = ObjectPool.instance.RequestObject(Enemies[randomIndex].Enemy.gameObject, offset, Quaternion.identity).GetComponent<Enemy>();
+            Enemy e = EnemyObjectPools[randomIndex].RequestObject(Player.instance.transform.position + offset, Quaternion.identity);
             e.RegisterOnDeathCallback(onEnemyDeath);
 
             activeEnemies.Add(e);
@@ -166,11 +153,5 @@ public class EnemyManager : MonoBehaviour
         if (currentMines < 0) {
             Debug.LogError($"EnemyManager::onMineExplosion() => currentMines is less than 0!!! currentMines: {currentMines}");
         }
-    }
-
-    [System.Serializable]
-    public struct PooledEnemy {
-
-        public Enemy Enemy;
     }
 }

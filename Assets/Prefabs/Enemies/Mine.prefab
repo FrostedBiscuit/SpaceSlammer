@@ -49,7 +49,10 @@ MonoBehaviour:
   Damage: 10
   ExplosionRadius: 3
   Timer: 3
-  ExplosionParticles: {fileID: 5704734517573977378, guid: a6a2cd32a6424364d82c9b5219fe805d,
+  MaxDistanceFromPlayer: 40
+  ParticlePool: {fileID: 5945024946193098699, guid: 9965161f2496f6a4989b1530bb118853,
+    type: 3}
+  ParentMinePool: {fileID: 1295117811231264920, guid: c17654bbcb44fa54a8b7f16eb6bbe66d,
     type: 3}
 --- !u!58 &6965295164157895037
 CircleCollider2D:

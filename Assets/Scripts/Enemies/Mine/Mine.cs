@@ -15,9 +15,6 @@ public class Mine : MonoBehaviour {
     [SerializeField]
     private float MaxDistanceFromPlayer = 40f;
 
-    [SerializeField]
-    private GameObject ExplosionParticles = null;
-
     private float distanceCheckInterval = 5f;
 
     private Action<Mine> mineExplosionCallback;
@@ -90,10 +87,14 @@ public class Mine : MonoBehaviour {
             mineExplosionCallback(this);
         }
 
-        ObjectPool.instance.RequestObject(ExplosionParticles, transform.position, transform.rotation);
-        //ObjectPool.instance.ReturnObject(gameObject);
+        ParticlesPool.instance.RequestObject(transform.position, transform.rotation);
 
-        Destroy(gameObject);
+        MinePool.instance.ReturnObject(this);
+    }
+
+    private void OnDisable() {
+
+        CancelInvoke();
     }
 
     public void RegisterOnExplosionCallback(Action<Mine> cb) {

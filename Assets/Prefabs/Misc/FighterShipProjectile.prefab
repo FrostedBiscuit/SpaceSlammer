@@ -95,8 +95,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 0.5
+  m_LinearDrag: 0.25
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -132,8 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b1af06b730d55a4c9e67487a9c1f97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 30
+  Speed: 50
   Damage: 20
+  DestroyAfter: 5
   ShootSound: {fileID: 8300000, guid: a89a3e74cd555954381c725ddd44d7f9, type: 3}
   ImpactSound: {fileID: 8300000, guid: e583fb7ffa48f834cb5acc8332d03164, type: 3}
 --- !u!82 &7721354343677138860

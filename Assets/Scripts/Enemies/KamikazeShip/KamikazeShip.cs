@@ -22,6 +22,11 @@ public class KamikazeShip : Enemy {
 
     Coroutine expTimerCoroutine;
 
+    public override void Dispose() {
+
+        KamikazeShipPool.instance.ReturnObject(this);
+    }
+
     protected override void OnEnable() {
         base.OnEnable();
 
@@ -104,7 +109,7 @@ public class KamikazeShip : Enemy {
         rigidbody.velocity = Vector2.zero;
         rigidbody.AddForce(transform.up * ChargeForce, ForceMode2D.Force);
 
-        Debug.Log("added force = " + (transform.up * ChargeForce).ToString());
+        //Debug.Log("added force = " + (transform.up * ChargeForce).ToString());
 
         expTimerCoroutine = StartCoroutine(explosionTimer());
     }
@@ -112,7 +117,7 @@ public class KamikazeShip : Enemy {
     protected override void Die() {
         base.Die();
 
-        ObjectPool.instance.ReturnObject(gameObject);
+        KamikazeShipPool.instance.ReturnObject(this);
     }
 
     private void move() {
@@ -129,7 +134,7 @@ public class KamikazeShip : Enemy {
 
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
 
-        Debug.Log("Boom!");
+        //Debug.Log("Boom!");
 
         for (int i = 0; i < cols.Length; i++) {
 
@@ -177,7 +182,7 @@ public class KamikazeShip : Enemy {
             yield return null;
         }
 
-        Debug.Log("Explosion in " + BombTimer + " seconds");
+        //Debug.Log("Explosion in " + BombTimer + " seconds");
 
         yield return new WaitForSeconds(BombTimer);
 
@@ -189,6 +194,11 @@ public class KamikazeShip : Enemy {
     }
 
     protected override void OnDrawGizmosSelected() {
+
+        if (rigidbody == null) {
+            return;
+        }
+
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, rigidbody.velocity);
     }

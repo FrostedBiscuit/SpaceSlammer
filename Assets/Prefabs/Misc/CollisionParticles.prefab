@@ -4711,4 +4711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671011571eb3cf743a6977ab5a2beee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Delay: 2
+  DestoryAfter: 2
+  ParentPool: {fileID: 5945024946193098699, guid: 9965161f2496f6a4989b1530bb118853,
+    type: 3}

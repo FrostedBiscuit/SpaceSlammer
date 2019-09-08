@@ -24,9 +24,6 @@ public class Player : MonoBehaviour {
     [SerializeField]
     Rigidbody2D Rigidbody = null;
 
-    [SerializeField]
-    GameObject CollisionParticles = null;
-
     [HideInInspector]
     public float Health;
 
@@ -65,7 +62,7 @@ public class Player : MonoBehaviour {
         
         if (collision.transform.tag == "Enemy" && Time.time >= nextParticleTime) {
 
-            ObjectPool.instance.RequestObject(CollisionParticles, (Vector3)collision.GetContact(0).point, Quaternion.identity);
+            ParticlesPool.instance.RequestObject((Vector3)collision.GetContact(0).point, Quaternion.identity);
 
             nextParticleTime = Time.time + ParticleInterval;
         }

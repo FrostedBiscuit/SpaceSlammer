@@ -49,11 +49,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 30
-  AttackDamage: 70
+  AttackDamage: 40
   AttackRange: 5.225
   RotationSmoothing: 0.5
   MaxDistanceFromPlayer: 30
   ScoreValue: 30
+  ParentObjectPool: {fileID: 1321245359753086669, guid: 0e59eab9ed508d8479992b82d63e953a,
+    type: 3}
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 2697276965730943013}
@@ -65,7 +67,7 @@ MonoBehaviour:
   BeamCooldown: 5
   BeamDuration: 2
   BeamLenght: 3
-  BeamDamageInterval: 0.25
+  BeamDamageInterval: 0.5
   Beam: {fileID: 6812092725846631880}
 --- !u!50 &6812092723991730537
 Rigidbody2D:

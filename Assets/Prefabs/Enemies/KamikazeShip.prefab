@@ -133,6 +133,8 @@ MonoBehaviour:
   RotationSmoothing: 0.5
   MaxDistanceFromPlayer: 30
   ScoreValue: 0
+  ParentObjectPool: {fileID: 1078689314747726237, guid: 61719c316711a234bbae36e8c12cc159,
+    type: 3}
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 731005323480211457}
@@ -142,7 +144,7 @@ MonoBehaviour:
   BombTimer: 3
   FocusTimer: 3
   Speed: 100
-  ChargeForce: 150
+  ChargeForce: 230
   ExplosionRadius: 3
   PassiveCircleColor: {r: 0, g: 1, b: 0, a: 1}
   AimingCircleColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

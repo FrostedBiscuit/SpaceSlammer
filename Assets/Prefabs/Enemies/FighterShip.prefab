@@ -61,10 +61,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c3f7a8a0b5d1e7243912eb4f85039d5d, type: 3}
   - {fileID: 8300000, guid: 0a5b62a89b30bf94087cd7c1b76ed07b, type: 3}
   BackoffRange: 3.5
-  FireRate: 3
-  Speed: 50
-  Projectile: {fileID: 2896482147063688776, guid: 1fb4d345a5c53e646be552ebc6e8472c,
-    type: 3}
+  FireRate: 5
+  Speed: 75
   ProjectileSpawnPoint: {fileID: 7942419702780967162}
 --- !u!50 &2212956285521098129
 Rigidbody2D:
@@ -302,7 +300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6795328667126383864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0.848, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2212956285521098135}

@@ -43,12 +43,9 @@ public abstract class Enemy : MonoBehaviour
         rigidbody = rigidbody == null ? GetComponent<Rigidbody2D>() : rigidbody;
 
         if (rigidbody == null) Debug.LogError("Enemy::Start() => No Rigidbody found!!!");
-
     }
 
     private void Start() {
-
-        Debug.Log($"{name} is getting it's EnemyIndicator");
 
         indicator = UIManager.instance.RequestEnemyIndicator();
         indicator.SetTarget(transform);
@@ -118,6 +115,8 @@ public abstract class Enemy : MonoBehaviour
     }
 
     protected virtual void OnDisable() { }
+
+    public abstract void Dispose();
 
     protected abstract void Update();
 

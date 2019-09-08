@@ -10,6 +10,7 @@ public class SoundSource : MonoBehaviour {
     AudioSource source = null;
 
     private void OnEnable() {
+
         source = source == null ? GetComponent<AudioSource>() : source;
     }
 
@@ -17,7 +18,7 @@ public class SoundSource : MonoBehaviour {
         
         if (initialized == true && source.isPlaying == false) {
 
-            ObjectPool.instance.ReturnObject(gameObject);
+            SoundSourcePool.instance.ReturnObject(this);
         }
     }
 

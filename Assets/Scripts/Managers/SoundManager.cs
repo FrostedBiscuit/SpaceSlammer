@@ -52,9 +52,6 @@ public class SoundManager : MonoBehaviour {
     AudioSource Source = null;
 
     [SerializeField]
-    GameObject SoundSource = null;
-
-    [SerializeField]
     List<GameObject> SFXToggleSwitches = new List<GameObject>();
     [SerializeField]
     List<GameObject> MusicToggleSwitches = new List<GameObject>();
@@ -123,7 +120,7 @@ public class SoundManager : MonoBehaviour {
             return;
         }
 
-        SoundSource ss = ObjectPool.instance.RequestObject(SoundSource, position, Quaternion.identity).GetComponent<SoundSource>();
+        SoundSource ss = SoundSourcePool.instance.RequestObject(position, Quaternion.identity);
         ss.Play(clip);
     }
 }
