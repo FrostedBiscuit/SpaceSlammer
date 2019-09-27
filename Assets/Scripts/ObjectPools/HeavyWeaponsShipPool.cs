@@ -8,10 +8,10 @@ public class HeavyWeaponsShipPool : ObjectPool<Enemy> {
     public static HeavyWeaponsShipPool instance = null;
 
     private void Awake() {
-        
+
         if (instance != null) {
 
-            Debug.LogError("HeavyWeaponsShipPool::Awake() => More than 1 instance of HeavyWeaponsShipPool in the scene!!");
+            Debug.LogError($"{this.name}::Awake() => More than 1 instance of {this.name} in the scene!!");
 
             return;
         }
@@ -19,17 +19,4 @@ public class HeavyWeaponsShipPool : ObjectPool<Enemy> {
         instance = this;
     }
     #endregion
-
-    // Start is called before the first frame update
-    void Start() {
-
-        for (int i = 0; i < NumToSpawn; i++) {
-
-            Enemy hws = Instantiate(PooledObject, transform);
-
-            hws.gameObject.SetActive(false);
-
-            pooledObjectQueue.Enqueue(hws);
-        }
-    }
 }

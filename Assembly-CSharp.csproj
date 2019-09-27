@@ -61,7 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraZoom.cs" />
     <Compile Include="Assets\Scripts\Camera\ParallaxBackground.cs" />
+    <Compile Include="Assets\Scripts\Consumables\Consumable.cs" />
+    <Compile Include="Assets\Scripts\Consumables\DamageBooster.cs" />
+    <Compile Include="Assets\Scripts\Consumables\HealthPickup.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\FighterSpaceShip\FighterSpaceShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\FighterSpaceShip\Projectile.cs" />
@@ -70,12 +74,15 @@
     <Compile Include="Assets\Scripts\Enemies\KamikazeShip\KamikazeShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\KamikazeShip\RadiusVisualizer.cs" />
     <Compile Include="Assets\Scripts\Enemies\Mine\Mine.cs" />
+    <Compile Include="Assets\Scripts\Managers\ConsumablesManager.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SkinManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\ObjectPools\DamageBoosterPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\FighterSpaceShipPool.cs" />
+    <Compile Include="Assets\Scripts\ObjectPools\HealthPickupPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\HeavyWeaponsShipPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\KamikazeShipPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\MinePool.cs" />
@@ -83,10 +90,12 @@
     <Compile Include="Assets\Scripts\ObjectPools\ParticlesPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\ProjectilePool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\SoundSourcePool.cs" />
+    <Compile Include="Assets\Scripts\ObjectPools\UIEnemyIndicatorPool.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\RotatePlayerSprite.cs" />
     <Compile Include="Assets\Scripts\Player\SwipeInput.cs" />
     <Compile Include="Assets\Scripts\UI\UICollapsablePanel.cs" />
+    <Compile Include="Assets\Scripts\UI\UIDamageMultiplierLabel.cs" />
     <Compile Include="Assets\Scripts\UI\UIEnemyIndicator.cs" />
     <Compile Include="Assets\Scripts\UI\UIFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />

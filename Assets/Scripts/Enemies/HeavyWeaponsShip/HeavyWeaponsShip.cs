@@ -5,7 +5,8 @@ using UnityEngine;
 public class HeavyWeaponsShip : Enemy
 {
     public float BackoffRange = 3f;
-    public float Speed = 10f;
+    public float SlopeCoefficient = 150f;
+    public float WanderingSpeed = 10f;
     public float BeamCooldown = 5f;
     public float BeamDuration = 2f;
     public float BeamLenght = 3f;
@@ -23,13 +24,10 @@ public class HeavyWeaponsShip : Enemy
         base.OnEnable();
 
         Beam.SetActive(false);
-
-        initialRotationSmoothing = RotationSmoothing;
     }
 
     float beamCurrentCooldown;
     float beamCurrentLifetime;
-    float initialRotationSmoothing;
 
     protected override void Attack() {
         base.Attack();
@@ -39,8 +37,6 @@ public class HeavyWeaponsShip : Enemy
         beamCurrentCooldown = Time.time + BeamCooldown;
 
         beamCurrentLifetime = Time.time + BeamDuration;
-
-        RotationSmoothing = RotationSmoothing / 100f;
     }
 
     protected override void Update() {
@@ -52,10 +48,10 @@ public class HeavyWeaponsShip : Enemy
             Player.instance.gameObject.activeSelf == true &&
             distanceToPlayer < AttackRange                &&
             Beam.activeSelf == false) {
+
+
+            Debug.Log($"attacking distance to player: {distanceToPlayer}");
             Attack();
-        }
-        else {
-            RotationSmoothing = initialRotationSmoothing;
         }
     }
 
@@ -71,17 +67,34 @@ public class HeavyWeaponsShip : Enemy
         HeavyWeaponsShipPool.instance.ReturnObject(this);
     }
 
-    void move() {
-        
-        if (distanceToPlayer < AttackRange) {
+    protected override void OnDrawGizmosSelected() {
+        base.OnDrawGizmosSelected();
 
-            rigidbody.velocity = Vector2.zero;
+        if (rigidbody == null) return;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawRay(transform.position, rigidbody.velocity);
+    }
+
+    void move() {
+
+        if (Player.instance.gameObject.activeSelf == true) {
+
+            Debug.Log("player active");
+
+            if (distanceToPlayer < AttackRange) {
+
+                rigidbody.velocity = Vector2.zero;
+            }
+            else {
+
+                float speed = SlopeCoefficient * distanceToPlayer - SlopeCoefficient * BackoffRange;
+
+                rigidbody.AddForce(transform.up * speed * Time.fixedDeltaTime);
+            }
         }
         else {
-
-            rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime);
+            rigidbody.AddForce(transform.up * WanderingSpeed * Time.fixedDeltaTime);
         }
-
-        rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Speed);
     }
 }

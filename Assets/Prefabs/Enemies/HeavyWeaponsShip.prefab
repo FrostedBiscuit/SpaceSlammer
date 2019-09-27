@@ -54,8 +54,6 @@ MonoBehaviour:
   RotationSmoothing: 0.5
   MaxDistanceFromPlayer: 30
   ScoreValue: 30
-  ParentObjectPool: {fileID: 1321245359753086669, guid: 0e59eab9ed508d8479992b82d63e953a,
-    type: 3}
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 2697276965730943013}
@@ -63,7 +61,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 744c0f266633db846a8e271e51c80eb4, type: 3}
   - {fileID: 8300000, guid: d71b9fa01d812324a918073de009827e, type: 3}
   BackoffRange: 3
-  Speed: 10
+  SlopeCoefficient: 150
+  WanderingSpeed: 10
   BeamCooldown: 5
   BeamDuration: 2
   BeamLenght: 3
@@ -300,7 +299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6812092725846631881
 Transform:
   m_ObjectHideFlags: 0

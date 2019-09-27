@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96e0a406f32f1a478d6c716245cdf98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParentSoundSourcePool: {fileID: 1037418177280218008, guid: edf9a9d5f02ffa246840f5563697e5a9,
-    type: 3}
 --- !u!82 &7945208734374552083
 AudioSource:
   m_ObjectHideFlags: 0

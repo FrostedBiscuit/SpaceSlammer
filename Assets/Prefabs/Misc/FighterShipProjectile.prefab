@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b1af06b730d55a4c9e67487a9c1f97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 50
+  Speed: 500
   Damage: 20
   DestroyAfter: 5
   ShootSound: {fileID: 8300000, guid: a89a3e74cd555954381c725ddd44d7f9, type: 3}

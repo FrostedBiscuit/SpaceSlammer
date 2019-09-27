@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
+    public enum Effect {
+        HEAL, DAMAGEBOOST
+    }
+
     #region Singelton
     public static PlayerManager instance;
 
@@ -40,6 +44,8 @@ public class PlayerManager : MonoBehaviour {
 
             EnemyManager.instance.EndSpawning();
 
+            ConsumablesManager.instance.StopSpawningConsumables();
+
             UIManager.instance.ActivateEndScreen();
         }
     }
@@ -61,6 +67,30 @@ public class PlayerManager : MonoBehaviour {
             return;
         }
 
+        StopAllCoroutines();
+
         PlayerGO.SetActive(false);
+    }
+
+    public void ApplyEffect(Effect effect, float amount, float duration = 0f) {
+
+        switch(effect) {
+            case Effect.DAMAGEBOOST:
+                StartCoroutine(boostPlayerDamageForSeconds(amount, duration));
+            break;
+            case Effect.HEAL:
+                Player.instance.Health += amount;
+            break;
+        }
+    }
+
+    IEnumerator boostPlayerDamageForSeconds(float amount, float duration) {
+        
+        Player.instance.DamageMultiplier += amount;
+
+        yield return new WaitForSeconds(duration);
+
+        Player.instance.DamageMultiplier -= amount;
+        Player.instance.DamageMultiplier = Mathf.Clamp(Player.instance.DamageMultiplier, 1f, Mathf.Infinity);
     }
 }

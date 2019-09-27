@@ -8,10 +8,10 @@ public class FighterSpaceShipPool : ObjectPool<Enemy> {
     public static FighterSpaceShipPool instance = null;
 
     private void Awake() {
-        
+
         if (instance != null) {
 
-            Debug.LogError("FighterSpaceShipPool::Awake() => More than 1 instacne of FighterSpaceShipPool in the scene!!");
+            Debug.LogError($"{this.name}::Awake() => More than 1 instance of {this.name} in the scene!!");
 
             return;
         }
@@ -19,17 +19,4 @@ public class FighterSpaceShipPool : ObjectPool<Enemy> {
         instance = this;
     }
     #endregion
-
-    // Start is called before the first frame update
-    void Start() {
-
-        for (int i = 0; i < NumToSpawn; i++) {
-
-            Enemy fss = Instantiate(PooledObject, transform);
-
-            fss.gameObject.SetActive(false);
-
-            pooledObjectQueue.Enqueue(fss);
-        }
-    }
 }

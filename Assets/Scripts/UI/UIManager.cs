@@ -20,24 +20,13 @@ public class UIManager : MonoBehaviour {
         instance = this;
     }
     #endregion
-
-    [SerializeField]
-    int IndicatorsToSpawn = 10;
-
+    
     [SerializeField]
     GameObject MainMenu = null;
     [SerializeField]
     GameObject HUD = null;
     [SerializeField]
     GameObject EndScreen = null;
-    [SerializeField]
-    GameObject EnemyIndicatorPrefab = null;
-
-    [SerializeField]
-    Transform EnemyIndicatorsParent= null;
-
-    List<UIEnemyIndicator> activeIndicators = new List<UIEnemyIndicator>();
-    List<UIEnemyIndicator> inactiveIndicators = new List<UIEnemyIndicator>();
 
     // Start is called before the first frame update
     void Start() {
@@ -52,15 +41,6 @@ public class UIManager : MonoBehaviour {
 
         if (EndScreen == null) {
             Debug.LogError("UIManager::Start() => EndScreen GameObject not assigned!!!");
-        }
-
-        for (int i = 0; i < IndicatorsToSpawn; i++) {
-
-            UIEnemyIndicator indicator = Instantiate(EnemyIndicatorPrefab, EnemyIndicatorsParent).GetComponent<UIEnemyIndicator>();
-
-            indicator.gameObject.SetActive(false);
-
-            inactiveIndicators.Add(indicator);
         }
     }
 
@@ -95,27 +75,5 @@ public class UIManager : MonoBehaviour {
             HUD.SetActive(false);
             MainMenu.SetActive(false);
         }
-    }
-
-    public UIEnemyIndicator RequestEnemyIndicator() {
-
-        UIEnemyIndicator indicator = inactiveIndicators[0];
-
-        indicator.gameObject.SetActive(true);
-
-        inactiveIndicators.Remove(indicator);
-        activeIndicators.Add(indicator);
-
-        return indicator;
-    }
-
-    public UIEnemyIndicator ReturnEnemyIndicator(UIEnemyIndicator indicator) {
-
-        indicator.gameObject.SetActive(false);
-
-        activeIndicators.Remove(indicator);
-        inactiveIndicators.Add(indicator);
-
-        return indicator;
     }
 }

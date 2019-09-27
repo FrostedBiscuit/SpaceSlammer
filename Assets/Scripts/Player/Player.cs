@@ -26,6 +26,8 @@ public class Player : MonoBehaviour {
 
     [HideInInspector]
     public float Health;
+    [HideInInspector]
+    public float DamageMultiplier = 1f;
 
     // Start is called before the first frame update
     void OnEnable() {
@@ -34,6 +36,8 @@ public class Player : MonoBehaviour {
         }
 
         Health = MaxHealth;
+
+        DamageMultiplier = 1f;
 
         Rigidbody.velocity = Vector2.zero;
     }
@@ -61,6 +65,10 @@ public class Player : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
         
         if (collision.transform.tag == "Enemy" && Time.time >= nextParticleTime) {
+
+            Enemy e = collision.transform.GetComponent<Enemy>();
+
+            e.TakeDamage(collision.relativeVelocity.magnitude * DamageMultiplier);
 
             ParticlesPool.instance.RequestObject((Vector3)collision.GetContact(0).point, Quaternion.identity);
 

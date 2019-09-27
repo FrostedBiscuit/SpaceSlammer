@@ -8,10 +8,10 @@ public class ParticlesPool : ObjectPool<Particles> {
     public static ParticlesPool instance = null;
 
     private void Awake() {
-        
+
         if (instance != null) {
 
-            Debug.LogError("ParticlesPool::Awake() => More than 1 instance of ParticlesPool in the scene!!");
+            Debug.LogError($"{this.name}::Awake() => More than 1 instance of {this.name} in the scene!!");
 
             return;
         }
@@ -19,17 +19,4 @@ public class ParticlesPool : ObjectPool<Particles> {
         instance = this;
     }
     #endregion
-
-    // Start is called before the first frame update
-    void Start() {
-
-        for (int i = 0; i < NumToSpawn; i++) {
-
-            Particles p = Instantiate(PooledObject, transform);
-
-            p.gameObject.SetActive(false);
-
-            pooledObjectQueue.Enqueue(p);
-        }
-    }
 }

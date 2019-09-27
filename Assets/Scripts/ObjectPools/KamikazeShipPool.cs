@@ -11,7 +11,7 @@ public class KamikazeShipPool : ObjectPool<Enemy> {
 
         if (instance != null) {
 
-            Debug.LogError("KamikazeShipPool::Awake() => More than 1 instance of KamikazeShipPool in the scene!!");
+            Debug.LogError($"{this.name}::Awake() => More than 1 instance of {this.name} in the scene!!");
 
             return;
         }
@@ -19,17 +19,4 @@ public class KamikazeShipPool : ObjectPool<Enemy> {
         instance = this;
     }
     #endregion
-
-    // Start is called before the first frame update
-    void Start() {
-
-        for (int i = 0; i < NumToSpawn; i++) {
-
-            Enemy ks = Instantiate(PooledObject, transform);
-
-            ks.gameObject.SetActive(false);
-
-            pooledObjectQueue.Enqueue(ks);
-        }
-    }
 }

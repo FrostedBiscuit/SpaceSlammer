@@ -18,11 +18,11 @@ public class EnemyManager : MonoBehaviour
 
         EnemyObjectPools = FindObjectsOfType<ObjectPool<Enemy>>().ToList();
 
-        Debug.Log(EnemyObjectPools.Count);
+        //Debug.Log(EnemyObjectPools.Count);
 
-        for (int i = 0; i < EnemyObjectPools.Count; i++) {
+        /*for (int i = 0; i < EnemyObjectPools.Count; i++) {
             Debug.Log(EnemyObjectPools[i].name);
-        }
+        }*/
     }
     #endregion
 

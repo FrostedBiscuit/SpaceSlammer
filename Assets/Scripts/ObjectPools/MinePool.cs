@@ -8,10 +8,10 @@ public class MinePool : ObjectPool<Mine> {
     public static MinePool instance = null;
 
     private void Awake() {
-        
+
         if (instance != null) {
 
-            Debug.LogError("MinePool::Awake() => More than 1 instance of MinePool in the scene!!");
+            Debug.LogError($"{this.name}::Awake() => More than 1 instance of {this.name} in the scene!!");
 
             return;
         }
@@ -19,17 +19,4 @@ public class MinePool : ObjectPool<Mine> {
         instance = this;
     }
     #endregion
-
-    // Start is called before the first frame update
-    void Start() {
-
-        for (int i = 0; i < NumToSpawn; i++) {
-
-            Mine m = Instantiate(PooledObject, transform);
-
-            m.gameObject.SetActive(false);
-
-            pooledObjectQueue.Enqueue(m);
-        }
-    }
 }

@@ -3,7 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<TPooledObject> : MonoBehaviour where TPooledObject : MonoBehaviour {
+public class ObjectPool<TPooledObject/*, TSingeltonType*/> : MonoBehaviour where  TPooledObject : MonoBehaviour /*where TSingeltonType : ObjectPool<TPooledObject, TSingeltonType>*/  {
+/*
+    #region Singelton
+    public static TSingeltonType instance = null;
+
+    private void Awake() {
+        
+        if (instance != null) {
+
+            Debug.LogError($"{nameof(TSingeltonType)}::Awake() => More than 1 instance of {nameof(TPooledObject)}'s object pool!!");
+
+            return;
+        }
+
+        instance = (TSingeltonType) this;
+    }
+    #endregion*/
 
     public int NumToSpawn = 5;
 
@@ -11,11 +27,20 @@ public class ObjectPool<TPooledObject> : MonoBehaviour where TPooledObject : Mon
 
     protected Queue<TPooledObject> pooledObjectQueue = new Queue<TPooledObject>();
 
-    private void Update() {
+    public virtual void Start() {
 
-         if (pooledObjectQueue == null) {
-            Debug.Log($"{name}'s queue is null...");
+        PooledObject.gameObject.SetActive(false);
+
+        for (int i = 0; i < NumToSpawn; i++) {
+
+
+            TPooledObject obj = Instantiate(PooledObject, transform);
+
+            pooledObjectQueue.Enqueue(obj);
+
         }
+
+        PooledObject.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -39,8 +64,6 @@ public class ObjectPool<TPooledObject> : MonoBehaviour where TPooledObject : Mon
     /// <param name="obj">Object instance to return</param>
     /// <returns>Instance of deactivated object</returns>
     public virtual TPooledObject ReturnObject(TPooledObject obj) {
-
-        Debug.Log(pooledObjectQueue == null);
 
         obj.gameObject.SetActive(false);
 

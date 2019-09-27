@@ -5,8 +5,9 @@ using UnityEngine;
 public class FighterSpaceShip : Enemy {
 
     public float BackoffRange = 1.5f;
+    public float SlopeCoefficient = 2f;
+    public float WanderingSpeed = 50f;
     public float FireRate = 1f;
-    public float Speed = 20f;
 
     [SerializeField]
     Transform ProjectileSpawnPoint = null;
@@ -15,10 +16,14 @@ public class FighterSpaceShip : Enemy {
 
     protected override void Attack() {
         base.Attack();
-
+#if UNITY_EDITOR
+        if (DEBUG_Fight == false) {
+            return;
+        }
+#endif        
         nextFire = FireRate + Time.time;
 
-        Debug.Log("Fighter ship attacking");
+        //Debug.Log("Fighter ship attacking");
 
         ProjectilePool.instance.RequestObject(ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
     }
@@ -80,20 +85,17 @@ public class FighterSpaceShip : Enemy {
     void move() {
 
         if (Player.instance.gameObject.activeSelf == true) {
-            if (distanceToPlayer > AttackRange) {
-                rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime);
-            }
-            else if (distanceToPlayer < AttackRange && distanceToPlayer > BackoffRange) {
-                rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime * (distanceToPlayer / AttackRange));
-            }
-            else if (distanceToPlayer < BackoffRange) {
-                rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime * (AttackRange / distanceToPlayer) * -1f);
-            }
+
+            float speed = SlopeCoefficient * distanceToPlayer - SlopeCoefficient * BackoffRange;
+
+            Debug.Log($"Speed: {speed}, distance to player: {distanceToPlayer}");
+
+            rigidbody.AddForce(transform.up * speed * Time.fixedDeltaTime);
         }
         else {
-            rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime);
+            rigidbody.AddForce(transform.up * WanderingSpeed * Time.fixedDeltaTime);
         }
 
-        rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Speed);
+        //rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Max);
     }
 }

@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
 
 #if UNITY_EDITOR
     [SerializeField]
-    bool DEBUG_Fight = true;
+    protected bool DEBUG_Fight = true;
 #endif
     [SerializeField]
     float DEBUG_newRandomDestinationTime = 2f;
@@ -43,11 +43,8 @@ public abstract class Enemy : MonoBehaviour
         rigidbody = rigidbody == null ? GetComponent<Rigidbody2D>() : rigidbody;
 
         if (rigidbody == null) Debug.LogError("Enemy::Start() => No Rigidbody found!!!");
-    }
 
-    private void Start() {
-
-        indicator = UIManager.instance.RequestEnemyIndicator();
+        indicator = UIEnemyIndicatorPool.instance.RequestObject();
         indicator.SetTarget(transform);
 
         InvokeRepeating("CheckForReposition", distanceCheckInterval, distanceCheckInterval);
@@ -61,6 +58,10 @@ public abstract class Enemy : MonoBehaviour
         lookAtPointOfInterest();
 
         calculateDistanceToPlayer();
+
+        if (indicator == null) {
+            //Debug.LogError($"{name}'s indicator is null!!!");
+        }
     }
 
     protected virtual void CheckForReposition() {
@@ -78,6 +79,8 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Attack() {
 #if UNITY_EDITOR
+        Debug.Log($"{name}'s fight bool: {DEBUG_Fight}");
+
         if (DEBUG_Fight == false) return;
 #endif
     }
@@ -100,12 +103,6 @@ public abstract class Enemy : MonoBehaviour
 
             SoundManager.instance.PlayRemoteSFXClip(Sounds[1], transform.position);
         }
-
-        if (indicator != null) {
-            UIManager.instance.ReturnEnemyIndicator(indicator);
-        }
-
-        CancelInvoke();
     }
 
     protected virtual void OnDrawGizmosSelected() {
@@ -114,7 +111,14 @@ public abstract class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
 
-    protected virtual void OnDisable() { }
+    protected virtual void OnDisable() {
+
+        if (indicator != null) {
+            UIEnemyIndicatorPool.instance.ReturnObject(indicator);
+        }
+
+        CancelInvoke();
+    }
 
     public abstract void Dispose();
 
@@ -132,15 +136,6 @@ public abstract class Enemy : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-
-        if (collision.transform.tag == "Player") {
-
-            TakeDamage(collision.relativeVelocity.magnitude);
-
-            if (currentHealth == 0f) {
-                return;
-            }
-        }
 
         if (Sounds.Length > 0 && SoundManager.instance.PlaySFX == true) {
 
