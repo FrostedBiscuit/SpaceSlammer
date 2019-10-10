@@ -94,6 +94,9 @@
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\RotatePlayerSprite.cs" />
     <Compile Include="Assets\Scripts\Player\SwipeInput.cs" />
+    <Compile Include="Assets\Scripts\UI\Debug\UIAccelerationInput.cs" />
+    <Compile Include="Assets\Scripts\UI\Debug\UIDebugMenuButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Debug\UIOrthoSizeInput.cs" />
     <Compile Include="Assets\Scripts\UI\UICollapsablePanel.cs" />
     <Compile Include="Assets\Scripts\UI\UIDamageMultiplierLabel.cs" />
     <Compile Include="Assets\Scripts\UI\UIEnemyIndicator.cs" />

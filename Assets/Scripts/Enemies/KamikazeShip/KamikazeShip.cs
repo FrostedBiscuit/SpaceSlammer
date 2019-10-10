@@ -42,6 +42,8 @@ public class KamikazeShip : Enemy {
         hot = false;
 
         expTimerCoroutine = null;
+
+        focusTimer = 0f;
     }
 
     protected override void FixedUpdate() {
@@ -106,8 +108,12 @@ public class KamikazeShip : Enemy {
 
         hot = true;
 
+        float addedVel = ChargeForce * distanceToPlayer;
+
+        Debug.Log($"Added velocity = {addedVel}, distance to player = {distanceToPlayer}");
+
         rigidbody.velocity = Vector2.zero;
-        rigidbody.AddForce(transform.up * ChargeForce, ForceMode2D.Force);
+        rigidbody.AddForce(transform.up * addedVel, ForceMode2D.Impulse);
 
         //Debug.Log("added force = " + (transform.up * ChargeForce).ToString());
 
@@ -131,6 +137,8 @@ public class KamikazeShip : Enemy {
     }
 
     private void explode() {
+
+        ParticlesPool.instance.RequestObject(transform.position, Quaternion.identity);
 
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
 
@@ -194,6 +202,12 @@ public class KamikazeShip : Enemy {
     }
 
     protected override void OnDrawGizmosSelected() {
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, ExplosionRadius);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
 
         if (rigidbody == null) {
             return;

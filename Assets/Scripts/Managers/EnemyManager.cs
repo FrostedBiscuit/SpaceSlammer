@@ -16,7 +16,10 @@ public class EnemyManager : MonoBehaviour
 
         instance = this;
 
-        EnemyObjectPools = FindObjectsOfType<ObjectPool<Enemy>>().ToList();
+        foreach (EnemyPool ep in EnemyObjectPools) {
+
+            ep.Init();
+        }
 
         //Debug.Log(EnemyObjectPools.Count);
 
@@ -25,6 +28,37 @@ public class EnemyManager : MonoBehaviour
         }*/
     }
     #endregion
+
+    [System.Serializable]
+    public class EnemyPool {
+
+        public GameObject PoolGO;
+
+        [Range(0f, 1f)]
+        public float SpawnProbability;
+
+        ObjectPool<Enemy> pool;
+
+        public void Init() {
+
+            if (PoolGO == null) {
+
+                Debug.LogError("EnemyPool has no PoolGO!!!");
+
+                return;
+            }
+
+            pool = PoolGO.GetComponent<ObjectPool<Enemy>>();
+        }
+
+        public Enemy RequestObject(Vector3 position, Quaternion rotation) {
+            return pool.RequestObject(position, rotation);
+        }
+
+        public Enemy ReturnObject(Enemy e) {
+            return pool.ReturnObject(e);
+        } 
+    }
 
     public float EnemySpawnNearDist = 5f;
     public float EnemySpawnFarDist = 10f;
@@ -35,7 +69,7 @@ public class EnemyManager : MonoBehaviour
     public int MaxMines = 5;
     public int sumEnemyDied;
 
-    public List<ObjectPool<Enemy>> EnemyObjectPools = new List<ObjectPool<Enemy>>();
+    public List<EnemyPool> EnemyObjectPools = new List<EnemyPool>();
 
     bool canSpawn = false;
 
@@ -114,12 +148,13 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < enemyCount; i++) {
 
-            int randomIndex = Random.Range(0, EnemyObjectPools.Count);
             float randomAngle = Random.Range(0f, 2f * Mathf.PI);
-
             Vector3 offset = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(EnemySpawnNearDist, EnemySpawnFarDist);
 
-            Enemy e = EnemyObjectPools[randomIndex].RequestObject(Player.instance.transform.position + offset, Quaternion.identity);
+            float randomProbability = Random.Range(0f, 1f);
+            EnemyPool randomPool = EnemyObjectPools.OrderBy(p => Mathf.Abs(randomProbability - p.SpawnProbability)).First();
+
+            Enemy e = randomPool.RequestObject(Player.instance.transform.position + offset, Quaternion.identity);
             e.RegisterOnDeathCallback(onEnemyDeath);
 
             activeEnemies.Add(e);

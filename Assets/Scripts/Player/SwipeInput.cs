@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -27,6 +28,23 @@ public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler/*, IEnd
 
         lastDragPos = eventData.position;
     }
+
+    public void SetAccelerationMultiplier(string value) {
+
+        float oldAcc = AccelerationMultiplier;
+
+        try {
+
+            AccelerationMultiplier = float.Parse(value);
+        }
+        catch (Exception e) {
+
+            Debug.LogError(e);
+
+            AccelerationMultiplier = oldAcc;
+        }
+    }
+
     /*
     public void OnEndDrag(PointerEventData eventData) {
 

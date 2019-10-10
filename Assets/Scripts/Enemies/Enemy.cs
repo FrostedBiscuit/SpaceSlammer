@@ -48,6 +48,8 @@ public abstract class Enemy : MonoBehaviour
         indicator.SetTarget(transform);
 
         InvokeRepeating("CheckForReposition", distanceCheckInterval, distanceCheckInterval);
+
+        calculateDistanceToPlayer();
     }
 
     protected virtual void FixedUpdate() {

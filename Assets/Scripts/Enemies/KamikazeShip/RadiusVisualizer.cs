@@ -6,50 +6,55 @@ using UnityEngine;
 public class RadiusVisualizer : MonoBehaviour {
 
     [SerializeField]
-    int NumVerticies = 10;
-
-    [SerializeField]
     float Range = 2.5f;
 
     [SerializeField]
-    LineRenderer lineRenderer = null;
-
-    Vector3[] normalizedVerticies;
+    new ParticleSystem particleSystem = null;
 
     public void SetRange(float r) {
-        Range = Mathf.Abs(r);
+
+        ParticleSystem.MainModule main = particleSystem.main;
+
+        main.startSize = Mathf.Abs(r) * 4f;
+
+        //Range = Mathf.Abs(r);
     }
 
     public void SetColor(Color color) {
-        lineRenderer.startColor = color;
-        lineRenderer.endColor = color;
+
+        ParticleSystem.MainModule main = particleSystem.main;
+
+        main.startColor = color;
+
+        //lineRenderer.startColor = color;
+        //lineRenderer.endColor = color;
     }
 
     private void Start() {
 
-        if (lineRenderer == null) {
+        if (particleSystem == null) {
 
-            Debug.LogError("RadiusVisualizer::Start() => Line renderer not found!!!");
+            Debug.LogError("RadiusVisualizer::Start() => Particle system not found!!!");
 
             return;
         }
 
-        generateNormalizedVerticies();
+        //generateNormalizedVerticies();
     }
 
     private void Update() {
 #if UNITY_EDITOR
-        generateNormalizedVerticies();
+        //generateNormalizedVerticies();
 #endif
-        Vector3[] newVerticies = new Vector3[normalizedVerticies.Length];
+        /*Vector3[] newVerticies = new Vector3[normalizedVerticies.Length];
 
         for (int i = 0; i < newVerticies.Length; i++) {
             newVerticies[i] = normalizedVerticies[i] * Range + transform.position;
         }
 
-        lineRenderer.SetPositions(newVerticies);
+        lineRenderer.SetPositions(newVerticies);*/
     }
-
+    /*
     private void generateNormalizedVerticies() {
 
         if (normalizedVerticies != null && normalizedVerticies.Length + 1 == NumVerticies) {
@@ -68,5 +73,5 @@ public class RadiusVisualizer : MonoBehaviour {
         normalizedVerticies[NumVerticies - 1] = normalizedVerticies[0];
 
         lineRenderer.positionCount = NumVerticies;
-    }
+    }*/
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkinManager : MonoBehaviour {
 
@@ -24,6 +25,9 @@ public class SkinManager : MonoBehaviour {
 
     [SerializeField]
     List<Skin> SkinConfig = new List<Skin>();
+
+    [SerializeField]
+    Button UnlockButton = null;
 
     List<Skin> skins = new List<Skin>();
 
@@ -60,12 +64,16 @@ public class SkinManager : MonoBehaviour {
 
         currentSkinIndex = (currentSkinIndex + 1) % skins.Count;
 
+        UnlockButton.interactable = ScoreManager.instance.GetHighScore() >= skins[currentSkinIndex].Cost;
+
         updatePlayerSprite();
     }
 
     public void DecreaseSkinindex() {
 
         currentSkinIndex = currentSkinIndex - 1 == -1 ? skins.Count - 1 : currentSkinIndex - 1;
+
+        UnlockButton.interactable = ScoreManager.instance.GetHighScore() >= skins[currentSkinIndex].Cost;
 
         updatePlayerSprite();
     }
@@ -77,10 +85,12 @@ public class SkinManager : MonoBehaviour {
         }
 
         // Some kind of score validation...
+        if (ScoreManager.instance.GetHighScore() >= skins[currentSkinIndex].Cost) {
 
-        skins[currentSkinIndex].Unlock();
+            skins[currentSkinIndex].Unlock();
 
-        updatePlayerSprite();
+            updatePlayerSprite();
+        }
     }
 
     private void updatePlayerSprite() {

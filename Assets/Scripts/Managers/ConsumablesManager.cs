@@ -30,7 +30,7 @@ public class ConsumablesManager : MonoBehaviour {
     [SerializeField]
     private float MaxSpawnCycleDelay = 10f;
     [SerializeField]
-    private float MaxSpawnDistanceFromPlayer = 20f;
+    private float MaxSpawnDistanceFromLastConsumable = 20f;
 
     private List<DamageBooster> activeDamageBoosters = new List<DamageBooster>();
     private List<HealthPickup> activeHealthPickups = new List<HealthPickup>();
@@ -64,6 +64,8 @@ public class ConsumablesManager : MonoBehaviour {
         activeHealthPickups.Clear();
     }
 
+    Vector3 lastPos;
+
     private void spawnRandomConsumable() {
 
         if (activeDamageBoosters.Count >= MaxActiveDamageBoosters && activeHealthPickups.Count >= MaxActiveHealthPickups) {
@@ -72,24 +74,24 @@ public class ConsumablesManager : MonoBehaviour {
 
         float randomAngle = Random.Range(0f, Mathf.PI * 2f);
 
-        Vector3 newPos = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(MaxSpawnDistanceFromPlayer * 0.4f, MaxSpawnDistanceFromPlayer);
+        Vector3 newPos = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(MaxSpawnDistanceFromLastConsumable * 0.4f, MaxSpawnDistanceFromLastConsumable);
 
         if (activeDamageBoosters.Count < MaxActiveDamageBoosters && activeHealthPickups.Count < MaxActiveHealthPickups) {
 
             int random01 = Random.Range(0, 2);
 
-            Debug.Log($"Random number in consumable manager: {random01}");
+            //Debug.Log($"Random number in consumable manager: {random01}");
 
             if (random01 == 1) {
 
-                DamageBooster db = DamageBoosterPool.instance.RequestObject(newPos, Quaternion.identity);
+                DamageBooster db = DamageBoosterPool.instance.RequestObject(lastPos + newPos, Quaternion.identity);
                 db.RegisterOnConsumeCallback(onDamageBoosterConsumed);
 
                 activeDamageBoosters.Add(db);
             }
             else {
 
-                HealthPickup hp = HealthPickupPool.instance.RequestObject(newPos, Quaternion.identity);
+                HealthPickup hp = HealthPickupPool.instance.RequestObject(lastPos + newPos, Quaternion.identity);
                 hp.RegisterOnConsumeCallback(onHealthPickupConsumed);
 
                 activeHealthPickups.Add(hp);
@@ -97,21 +99,23 @@ public class ConsumablesManager : MonoBehaviour {
         }
         else if (activeDamageBoosters.Count >= MaxActiveDamageBoosters && activeHealthPickups.Count < MaxActiveHealthPickups) {
 
-            HealthPickup hp = HealthPickupPool.instance.RequestObject(newPos, Quaternion.identity);
+            HealthPickup hp = HealthPickupPool.instance.RequestObject(lastPos + newPos, Quaternion.identity);
             hp.RegisterOnConsumeCallback(onHealthPickupConsumed);
 
             activeHealthPickups.Add(hp);
         }
         else if (activeDamageBoosters.Count < MaxActiveDamageBoosters && activeHealthPickups.Count >= MaxActiveHealthPickups) {
 
-            DamageBooster db = DamageBoosterPool.instance.RequestObject(newPos, Quaternion.identity);
+            DamageBooster db = DamageBoosterPool.instance.RequestObject(lastPos + newPos, Quaternion.identity);
             db.RegisterOnConsumeCallback(onDamageBoosterConsumed);
 
             activeDamageBoosters.Add(db);
         }
 
-        Debug.Log($"Active damage boosters: {activeDamageBoosters.Count}, active health pickups: {activeHealthPickups.Count}");
+        //Debug.Log($"Active damage boosters: {activeDamageBoosters.Count}, active health pickups: {activeHealthPickups.Count}");
 
+        lastPos = newPos;
+        
         Invoke("spawnRandomConsumable", Random.Range(MinSpawnCycleDelay, MaxSpawnCycleDelay));
     }
 

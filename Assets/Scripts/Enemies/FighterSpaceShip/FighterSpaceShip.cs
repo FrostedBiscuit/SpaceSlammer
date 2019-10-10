@@ -88,7 +88,7 @@ public class FighterSpaceShip : Enemy {
 
             float speed = SlopeCoefficient * distanceToPlayer - SlopeCoefficient * BackoffRange;
 
-            Debug.Log($"Speed: {speed}, distance to player: {distanceToPlayer}");
+            //Debug.Log($"Speed: {speed}, distance to player: {distanceToPlayer}");
 
             rigidbody.AddForce(transform.up * speed * Time.fixedDeltaTime);
         }

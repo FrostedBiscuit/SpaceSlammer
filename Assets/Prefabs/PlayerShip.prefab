@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6698449171826953432}
   - component: {fileID: 6698449171826953434}
   - component: {fileID: 6698449171826953435}
+  - component: {fileID: 1089511712}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -51,8 +52,9 @@ MonoBehaviour:
   MaxHealth: 100
   ParticleInterval: 1.25
   Rigidbody: {fileID: 6698449171826953434}
-  ParticlePool: {fileID: 0}
   Health: 0
+  DamageMultiplier: 1
+  DisableAnimatorAfter: 1.417
 --- !u!50 &6698449171826953434
 Rigidbody2D:
   serializedVersion: 4
@@ -90,6 +92,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!95 &1089511712
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698449171826953436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba89f2abf52326b41bcf2a38b8dc4bf0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6698449172501014722
 GameObject:
   m_ObjectHideFlags: 0
