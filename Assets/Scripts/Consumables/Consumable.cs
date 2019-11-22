@@ -30,7 +30,6 @@ public abstract class Consumable : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
 
-
         if (collision.transform.tag == "Player") {
 
             if (onConsumeCallback != null) {

@@ -20,8 +20,6 @@ public class KamikazeShip : Enemy {
     [SerializeField]
     RadiusVisualizer ExplosionRadiusCircle = null;
 
-    Coroutine expTimerCoroutine;
-
     public override void Dispose() {
 
         KamikazeShipPool.instance.ReturnObject(this);
@@ -40,10 +38,6 @@ public class KamikazeShip : Enemy {
 
         focusingTarget = false;
         hot = false;
-
-        expTimerCoroutine = null;
-
-        focusTimer = 0f;
     }
 
     protected override void FixedUpdate() {
@@ -57,15 +51,13 @@ public class KamikazeShip : Enemy {
         move();
     }
 
-    float focusTimer;
-
     protected override void Update() {
 
         if (hot == true) {
             return;
         }
 
-        if (distanceToPlayer <= AttackRange) {
+        if (distanceToPlayer <= AttackRange && focusingTarget == false) {
 
             focusingTarget = true;
 
@@ -73,18 +65,9 @@ public class KamikazeShip : Enemy {
                 ExplosionRadiusCircle.SetColor(AimingCircleColor);
             }
 
-            if (focusTimer == 0f) {
+            rigidbody.velocity = Vector2.zero;
 
-                focusTimer = Time.time + FocusTimer;
-
-                rigidbody.velocity = Vector2.zero;
-            }
-
-        }
-
-        if (focusTimer <= Time.time && focusTimer != 0f) {
-
-            Attack();
+            Invoke("Attack", FocusTimer);
         }
     }
 
@@ -110,14 +93,12 @@ public class KamikazeShip : Enemy {
 
         float addedVel = ChargeForce * distanceToPlayer;
 
-        Debug.Log($"Added velocity = {addedVel}, distance to player = {distanceToPlayer}");
+        //Debug.Log($"Added velocity = {addedVel}, distance to player = {distanceToPlayer}");
 
         rigidbody.velocity = Vector2.zero;
         rigidbody.AddForce(transform.up * addedVel, ForceMode2D.Impulse);
 
-        //Debug.Log("added force = " + (transform.up * ChargeForce).ToString());
-
-        expTimerCoroutine = StartCoroutine(explosionTimer());
+        Invoke("explode", BombTimer);
     }
 
     protected override void Die() {
@@ -142,8 +123,6 @@ public class KamikazeShip : Enemy {
 
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
 
-        //Debug.Log("Boom!");
-
         for (int i = 0; i < cols.Length; i++) {
 
             if (cols[i].transform.tag == "Player") {
@@ -159,6 +138,8 @@ public class KamikazeShip : Enemy {
                 }
             }
         }
+
+        Die();
     }
 
     private void OnCollisionEnter2D() {
@@ -167,38 +148,12 @@ public class KamikazeShip : Enemy {
             return;
         }
 
-        if (expTimerCoroutine != null) {
-            StopCoroutine(expTimerCoroutine);
-        }
-
         if (Sounds.Length > 0 && SoundManager.instance.PlaySFX == true) {
 
             SoundManager.instance.PlayRemoteSFXClip(Sounds[0], transform.position);
         }
 
-
         explode();
-
-        Die();
-    }
-
-    bool isRunning = false;
-
-    IEnumerator explosionTimer() {
-
-        if (isRunning == true) {
-            yield return null;
-        }
-
-        //Debug.Log("Explosion in " + BombTimer + " seconds");
-
-        yield return new WaitForSeconds(BombTimer);
-
-        explode();
-
-        isRunning = false;
-
-        Die();
     }
 
     protected override void OnDrawGizmosSelected() {

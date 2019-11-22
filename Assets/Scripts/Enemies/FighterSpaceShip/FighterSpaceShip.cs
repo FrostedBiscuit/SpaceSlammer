@@ -10,7 +10,9 @@ public class FighterSpaceShip : Enemy {
     public float FireRate = 1f;
 
     [SerializeField]
-    Transform ProjectileSpawnPoint = null;
+    Transform ProjectileSpawnPointLeft = null;
+    [SerializeField]
+    Transform ProjectileSpawnPointRight = null;
 
     float nextFire;
 
@@ -25,7 +27,8 @@ public class FighterSpaceShip : Enemy {
 
         //Debug.Log("Fighter ship attacking");
 
-        ProjectilePool.instance.RequestObject(ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
+        ProjectilePool.instance.RequestObject(ProjectileSpawnPointLeft.position, ProjectileSpawnPointLeft.rotation);
+        ProjectilePool.instance.RequestObject(ProjectileSpawnPointRight.position, ProjectileSpawnPointRight.rotation);
     }
 
     protected override void Die() {
@@ -37,8 +40,12 @@ public class FighterSpaceShip : Enemy {
     protected override void OnEnable() {
         base.OnEnable();
 
-        if (ProjectileSpawnPoint == null) {
-            Debug.LogError("BasicSpaceShip::Start() => No projectile spawn point found!!!");
+        if (ProjectileSpawnPointLeft == null) {
+            Debug.LogError("BasicSpaceShip::Start() => Left projectile spawn point missing!!!");
+        }
+
+        if (ProjectileSpawnPointRight == null) {
+            Debug.LogError("BasicSpaceShip::Start() => Right projectile spawn point missing!!!");
         }
 
         nextFire = Time.time + FireRate;

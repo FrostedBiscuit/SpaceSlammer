@@ -50,7 +50,7 @@ public class HeavyWeaponsShip : Enemy
             Beam.activeSelf == false) {
 
 
-            Debug.Log($"attacking distance to player: {distanceToPlayer}");
+            //Debug.Log($"attacking distance to player: {distanceToPlayer}");
             Attack();
         }
     }
@@ -80,7 +80,7 @@ public class HeavyWeaponsShip : Enemy
 
         if (Player.instance.gameObject.activeSelf == true) {
 
-            Debug.Log("player active");
+            //Debug.Log("player active");
 
             if (distanceToPlayer < AttackRange) {
 

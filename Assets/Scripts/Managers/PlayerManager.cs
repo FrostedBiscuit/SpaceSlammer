@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     public enum Effect {
-        HEAL, DAMAGEBOOST
+        HEAL, DAMAGEBOOST, INVINCIBILITY
     }
 
     #region Singelton
@@ -81,6 +81,9 @@ public class PlayerManager : MonoBehaviour {
             case Effect.HEAL:
                 Player.instance.Health += amount;
             break;
+            case Effect.INVINCIBILITY:
+                StartCoroutine(playerInvincibleForSeconds(duration));
+            break;
         }
     }
 
@@ -92,5 +95,18 @@ public class PlayerManager : MonoBehaviour {
 
         Player.instance.DamageMultiplier -= amount;
         Player.instance.DamageMultiplier = Mathf.Clamp(Player.instance.DamageMultiplier, 1f, Mathf.Infinity);
+    }
+
+    IEnumerator playerInvincibleForSeconds(float duration) {
+
+        Player.instance.CanTakeDamage = false;
+
+        Debug.Log("invincibility started");
+
+        yield return new WaitForSeconds(duration);
+
+        Player.instance.CanTakeDamage = true;
+
+        Debug.Log("invincibility wore off");
     }
 }

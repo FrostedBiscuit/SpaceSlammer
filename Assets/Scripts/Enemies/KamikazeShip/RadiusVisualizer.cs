@@ -6,9 +6,6 @@ using UnityEngine;
 public class RadiusVisualizer : MonoBehaviour {
 
     [SerializeField]
-    float Range = 2.5f;
-
-    [SerializeField]
     new ParticleSystem particleSystem = null;
 
     public void SetRange(float r) {

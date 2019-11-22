@@ -24,6 +24,8 @@ public class ConsumablesManager : MonoBehaviour {
     private int MaxActiveDamageBoosters = 4;
     [SerializeField]
     private int MaxActiveHealthPickups = 4;
+    [SerializeField]
+    private int MaxActiveInvincibilityPickups = 2;
 
     [SerializeField]
     private float MinSpawnCycleDelay = 5f;
@@ -34,6 +36,7 @@ public class ConsumablesManager : MonoBehaviour {
 
     private List<DamageBooster> activeDamageBoosters = new List<DamageBooster>();
     private List<HealthPickup> activeHealthPickups = new List<HealthPickup>();
+    private List<InvincibilityPickup> activeInvincibilityPickups = new List<InvincibilityPickup>();
 
     public void StartSpawningConsumables() {
 
@@ -43,12 +46,9 @@ public class ConsumablesManager : MonoBehaviour {
     public void StopSpawningConsumables() {
 
         CancelInvoke();
-
-        activeDamageBoosters.Clear();
-        activeHealthPickups.Clear();
     }
 
-    public void ClearConsumables() { 
+    public void ClearConsumables() {
 
         foreach (var db in activeDamageBoosters) {
 
@@ -60,13 +60,42 @@ public class ConsumablesManager : MonoBehaviour {
             HealthPickupPool.instance.ReturnObject(hp);
         }
 
+        foreach (var iv in activeInvincibilityPickups) {
+
+            InvincibilityPickupPool.instance.ReturnObject(iv);
+        }
+
         activeDamageBoosters.Clear();
         activeHealthPickups.Clear();
+        activeInvincibilityPickups.Clear();
     }
 
     Vector3 lastPos;
 
     private void spawnRandomConsumable() {
+
+        int randomConsumableIndex = Random.Range(0, 4);
+
+        float randomAngle = Random.Range(0f, Mathf.PI * 2f);
+
+        Vector3 newPos = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(MaxSpawnDistanceFromLastConsumable * 0.4f, MaxSpawnDistanceFromLastConsumable);
+
+        switch(randomConsumableIndex) {
+            case 0:
+                spawnDamangeBooster(lastPos + newPos);
+            break;
+            case 1:
+                spawnHealthPickup(lastPos + newPos);
+            break;
+            case 2:
+                spawnInvincibilityPickup(lastPos + newPos);
+            break;
+        }
+
+        Invoke("spawnRandomConsumable", Random.Range(MinSpawnCycleDelay, MaxSpawnCycleDelay));
+    }
+
+    /*private void spawnRandomConsumable1() {
 
         if (activeDamageBoosters.Count >= MaxActiveDamageBoosters && activeHealthPickups.Count >= MaxActiveHealthPickups) {
             return;
@@ -79,8 +108,6 @@ public class ConsumablesManager : MonoBehaviour {
         if (activeDamageBoosters.Count < MaxActiveDamageBoosters && activeHealthPickups.Count < MaxActiveHealthPickups) {
 
             int random01 = Random.Range(0, 2);
-
-            //Debug.Log($"Random number in consumable manager: {random01}");
 
             if (random01 == 1) {
 
@@ -117,7 +144,7 @@ public class ConsumablesManager : MonoBehaviour {
         lastPos = newPos;
         
         Invoke("spawnRandomConsumable", Random.Range(MinSpawnCycleDelay, MaxSpawnCycleDelay));
-    }
+    }*/
 
     private void onDamageBoosterConsumed(Consumable c) {
 
@@ -131,5 +158,51 @@ public class ConsumablesManager : MonoBehaviour {
         c.UnregisterOnConsumeCallback(onHealthPickupConsumed);
 
         activeHealthPickups.Remove((HealthPickup)c);
+    }
+
+    private void onInvincibilityPickupConsumed(Consumable c) {
+
+        c.UnregisterOnConsumeCallback(onInvincibilityPickupConsumed);
+
+        activeInvincibilityPickups.Remove((InvincibilityPickup)c);
+    }
+
+    private void spawnDamangeBooster(Vector3 pos) {
+
+        if (activeDamageBoosters.Count <= MaxActiveDamageBoosters) {
+
+            DamageBooster db = DamageBoosterPool.instance.RequestObject(pos, Quaternion.identity);
+            db.RegisterOnConsumeCallback(onDamageBoosterConsumed);
+
+            Debug.Log("Spawned damage booster");
+
+            activeDamageBoosters.Add(db);
+        }
+    }
+
+    private void spawnHealthPickup(Vector3 pos) {
+
+        if (activeHealthPickups.Count <= MaxActiveHealthPickups) {
+
+            HealthPickup hp = HealthPickupPool.instance.RequestObject(pos, Quaternion.identity);
+            hp.RegisterOnConsumeCallback(onHealthPickupConsumed);
+
+            Debug.Log("Spawned health pickup");
+
+            activeHealthPickups.Add(hp);
+        }
+    }
+
+    private void spawnInvincibilityPickup(Vector3 pos) {
+
+        if (activeInvincibilityPickups.Count <= MaxActiveInvincibilityPickups) {
+
+            InvincibilityPickup iv = InvincibilityPickupPool.instance.RequestObject(pos, Quaternion.identity);
+            iv.RegisterOnConsumeCallback(onInvincibilityPickupConsumed);
+
+            Debug.Log("Spawned invincibility pickup");
+
+            activeInvincibilityPickups.Add(iv);
+        }
     }
 }

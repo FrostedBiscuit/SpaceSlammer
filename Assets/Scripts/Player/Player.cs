@@ -29,8 +29,8 @@ public class Player : MonoBehaviour {
     [HideInInspector]
     public float DamageMultiplier = 1f;
 
-    [SerializeField]
-    float DisableAnimatorAfter = 1.167f;
+    [HideInInspector]
+    public bool CanTakeDamage = true;
 
     // Start is called before the first frame update
     void OnEnable() {
@@ -42,12 +42,16 @@ public class Player : MonoBehaviour {
 
         DamageMultiplier = 1f;
 
-        Rigidbody.velocity = Vector2.zero;
+        CanTakeDamage = true;
 
-        Invoke("disableAnimator", DisableAnimatorAfter);
+        Rigidbody.velocity = Vector2.zero;
     }
 
     public void TakeDamage(float dmg) {
+
+        if (!CanTakeDamage) {
+            return;
+        }
 
         if (Health <= dmg) {
 
@@ -79,10 +83,5 @@ public class Player : MonoBehaviour {
 
             nextParticleTime = Time.time + ParticleInterval;
         }
-    }
-
-    private void disableAnimator() {
-
-        GetComponent<Animator>().enabled = false;
     }
 }

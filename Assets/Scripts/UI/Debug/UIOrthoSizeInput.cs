@@ -6,26 +6,26 @@ public class UIOrthoSizeInput : MonoBehaviour {
 
     public TMP_InputField InputField;
 
-    public Camera Cam;
+    public CameraZoom CamZoom;
 
     private void OnEnable() {
 
-        InputField.text = Cam.orthographicSize.ToString();
+        InputField.text = CamZoom.BaseOrthoSize.ToString();
     }
 
     public void SetOrthoSize(string value) {
 
-        float lastOrthoSize = Cam.orthographicSize;
+        float lastOrthoSize = CamZoom.BaseOrthoSize;
 
         try {
 
-            Cam.orthographicSize = float.Parse(value);
+            CamZoom.BaseOrthoSize = float.Parse(value);
         }
         catch (Exception e) {
 
             Debug.LogError(e);
 
-            Cam.orthographicSize = lastOrthoSize;
+            CamZoom.BaseOrthoSize = lastOrthoSize;
         }
     }
 }

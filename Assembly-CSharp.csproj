@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Consumables\Consumable.cs" />
     <Compile Include="Assets\Scripts\Consumables\DamageBooster.cs" />
     <Compile Include="Assets\Scripts\Consumables\HealthPickup.cs" />
+    <Compile Include="Assets\Scripts\Consumables\InvincibilityPickup.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\FighterSpaceShip\FighterSpaceShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\FighterSpaceShip\Projectile.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\ObjectPools\FighterSpaceShipPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\HealthPickupPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\HeavyWeaponsShipPool.cs" />
+    <Compile Include="Assets\Scripts\ObjectPools\InvincibilityPickupPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\KamikazeShipPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\MinePool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\ObjectPool.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\UI\UIPauseMenu.cs" />
     <Compile Include="Assets\Scripts\UI\UISkinMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\UITapToContinue.cs" />
     <Compile Include="Assets\Scripts\UI\UIToggleScoreButton.cs" />
     <Compile Include="Assets\Scripts\UI\UIToggleSwitch.cs" />
     <Compile Include="Assets\Scripts\UI\UIUpdateHealthSlider.cs" />
