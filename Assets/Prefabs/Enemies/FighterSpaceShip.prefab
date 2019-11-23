@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 148}
   - component: {fileID: 157}
   m_Layer: 0
-  m_Name: FighterShip
+  m_Name: FighterSpaceShip
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
