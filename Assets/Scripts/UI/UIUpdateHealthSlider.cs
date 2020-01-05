@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class UIUpdateHealthSlider : MonoBehaviour {
 
-    Slider slider;
+    Image slider;
 
     // Start is called before the first frame update
     void Start() {
 
-        slider = GetComponent<Slider>();
+        slider = GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -18,11 +18,11 @@ public class UIUpdateHealthSlider : MonoBehaviour {
         
         if (Player.instance == null) {
 
-            slider.value = 0f;
+            slider.fillAmount = 0f;
         }
         else {
 
-            slider.value = Player.instance.Health / Player.instance.MaxHealth;
+            slider.fillAmount = Player.instance.Health / Player.instance.MaxHealth;
         }
     }
 }

@@ -88,16 +88,25 @@ public class PlayerManager : MonoBehaviour {
     }
 
     IEnumerator boostPlayerDamageForSeconds(float amount, float duration) {
-        
+
+        UIDamageBoostIcon.instance.Activate();
+
         Player.instance.DamageMultiplier += amount;
 
         yield return new WaitForSeconds(duration);
 
         Player.instance.DamageMultiplier -= amount;
         Player.instance.DamageMultiplier = Mathf.Clamp(Player.instance.DamageMultiplier, 1f, Mathf.Infinity);
+
+        if (Player.instance.DamageMultiplier == 1f) {
+
+            UIDamageBoostIcon.instance.Deactivate();
+        }
     }
 
     IEnumerator playerInvincibleForSeconds(float duration) {
+
+        UIInvincibilityIcon.instance.Activate();
 
         Player.instance.CanTakeDamage = false;
 
@@ -108,5 +117,7 @@ public class PlayerManager : MonoBehaviour {
         Player.instance.CanTakeDamage = true;
 
         Debug.Log("invincibility wore off");
+
+        UIInvincibilityIcon.instance.Deactivate();
     }
 }

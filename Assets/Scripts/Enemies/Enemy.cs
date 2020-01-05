@@ -107,6 +107,12 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    protected void calculateDistanceToPlayer() {
+
+        if (Player.instance != null) distanceToPlayer = Vector3.Distance(transform.position, Player.instance.transform.position);
+        else distanceToPlayer = Mathf.Infinity;
+    }
+
     protected virtual void OnDrawGizmosSelected() {
 
         Gizmos.color = Color.green;
@@ -126,7 +132,6 @@ public abstract class Enemy : MonoBehaviour
 
     protected abstract void Update();
 
-
     public void RegisterOnDeathCallback(Action<Enemy> cb) {
 
         enemyDeathCallback += cb;
@@ -145,12 +150,6 @@ public abstract class Enemy : MonoBehaviour
         }
 
         rigidbody.AddForce(collision.relativeVelocity, ForceMode2D.Impulse);
-    }
-
-    private void calculateDistanceToPlayer() {
-
-        if (Player.instance != null) distanceToPlayer = Vector3.Distance(transform.position, Player.instance.transform.position);
-        else distanceToPlayer = Mathf.Infinity;
     }
 
     private void lookAtPointOfInterest() {

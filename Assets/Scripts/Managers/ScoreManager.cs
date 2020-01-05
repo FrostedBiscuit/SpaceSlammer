@@ -23,6 +23,7 @@ public class ScoreManager : MonoBehaviour {
 
     public TextMeshProUGUI score;
 
+    int currScore;
     int highScore;
 
     private void Start() {
@@ -47,19 +48,41 @@ public class ScoreManager : MonoBehaviour {
 
             return;
         }
-        
-        score.text = EnemyManager.instance.sumEnemyDied.ToString();
 
-        if (highScore < EnemyManager.instance.sumEnemyDied) {
-
-            PlayerPrefs.SetInt("HighScore", EnemyManager.instance.sumEnemyDied);
-
-            highScore = EnemyManager.instance.sumEnemyDied;
-        }
+        score.text = currScore.ToString();
     }
 
     public int GetHighScore() {
 
         return highScore;
+    }
+
+    public int GetCurrentScore() {
+
+        return currScore;
+    }
+
+    public void ClearCurrentScore() {
+
+        currScore = 0;
+    }
+
+    public void CalculateScore(float time) {
+
+        currScore += Mathf.RoundToInt(time * 0.5f);
+
+        Debug.Log($"Current score: {currScore}");
+    }
+
+    public void UpdateCurrentScore(int amt) {
+
+        currScore += amt;
+
+        if (highScore < currScore) {
+
+            highScore = currScore;
+
+            PlayerPrefs.SetInt("HighScore", highScore);
+        }
     }
 }

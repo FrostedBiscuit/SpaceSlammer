@@ -63,39 +63,63 @@ public class EnemyManager : MonoBehaviour
     public float EnemySpawnNearDist = 5f;
     public float EnemySpawnFarDist = 10f;
     public float MineCheckInterval = 5f;
+    public float DifficultyFactor = 60f;
 
-    public int MinEnemyNum = 1;
-    public int MaxEnemyNum = 4;
     public int MaxMines = 5;
-    public int sumEnemyDied;
 
     public List<EnemyPool> EnemyObjectPools = new List<EnemyPool>();
 
+    public GameObject[] TestBosses = null;
+
     bool canSpawn = false;
 
+    float sessionTime = 0f;
+
     int currentMines;
+    int waves;
 
     List<Enemy> activeEnemies = new List<Enemy>();
     List<Mine> activeMines = new List<Mine>();
 
+    private void Update() {
+
+        sessionTime += Time.deltaTime;
+    }
+
     public void StartSpawning() {
+
+        if (canSpawn) {
+            return;
+        }
 
         ClearEnemies();
 
         canSpawn = true;
 
-        sumEnemyDied = 0;
+        sessionTime = 0f;
 
-        spawnNumEnemies(Random.Range(MinEnemyNum, MaxEnemyNum));
+        waves = 0;
+
+        spawnNewWave();
 
         InvokeRepeating("spawnMines", 0f, MineCheckInterval);
+
+        ScoreManager.instance.ClearCurrentScore();
+
+        Debug.Log($"Session time: {sessionTime}");
     }
 
     public void EndSpawning() {
 
+        if (!canSpawn) {
+            return;
+        }
+
         CancelInvoke("spawnMines");
 
         canSpawn = false;
+
+        ScoreManager.instance.CalculateScore(sessionTime);
     }
 
     public void ClearEnemies() {
@@ -142,9 +166,32 @@ public class EnemyManager : MonoBehaviour
 
     // TEST CODE FOR GATHERING IDEAS!!!!
     // PRONE TO MUCH CHANGE
-    private void spawnNumEnemies(int enemyCount) {
+    private void spawnNewWave() {
 
         //Debug.Log("spawnNumEnemies");
+
+        waves++;
+
+        if (waves % 3 == 0) {
+
+            Debug.Log($"Boss wave #{waves}");
+
+            int randomIndex = Random.Range(0, TestBosses.Length);
+
+            float randomAngle = Random.Range(0f, 2f * Mathf.PI);
+            Vector3 offset = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(EnemySpawnNearDist, EnemySpawnFarDist);
+
+            Enemy e = Instantiate(TestBosses[randomIndex], Player.instance.transform.position + offset, Quaternion.identity).GetComponent<Enemy>();
+            e.RegisterOnDeathCallback(onEnemyDeath);
+
+            activeEnemies.Add(e);
+
+            return;
+        }
+
+        int enemyCount = Mathf.RoundToInt(1 + Mathf.Sqrt(sessionTime / DifficultyFactor));
+
+        Debug.Log($"Enemies to spawn: {enemyCount}");
 
         for (int i = 0; i < enemyCount; i++) {
 
@@ -169,13 +216,13 @@ public class EnemyManager : MonoBehaviour
 
         activeEnemies.Remove(e);
 
-        sumEnemyDied += e.ScoreValue;
+        ScoreManager.instance.UpdateCurrentScore(e.ScoreValue);
 
         if (activeEnemies.Count == 0 && canSpawn == true) {
 
             activeEnemies.Clear();
 
-            spawnNumEnemies(Random.Range(MinEnemyNum, MaxEnemyNum));
+            spawnNewWave();
         }
     }
 
