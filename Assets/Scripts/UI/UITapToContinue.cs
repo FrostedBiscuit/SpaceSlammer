@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class UITapToContinue : MonoBehaviour, IPointerClickHandler {
 
     [SerializeField]
-    float DisableAfter;
+    float DisableAfter = 0f;
 
     [SerializeField]
     Animator PlayerAnimator = null;

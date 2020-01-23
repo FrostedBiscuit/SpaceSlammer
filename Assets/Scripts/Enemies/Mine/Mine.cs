@@ -28,19 +28,20 @@ public class Mine : MonoBehaviour {
 
     private void checkForReposition() {
 
-        if (Player.instance.gameObject.activeSelf == true && hot == false) {
-            
-            float distanceToPlayer = Vector3.Distance(transform.position, Player.instance.transform.position);
+        if (Player.instance.gameObject.activeSelf == true || hot == false) {
+            return;
+        }
 
-            if (distanceToPlayer > MaxDistanceFromPlayer) {
+        float distanceToPlayer = Vector3.Distance(transform.position, Player.instance.transform.position);
 
-                float randomAngle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+        if (distanceToPlayer > MaxDistanceFromPlayer) {
 
-                Vector3 newPos = Player.instance.transform.position +
-                                 new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * UnityEngine.Random.Range(EnemyManager.instance.EnemySpawnNearDist, EnemyManager.instance.EnemySpawnFarDist);
+            float randomAngle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
 
-                transform.position = newPos;
-            }
+            Vector3 newPos = Player.instance.transform.position +
+                             new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * UnityEngine.Random.Range(EnemyManager.instance.EnemySpawnNearDist, EnemyManager.instance.EnemySpawnFarDist);
+
+            transform.position = newPos;
         }
     }
 

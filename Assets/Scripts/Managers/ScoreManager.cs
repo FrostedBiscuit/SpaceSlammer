@@ -42,13 +42,6 @@ public class ScoreManager : MonoBehaviour {
 
     void Update() {
 
-        if (Player.instance.gameObject.activeSelf == false) {
-
-            PlayerPrefs.Save();
-
-            return;
-        }
-
         score.text = currScore.ToString();
     }
 
@@ -71,6 +64,8 @@ public class ScoreManager : MonoBehaviour {
 
         currScore += Mathf.RoundToInt(time * 0.5f);
 
+        checkForHighScore();
+
         Debug.Log($"Current score: {currScore}");
     }
 
@@ -78,11 +73,18 @@ public class ScoreManager : MonoBehaviour {
 
         currScore += amt;
 
+        checkForHighScore();
+    }
+
+    void checkForHighScore() {
+
         if (highScore < currScore) {
 
             highScore = currScore;
 
             PlayerPrefs.SetInt("HighScore", highScore);
+
+            PlayerPrefs.Save();
         }
     }
 }

@@ -18,11 +18,7 @@ public class FighterSpaceShip : Enemy {
 
     protected override void Attack() {
         base.Attack();
-#if UNITY_EDITOR
-        if (DEBUG_Fight == false) {
-            return;
-        }
-#endif        
+
         nextFire = FireRate + Time.time;
 
         //Debug.Log("Fighter ship attacking");
@@ -41,11 +37,11 @@ public class FighterSpaceShip : Enemy {
         base.OnEnable();
 
         if (ProjectileSpawnPointLeft == null) {
-            Debug.LogError("BasicSpaceShip::Start() => Left projectile spawn point missing!!!");
+            Debug.LogError("FighterSpaceShip::Start() => Left projectile spawn point missing!!!");
         }
 
         if (ProjectileSpawnPointRight == null) {
-            Debug.LogError("BasicSpaceShip::Start() => Right projectile spawn point missing!!!");
+            Debug.LogError("FighterSpaceShip::Start() => Right projectile spawn point missing!!!");
         }
 
         nextFire = Time.time + FireRate;
@@ -61,12 +57,6 @@ public class FighterSpaceShip : Enemy {
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawRay(transform.position, rigidbody.velocity);
-    }
-
-    public override void TakeDamage(float dmg) {
-        base.TakeDamage(dmg);
-
-        //Debug.Log("BasicSpaceShip::TakeDamage() => Damage taken: " + dmg);
     }
 
     public override void Dispose() {

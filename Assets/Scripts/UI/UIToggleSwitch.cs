@@ -9,7 +9,7 @@ public class UIToggleSwitch : MonoBehaviour {
     Animator Animator = null;
 
     [SerializeField]
-    Toggle Toggle;
+    Toggle Toggle = null;
 
     // Start is called before the first frame update
     private void OnEnable() {

@@ -8,12 +8,23 @@ public class ParallaxBackground : MonoBehaviour {
 
     public Vector2 ConstScrollWeights = new Vector2();
 
+    MeshRenderer meshRenderer;
+
+    private void Start() {
+
+        meshRenderer = GetComponent<MeshRenderer>();
+
+        // Scale the plane to fit the screen
+        transform.localScale = new Vector3(Camera.main.orthographicSize * 2f * Screen.width / Screen.height, 
+                                           Camera.main.orthographicSize * 2f * Screen.width / Screen.height);
+    }
+
     void Update() {
 
-        Material mat = GetComponent<MeshRenderer>().material;
+        // Move the background image
+        Vector2 offset = new Vector2((transform.position.x + ConstScrollWeights.x * Time.time) / transform.localScale.x / ParallaxCoeficient, 
+                                     (transform.position.y + ConstScrollWeights.y * Time.time) / transform.localScale.y / ParallaxCoeficient);
 
-        Vector2 offset = new Vector2((transform.position.x + ConstScrollWeights.x * Time.time) / transform.localScale.x / ParallaxCoeficient, (transform.position.y + ConstScrollWeights.y * Time.time) / transform.localScale.y / ParallaxCoeficient);
-
-        mat.mainTextureOffset = offset;
+        meshRenderer.material.mainTextureOffset = offset;
     }
 }

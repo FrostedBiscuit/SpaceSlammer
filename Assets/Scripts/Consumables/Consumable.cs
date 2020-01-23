@@ -60,9 +60,22 @@ public abstract class Consumable : MonoBehaviour {
 
             float randomAngle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
 
-            Vector3 newPos = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * UnityEngine.Random.Range(MaxDistanceFromPlayer * 0.4f, MaxDistanceFromPlayer);
+            Vector3 newOffset = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * UnityEngine.Random.Range(MaxDistanceFromPlayer * 0.4f, MaxDistanceFromPlayer);
 
-            transform.position = newPos;
+            transform.position = Player.instance.transform.position + newOffset;
         }
+    }
+
+    private void OnDrawGizmosSelected() {
+
+        if (Player.instance.gameObject.activeSelf == false) {
+            return;
+        }
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(Player.instance.transform.position, MaxDistanceFromPlayer);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(Player.instance.transform.position, MaxDistanceFromPlayer * 0.4f);
     }
 }

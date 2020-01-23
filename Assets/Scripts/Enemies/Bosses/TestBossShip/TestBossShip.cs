@@ -53,6 +53,8 @@ public class TestBossShip : Enemy {
 
     public override void Dispose() {
 
+        UIBossHealthBar.instance.Disable();
+
         Destroy(gameObject);
     }
 

@@ -67,6 +67,8 @@
     <Compile Include="Assets\Scripts\Consumables\DamageBooster.cs" />
     <Compile Include="Assets\Scripts\Consumables\HealthPickup.cs" />
     <Compile Include="Assets\Scripts\Consumables\InvincibilityPickup.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Bosses\Agerroth\Agerroth.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Bosses\Agerroth\AgerrothRocket.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bosses\KR-2000\KR2000.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bosses\KR-2000\KR2000Projectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bosses\TestBossShip\TestBossShip.cs" />

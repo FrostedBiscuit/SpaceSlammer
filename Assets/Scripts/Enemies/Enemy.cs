@@ -54,16 +54,11 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate() {
 
-        if (Player.instance.gameObject.activeSelf == true) pointOfInterest = Player.instance.transform.position;
-        else pointOfInterest = getRandomPointOfInterest();
+        pointOfInterest = Player.instance.gameObject.activeSelf ? Player.instance.transform.position : getRandomPointOfInterest();
 
         lookAtPointOfInterest();
 
         calculateDistanceToPlayer();
-
-        if (indicator == null) {
-            //Debug.LogError($"{name}'s indicator is null!!!");
-        }
     }
 
     protected virtual void CheckForReposition() {
@@ -73,7 +68,8 @@ public abstract class Enemy : MonoBehaviour
             float randomAngle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
         
             Vector3 newPos = Player.instance.transform.position +
-                             new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * UnityEngine.Random.Range(EnemyManager.instance.EnemySpawnNearDist, EnemyManager.instance.EnemySpawnFarDist);
+                             new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * 
+                             UnityEngine.Random.Range(EnemyManager.instance.EnemySpawnNearDist, EnemyManager.instance.EnemySpawnFarDist);
         
             transform.position = newPos;
         }
@@ -156,7 +152,7 @@ public abstract class Enemy : MonoBehaviour
 
         Vector3 dir = (pointOfInterest - transform.position).normalized;
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f), Time.deltaTime * RotationSmoothing);
+        rigidbody.MoveRotation(Mathf.LerpAngle(rigidbody.rotation, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f, Time.deltaTime * RotationSmoothing));//= Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f), Time.deltaTime * RotationSmoothing);
     }
 
     float currentPointOfInterestTime;

@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898291535199563990}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5915972527566957085}
-  m_Father: {fileID: 4493829309516942023}
-  m_RootOrder: 2
+  m_Father: {fileID: 4248602502354283067}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &6452214000240226722
 CapsuleCollider2D:
@@ -88,13 +88,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349899062179457658}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 1.0000005, y: 1.0000005, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2035144732084175694}
-  m_Father: {fileID: 4493829309516942023}
-  m_RootOrder: 4
+  m_Father: {fileID: 4248602502354283067}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!70 &3412619984602052180
 CapsuleCollider2D:
@@ -126,6 +126,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 30
   WeakPointDamageMultiplier: 3
+--- !u!1 &1748551893091115420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4248602502354283067}
+  m_Layer: 0
+  m_Name: Guns
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4248602502354283067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748551893091115420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5655855585892158215}
+  - {fileID: 3455654810541836851}
+  - {fileID: 4160626920594972649}
+  - {fileID: 1070904522386418350}
+  m_Father: {fileID: 4493829309516942023}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115027235724022832
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,13 +185,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115027235724022832}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3962378755974738653}
-  m_Father: {fileID: 4493829309516942023}
-  m_RootOrder: 1
+  m_Father: {fileID: 4248602502354283067}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!70 &7902994494752798686
 CapsuleCollider2D:
@@ -457,10 +491,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4493829309094097484}
-  - {fileID: 5655855585892158215}
-  - {fileID: 3455654810541836851}
-  - {fileID: 4160626920594972649}
-  - {fileID: 1070904522386418350}
+  - {fileID: 4248602502354283067}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -497,16 +528,16 @@ MonoBehaviour:
   AttackRange: 7.5
   RotationSmoothing: 0.5
   MaxDistanceFromPlayer: 30
-  ScoreValue: 0
+  ScoreValue: 75
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 0}
   Sounds: []
   SlopeCoefficient: 10
   RotationAngle: 90
-  RotationDuration: 3
+  RotationDuration: 2
   RotationCooldown: 1.5
-  FireRate: 1
+  FireRate: 0.5
   SpawnOffsetFromPlayer: {x: 0, y: 8}
   Projectile: {fileID: 4877735629922035843, guid: cb02bd65bb117f74a951f12b798a341b,
     type: 3}
@@ -561,13 +592,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5313698194275444916}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5284025396189034794}
-  m_Father: {fileID: 4493829309516942023}
-  m_RootOrder: 3
+  m_Father: {fileID: 4248602502354283067}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!70 &2366702500928222791
 CapsuleCollider2D:

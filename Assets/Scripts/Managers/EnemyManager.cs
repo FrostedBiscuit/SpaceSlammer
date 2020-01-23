@@ -66,6 +66,7 @@ public class EnemyManager : MonoBehaviour
     public float DifficultyFactor = 60f;
 
     public int MaxMines = 5;
+    public int BossWavePeriod = 3;
 
     public List<EnemyPool> EnemyObjectPools = new List<EnemyPool>();
 
@@ -74,6 +75,7 @@ public class EnemyManager : MonoBehaviour
     bool canSpawn = false;
 
     float sessionTime = 0f;
+    float progress = 0f;
 
     int currentMines;
     int waves;
@@ -84,6 +86,7 @@ public class EnemyManager : MonoBehaviour
     private void Update() {
 
         sessionTime += Time.deltaTime;
+        progress += Time.deltaTime; // Maybe have the difficulty factor effect the overall rate of growth...
     }
 
     public void StartSpawning() {
@@ -97,6 +100,7 @@ public class EnemyManager : MonoBehaviour
         canSpawn = true;
 
         sessionTime = 0f;
+        progress = 0f;
 
         waves = 0;
 
@@ -172,7 +176,7 @@ public class EnemyManager : MonoBehaviour
 
         waves++;
 
-        if (waves % 3 == 0) {
+        if (waves % BossWavePeriod == 0) {
 
             Debug.Log($"Boss wave #{waves}");
 
@@ -186,10 +190,12 @@ public class EnemyManager : MonoBehaviour
 
             activeEnemies.Add(e);
 
+            progress += e.ScoreValue * 0.5f; // Definitley change this to something better
+
             return;
         }
 
-        int enemyCount = Mathf.RoundToInt(1 + Mathf.Sqrt(sessionTime / DifficultyFactor));
+        int enemyCount = Mathf.RoundToInt(1 + Mathf.Sqrt(progress / DifficultyFactor));
 
         Debug.Log($"Enemies to spawn: {enemyCount}");
 

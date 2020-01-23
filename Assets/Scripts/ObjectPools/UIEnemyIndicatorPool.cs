@@ -22,7 +22,7 @@ public class UIEnemyIndicatorPool : ObjectPool<UIEnemyIndicator> {
     #endregion
 
     [SerializeField]
-    Transform parentTransfrom;
+    Transform parentTransfrom = null;
 
     public override void Start() {
 

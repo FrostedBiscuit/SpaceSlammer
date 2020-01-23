@@ -53,7 +53,7 @@ MonoBehaviour:
   AttackRange: 7.5
   RotationSmoothing: 0.5
   MaxDistanceFromPlayer: 30
-  ScoreValue: 0
+  ScoreValue: 50
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 0}
@@ -103,7 +103,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!1 &1797856866426027263
 GameObject:
   m_ObjectHideFlags: 0
