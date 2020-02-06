@@ -4,31 +4,38 @@ using UnityEngine;
 
 public class CameraZoom : MonoBehaviour {
 
-    public float BaseOrthoSize = 0f;
+    public float DefaultZoom = 4f;
+    public float ZoomExtension = 6f;
 
-    [SerializeField]
-    private float NearZoom = 4f;
-    [SerializeField]
-    private float FarZoom = 6f;
     [SerializeField]
     private float ZoomSpeed = 5f;
 
     //float lastDmgMul;
     float currOrthoLerpAmt;
 
+    private void Start() {
+
+        currOrthoLerpAmt = Camera.main.orthographicSize;
+    }
+
     void Update() {
 
         if (Player.instance.gameObject.activeSelf == true) {
 
-            currOrthoLerpAmt = Mathf.Lerp(currOrthoLerpAmt, Player.instance.DamageMultiplier > 1f ? FarZoom : NearZoom, Time.deltaTime * ZoomSpeed);
+            currOrthoLerpAmt = Mathf.Lerp(currOrthoLerpAmt, Player.instance.DamageMultiplier > 1f ? DefaultZoom + ZoomExtension : DefaultZoom, Time.deltaTime * ZoomSpeed);
 
-            Camera.main.orthographicSize = BaseOrthoSize + currOrthoLerpAmt; //Mathf.Lerp(Camera.main.orthographicSize, Player.instance.DamageMultiplier > 1f ? FarZoom : NearZoom, Time.deltaTime * ZoomSpeed);
+            Camera.main.orthographicSize = currOrthoLerpAmt; //Mathf.Lerp(Camera.main.orthographicSize, Player.instance.DamageMultiplier > 1f ? FarZoom : NearZoom, Time.deltaTime * ZoomSpeed);
         }
         else {
 
-            currOrthoLerpAmt = Mathf.Lerp(currOrthoLerpAmt, NearZoom, Time.deltaTime * ZoomSpeed);
+            currOrthoLerpAmt = Mathf.Lerp(currOrthoLerpAmt, DefaultZoom, Time.deltaTime * ZoomSpeed);
 
-            Camera.main.orthographicSize = BaseOrthoSize + currOrthoLerpAmt; //Mathf.Lerp(Camera.main.orthographicSize, NearZoom, Time.deltaTime * ZoomSpeed);
+            Camera.main.orthographicSize = currOrthoLerpAmt; //Mathf.Lerp(Camera.main.orthographicSize, NearZoom, Time.deltaTime * ZoomSpeed);
         }
+    }
+
+    public void SetDefaultZoom(float zoom) {
+
+        DefaultZoom = zoom;
     }
 }

@@ -46,8 +46,6 @@ public class KamikazeShip : Enemy {
             return;
         }
 
-        Debug.Log("KamikazeShipFixedUpdate");
-
         base.FixedUpdate();
 
         move();

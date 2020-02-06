@@ -3,6 +3,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+    public string Name;
+
     public float MaxHealth = 100;
     public float AttackDamage = 30f;
     public float AttackRange = 7.5f;
@@ -10,6 +12,9 @@ public abstract class Enemy : MonoBehaviour
     public float MaxDistanceFromPlayer = 30f;
 
     public int ScoreValue = 0;
+
+    public bool LookAtPlayerOnSpawn = true;
+    public bool Damagable = true;
 
     protected float currentHealth;
     protected float distanceToPlayer;
@@ -50,6 +55,13 @@ public abstract class Enemy : MonoBehaviour
         InvokeRepeating("CheckForReposition", distanceCheckInterval, distanceCheckInterval);
 
         calculateDistanceToPlayer();
+
+        if (LookAtPlayerOnSpawn == true) {
+
+            Vector3 dir = (pointOfInterest - transform.position).normalized;
+
+            transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f);
+        }
     }
 
     protected virtual void FixedUpdate() {

@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviour {
     int currScore;
     int highScore;
 
-    private void Start() {
+    private void OnEnable() {
 
         if (PlayerPrefs.HasKey("HighScore")) {
 
@@ -79,6 +79,8 @@ public class ScoreManager : MonoBehaviour {
     void checkForHighScore() {
 
         if (highScore < currScore) {
+
+            Debug.Log($"New high score {highScore}");
 
             highScore = currScore;
 

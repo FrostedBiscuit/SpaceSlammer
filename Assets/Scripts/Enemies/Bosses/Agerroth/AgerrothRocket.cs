@@ -22,6 +22,8 @@ public class AgerrothRocket : MonoBehaviour {
 
     new Rigidbody2D rigidbody;
 
+    private bool agerrothProtected = true;
+
     // Start is called before the first frame update
     void Start() {
 
@@ -30,22 +32,28 @@ public class AgerrothRocket : MonoBehaviour {
         StartCoroutine(startBoosters());
     }
 
-    bool lookAtPlayer = true;
+    bool flying = false;
 
     private void FixedUpdate() {
 
-        if (Player.instance == null || lookAtPlayer == false) {
+        if (Player.instance == null) {
             return;
         }
 
         Vector3 dir = (Player.instance.transform.position - transform.position).normalized;
 
-        rigidbody.MoveRotation(Mathf.LerpAngle(rigidbody.rotation, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f, Time.deltaTime * RotationSmoothing));
+        rigidbody.MoveRotation(Mathf.LerpAngle(rigidbody.rotation, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f, Time.fixedDeltaTime * RotationSmoothing));
+
+        if (flying == true) {
+            rigidbody.AddForce(transform.up * BoosterForce);
+        }
+
+        RotationSmoothing = Mathf.Lerp(RotationSmoothing, 0f, Time.fixedDeltaTime / (BoosterDelay + DestroyAfter));
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         
-        if (collision.isTrigger == false) {
+        if (collision.isTrigger == false && (collision.transform.GetComponent<Agerroth>() == null || agerrothProtected == false)) {
             explode();
         }
     }
@@ -96,9 +104,7 @@ public class AgerrothRocket : MonoBehaviour {
 
         ExhaustParticles.Play();
 
-        rigidbody.AddForce(transform.up * BoosterForce);
-
-        lookAtPlayer = false;
+        flying = true;
 
         if (SoundManager.instance.PlaySFX == true) {
 
@@ -110,7 +116,11 @@ public class AgerrothRocket : MonoBehaviour {
 
     IEnumerator destroyAfter() {
 
-        yield return new WaitForSeconds(DestroyAfter);
+        yield return new WaitForSeconds(DestroyAfter / 2f);
+
+        agerrothProtected = false;
+
+        yield return new WaitForSeconds(DestroyAfter / 2f);
 
         explode();
     }

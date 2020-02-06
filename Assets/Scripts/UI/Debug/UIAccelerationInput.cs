@@ -11,6 +11,6 @@ public class UIAccelerationInput : MonoBehaviour {
 
     private void OnEnable() {
 
-        InputField.text = SwipeInput.AccelerationMultiplier.ToString();
+        //InputField.text = SwipeInput.AccelerationMultiplier.ToString();
     }
 }

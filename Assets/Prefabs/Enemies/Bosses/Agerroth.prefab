@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 400015301645532552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.135, y: 0.135, z: 0.135}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 1}
   m_Children: []
   m_Father: {fileID: 1029574485486924873}
   m_RootOrder: 0
@@ -158,19 +158,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4781ec04ec2057149a2551a971d2f14e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  Name: Agerroth
+  MaxHealth: 350
   AttackDamage: 30
   AttackRange: 20
   RotationSmoothing: 5
   MaxDistanceFromPlayer: 30
   ScoreValue: 0
+  LookAtPlayerOnSpawn: 1
+  Damagable: 1
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 0}
   Sounds: []
-  BackoffRange: 9.25
+  BackoffRange: 5
   SlopeCoefficient: 150
-  RocketFiringPeriod: 2.5
+  RocketFiringPeriod: 1.5
   AttackCooldown: 5
   DodgeTime: 2
   DodgeCooldown: 5
@@ -204,10 +207,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.01605457, y: 2.8888233}
-      - {x: -2.1292155, y: -0.9043108}
-      - {x: 0.032480776, y: -2.892789}
-      - {x: 2.1773908, y: -0.9147632}
+    - - {x: 0.00032043457, y: 1.6615965}
+      - {x: -1.2166615, y: -0.51096874}
+      - {x: -0.030454636, y: -1.6655624}
+      - {x: 1.2176361, y: -0.5214216}
 --- !u!50 &8594370398275243698
 Rigidbody2D:
   serializedVersion: 4
@@ -253,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3662972278604236254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: -1.2, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3678167010913302787}
@@ -283,7 +286,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6809235754287815731}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 1.2, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3678167010913302787}

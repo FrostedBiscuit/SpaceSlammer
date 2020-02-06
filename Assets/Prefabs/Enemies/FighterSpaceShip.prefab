@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -3.7, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 124}
@@ -49,12 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 777fda168051a1443b97391725bac745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   MaxHealth: 30
   AttackDamage: 30
   AttackRange: 7.5
   RotationSmoothing: 2.5
   MaxDistanceFromPlayer: 30
   ScoreValue: 10
+  LookAtPlayerOnSpawn: 1
+  Damagable: 1
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 157}
@@ -64,7 +67,7 @@ MonoBehaviour:
   BackoffRange: 3.5
   SlopeCoefficient: 200
   WanderingSpeed: 50
-  FireRate: 2
+  FireRate: 0.75
   ProjectileSpawnPointLeft: {fileID: 131}
   ProjectileSpawnPointRight: {fileID: 140}
 --- !u!50 &143
@@ -103,7 +106,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.55
+  m_Radius: 0.61
 --- !u!82 &157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -226,7 +229,7 @@ Transform:
   m_GameObject: {fileID: 100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children: []
   m_Father: {fileID: 123}
   m_RootOrder: 0

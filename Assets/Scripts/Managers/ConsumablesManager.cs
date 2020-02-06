@@ -78,17 +78,19 @@ public class ConsumablesManager : MonoBehaviour {
 
         float randomAngle = Random.Range(0f, Mathf.PI * 2f);
 
-        Vector3 newPos = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(MaxSpawnDistanceFromLastConsumable * 0.4f, MaxSpawnDistanceFromLastConsumable);
+        Vector3 newPos = lastPos + new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * Random.Range(MaxSpawnDistanceFromLastConsumable * 0.4f, MaxSpawnDistanceFromLastConsumable);
 
-        switch(randomConsumableIndex) {
+        lastPos = newPos;
+
+        switch (randomConsumableIndex) {
             case 0:
-                spawnDamangeBooster(lastPos + newPos);
+                spawnDamangeBooster(newPos);
             break;
             case 1:
-                spawnHealthPickup(lastPos + newPos);
+                spawnHealthPickup(newPos);
             break;
             case 2:
-                spawnInvincibilityPickup(lastPos + newPos);
+                spawnInvincibilityPickup(newPos);
             break;
         }
 

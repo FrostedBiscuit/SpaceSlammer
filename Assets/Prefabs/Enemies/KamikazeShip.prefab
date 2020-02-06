@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 142}
   m_RootOrder: 0
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.22, y: 1.21, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 156}
@@ -127,12 +127,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a708c8f9b75e52408c0dc0a3eb99277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   MaxHealth: 100
   AttackDamage: 30
-  AttackRange: 5
-  RotationSmoothing: 0.25
+  AttackRange: 6.5
+  RotationSmoothing: 1
   MaxDistanceFromPlayer: 30
   ScoreValue: 0
+  LookAtPlayerOnSpawn: 1
+  Damagable: 1
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 173}
@@ -142,8 +145,8 @@ MonoBehaviour:
   BombTimer: 0.5
   FocusTimer: 1
   Speed: 100
-  ChargeForce: 5
-  ExplosionRadius: 3
+  ChargeForce: 7
+  ExplosionRadius: 4.25
   PassiveCircleColor: {r: 0, g: 1, b: 0, a: 1}
   AimingCircleColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   HotCircleColor: {r: 1, g: 0, b: 0, a: 1}

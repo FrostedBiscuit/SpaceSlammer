@@ -72,12 +72,14 @@ public class Player : MonoBehaviour {
     float nextParticleTime;
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        
+
         if (collision.transform.tag == "Enemy" && Time.time >= nextParticleTime) {
 
             Enemy e = collision.transform.GetComponent<Enemy>();
 
-            e.TakeDamage(collision.relativeVelocity.magnitude * DamageMultiplier);
+            if (e.Damagable == true) {
+                e.TakeDamage(collision.relativeVelocity.magnitude);
+            }
 
             ParticlesPool.instance.RequestObject((Vector3)collision.GetContact(0).point, Quaternion.identity);
 

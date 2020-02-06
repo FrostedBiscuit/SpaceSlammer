@@ -15,8 +15,8 @@ public class ParallaxBackground : MonoBehaviour {
         meshRenderer = GetComponent<MeshRenderer>();
 
         // Scale the plane to fit the screen
-        transform.localScale = new Vector3(Camera.main.orthographicSize * 2f * Screen.width / Screen.height, 
-                                           Camera.main.orthographicSize * 2f * Screen.width / Screen.height);
+        transform.localScale = new Vector3(Camera.main.orthographicSize * 5f * Screen.width / Screen.height, 
+                                           Camera.main.orthographicSize * 5f * Screen.width / Screen.height);
     }
 
     void Update() {

@@ -11,6 +11,12 @@ public class HeavyWeaponsShip : Enemy
     public float BeamDuration = 2f;
     public float BeamLenght = 3f;
     public float BeamDamageInterval = 0.25f;
+    public float SuperSpinCooldown = 5f;
+    public float SuperSpinDuration = 0.25f;
+    public float SuperSpinRotationSmoothing = 3f;
+
+    [SerializeField]
+    Animator Animator = null;
 
     [SerializeField]
     GameObject Beam = null;
@@ -32,6 +38,8 @@ public class HeavyWeaponsShip : Enemy
     protected override void Attack() {
         base.Attack();
 
+        StartCoroutine(superSpin());
+
         Beam.SetActive(true);
 
         beamCurrentCooldown = Time.time + BeamCooldown;
@@ -51,7 +59,7 @@ public class HeavyWeaponsShip : Enemy
 
 
             //Debug.Log($"attacking distance to player: {distanceToPlayer}");
-            Attack();
+            StartCoroutine(attackSequence());
         }
     }
 
@@ -96,5 +104,44 @@ public class HeavyWeaponsShip : Enemy
         else {
             rigidbody.AddForce(transform.up * WanderingSpeed * Time.fixedDeltaTime);
         }
+    }
+
+    IEnumerator attackSequence() {
+
+        Animator.SetBool("IsAttacking", true);
+
+        yield return new WaitForSeconds(0.683f);
+
+        Attack();
+
+        yield return new WaitForSeconds(BeamDuration);
+
+        Animator.SetBool("IsAttacking", false);
+    }
+
+    float lastSuperSpin;
+
+    bool superSpinning;
+
+    IEnumerator superSpin() {
+
+        if (lastSuperSpin > Time.time || superSpinning == true) {
+
+            yield return null;
+        }
+
+        superSpinning = true;
+
+        float oldSmoothing = RotationSmoothing;
+
+        RotationSmoothing = SuperSpinRotationSmoothing;
+
+        yield return new WaitForSeconds(SuperSpinDuration);
+
+        RotationSmoothing = oldSmoothing;
+
+        superSpinning = false;
+
+        lastSuperSpin = Time.time + SuperSpinCooldown;
     }
 }

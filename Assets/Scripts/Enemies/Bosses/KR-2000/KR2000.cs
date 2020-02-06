@@ -117,7 +117,7 @@ public class KR2000 : Enemy {
 
             Debug.DrawRay(transform.position, velocityDir * moveSpeed * Time.fixedDeltaTime);
         }
-        else if (distanceToPlayer <= AttackRange && rotatingAroundPlayer == false) {
+        else if (distanceToPlayer <= AttackRange && rotatingAroundPlayer == false && Player.instance.gameObject.activeSelf) {
 
             StartCoroutine(rotateAroundPlayer());
         }
