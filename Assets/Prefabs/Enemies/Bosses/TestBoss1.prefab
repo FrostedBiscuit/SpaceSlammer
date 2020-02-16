@@ -48,12 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4286d7d0ff2c0074792d6159ac95e031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Test Boss
   MaxHealth: 150
   AttackDamage: 30
   AttackRange: 7.5
   RotationSmoothing: 0.5
   MaxDistanceFromPlayer: 30
   ScoreValue: 50
+  LookAtPlayerOnSpawn: 1
+  Damagable: 1
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 0}

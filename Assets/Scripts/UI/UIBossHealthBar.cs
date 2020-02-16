@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIBossHealthBar : MonoBehaviour {
 
@@ -21,21 +22,26 @@ public class UIBossHealthBar : MonoBehaviour {
     }
     #endregion
 
+    public GameObject HealthBarObject;
+
     public Image HealthBar;
-    public Image HealthBarBG;
 
-    public void Enable() {
+    public TextMeshProUGUI BossNameLabel;
 
-        HealthBar.gameObject.SetActive(true);
-        HealthBarBG.gameObject.SetActive(true);
+    public void Enable(string name) {
+
+        HealthBarObject.SetActive(true);
 
         HealthBar.fillAmount = 1f;
+
+        BossNameLabel.text = name.ToUpper();
     }
 
     public void Disable() {
 
-        HealthBar.gameObject.SetActive(false);
-        HealthBarBG.gameObject.SetActive(false);
+        HealthBarObject.SetActive(false);
+
+        BossNameLabel.text = "";
     }
 
     public void UpdateHealth(float health, float maxHealth) {

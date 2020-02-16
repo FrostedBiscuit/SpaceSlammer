@@ -9,6 +9,11 @@ public class UICollapsablePanel : MonoBehaviour {
     [SerializeField]
     Animator Animator = null;
 
+    private void OnEnable() {
+
+        Animator.SetBool("isOpen", isActive);
+    }
+
     public void Toggle() {
 
         isActive = !isActive;

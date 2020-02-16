@@ -17,7 +17,7 @@ public class TestBossShip : Enemy {
     protected override void OnEnable() {
         base.OnEnable();
 
-        UIBossHealthBar.instance.Enable();
+        UIBossHealthBar.instance.Enable(Name);
     }
 
     protected override void FixedUpdate() {

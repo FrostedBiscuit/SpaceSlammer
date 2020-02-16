@@ -47,6 +47,23 @@ public class Player : MonoBehaviour {
         Rigidbody.velocity = Vector2.zero;
     }
 
+    float lastGreatestVelocityMag;
+
+    //private void Update() {
+
+    //    if (lastGreatestVelocityMag < Rigidbody.velocity.magnitude) {
+
+    //        lastGreatestVelocityMag = Rigidbody.velocity.magnitude;
+
+    //        Debug.Log($"Greatest velocity so far: {lastGreatestVelocityMag}");
+    //    }
+    //}
+
+    private void FixedUpdate() {
+
+        Rigidbody.velocity = Vector2.ClampMagnitude(Rigidbody.velocity, 80f);
+    }
+
     public void TakeDamage(float dmg) {
 
         if (!CanTakeDamage) {

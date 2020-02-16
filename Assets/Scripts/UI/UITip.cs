@@ -40,7 +40,7 @@ public class UITip : MonoBehaviour {
 
         int randomTipIndex = Random.Range(0, Tips.Length);
 
-        TipText.text = $"TIP: {Tips[randomTipIndex].TipText.ToUpper()}";
+        TipText.text = $"TIP:\n{Tips[randomTipIndex].TipText.ToUpper()}";
         TipImage.sprite = Tips[randomTipIndex].TipSprite;
     }
 }

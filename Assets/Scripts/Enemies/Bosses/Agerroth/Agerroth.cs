@@ -22,7 +22,7 @@ public class Agerroth : Enemy {
     protected override void OnEnable() {
         base.OnEnable();
 
-        UIBossHealthBar.instance.Enable();
+        UIBossHealthBar.instance.Enable(Name);
 
         Rocket.GetComponent<AgerrothRocket>().Damage = AttackDamage;
     }

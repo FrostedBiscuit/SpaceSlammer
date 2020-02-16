@@ -3,23 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<TPooledObject/*, TSingeltonType*/> : MonoBehaviour where  TPooledObject : MonoBehaviour /*where TSingeltonType : ObjectPool<TPooledObject, TSingeltonType>*/  {
-/*
-    #region Singelton
-    public static TSingeltonType instance = null;
-
-    private void Awake() {
-        
-        if (instance != null) {
-
-            Debug.LogError($"{nameof(TSingeltonType)}::Awake() => More than 1 instance of {nameof(TPooledObject)}'s object pool!!");
-
-            return;
-        }
-
-        instance = (TSingeltonType) this;
-    }
-    #endregion*/
+public class ObjectPool<TPooledObject> : MonoBehaviour where  TPooledObject : MonoBehaviour {
 
     public int NumToSpawn = 5;
 

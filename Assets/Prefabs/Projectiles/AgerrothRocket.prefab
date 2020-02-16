@@ -4825,12 +4825,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3a3fbb9038ec041af7b15aad21d1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoosterDelay: 0.25
+  BoosterDelay: 0.125
   BoosterForce: 30
-  DestroyAfter: 3
-  ExplosionRadius: 3
+  DestroyAfter: 1.5
+  ExplosionRadius: 3.75
   RotationSmoothing: 5
-  BoosterSFX: {fileID: 8300000, guid: ea3b67ed43a3ae4479f349dae40c2a7e, type: 3}
+  BoosterSFX: {fileID: 8300000, guid: 3f999877234f950419b21226b677e9fc, type: 3}
+  ExplosionsSFX:
+  - {fileID: 8300000, guid: a21e1a989caa2404d8d0ce5557c884c7, type: 3}
+  - {fileID: 8300000, guid: 1b0a8f5e6bc9a624cb4c124b3aaa7037, type: 3}
+  - {fileID: 8300000, guid: 5512ec02640e8ce4c90fc268a33c31ef, type: 3}
   ExhaustParticles: {fileID: 4984637604594047453}
   audioSource: {fileID: 4194630516171871800}
   Damage: 40

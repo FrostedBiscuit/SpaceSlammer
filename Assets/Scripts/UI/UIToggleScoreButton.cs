@@ -7,6 +7,8 @@ public class UIToggleScoreButton : MonoBehaviour {
 
     [SerializeField]
     float OpenSpeed = 10f;
+    [SerializeField]
+    float ButtonSize = 72f;
 
     [SerializeField]
     bool IsOn = false;
@@ -45,7 +47,7 @@ public class UIToggleScoreButton : MonoBehaviour {
             return;
         }
 
-        closedPos = new Vector2(0f, TextBackgroundRect.sizeDelta.y);
+        closedPos = new Vector2(ButtonSize, TextBackgroundRect.sizeDelta.y);
 
         TextBackgroundRect.sizeDelta = closedPos;
 
@@ -59,7 +61,7 @@ public class UIToggleScoreButton : MonoBehaviour {
 
         if (IsOn == true) {
 
-            TextBackgroundRect.sizeDelta = new Vector2(Mathf.Lerp(TextBackgroundRect.sizeDelta.x, openPos.x, OpenSpeed * Time.deltaTime), TextBackgroundRect.sizeDelta.y);
+            TextBackgroundRect.sizeDelta = new Vector2(Mathf.Lerp(TextBackgroundRect.sizeDelta.x, ButtonSize + openPos.x, OpenSpeed * Time.deltaTime), TextBackgroundRect.sizeDelta.y);
 
             if (openPos.x - TextBackgroundRect.sizeDelta.x <= 5f) {
                 TextCanvasGroup.alpha = 1f;

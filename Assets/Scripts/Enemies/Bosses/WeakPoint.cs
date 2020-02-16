@@ -6,6 +6,12 @@ public class WeakPoint : MonoBehaviour {
     public float MaxHealth;
     public float WeakPointDamageMultiplier = 10f;
 
+    public float CurrentHealth {
+        get {
+            return currentHealth;
+        }
+    }
+
     float currentHealth;
 
     public void TakeDamage(float dmg) {

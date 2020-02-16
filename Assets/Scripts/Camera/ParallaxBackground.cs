@@ -8,6 +8,8 @@ public class ParallaxBackground : MonoBehaviour {
 
     public Vector2 ConstScrollWeights = new Vector2();
 
+    public float MaxOrthoSize = 12f;
+
     MeshRenderer meshRenderer;
 
     private void Start() {
@@ -15,14 +17,14 @@ public class ParallaxBackground : MonoBehaviour {
         meshRenderer = GetComponent<MeshRenderer>();
 
         // Scale the plane to fit the screen
-        transform.localScale = new Vector3(Camera.main.orthographicSize * 5f * Screen.width / Screen.height, 
-                                           Camera.main.orthographicSize * 5f * Screen.width / Screen.height);
+        //transform.localScale = new Vector3(MaxOrthoSize * 5f * Screen.width / Screen.height,
+                                           //MaxOrthoSize * 5f * Screen.width / Screen.height);
     }
 
     void Update() {
 
         // Move the background image
-        Vector2 offset = new Vector2((transform.position.x + ConstScrollWeights.x * Time.time) / transform.localScale.x / ParallaxCoeficient, 
+        Vector2 offset = new Vector2((transform.position.x + ConstScrollWeights.x * Time.time) / transform.localScale.x / ParallaxCoeficient,
                                      (transform.position.y + ConstScrollWeights.y * Time.time) / transform.localScale.y / ParallaxCoeficient);
 
         meshRenderer.material.mainTextureOffset = offset;

@@ -413,16 +413,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8282449448944426592, guid: cb0649589cfb2804ca045a4de312122b,
         type: 3}
-      propertyPath: m_fontSize
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 8282449448944426592, guid: cb0649589cfb2804ca045a4de312122b,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 8282449448944426592, guid: cb0649589cfb2804ca045a4de312122b,
-        type: 3}
       propertyPath: m_enableAutoSizing
       value: 0
       objectReference: {fileID: 0}

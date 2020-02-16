@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KR2000 : Enemy {
 
+    public float WanderingSpeed = 50f;
     public float SlopeCoefficient = 10f;
     public float RotationAngle = 90f;
     public float RotationDuration = 3f;
@@ -16,8 +17,12 @@ public class KR2000 : Enemy {
 
     public Transform[] Guns = null;
 
+    int weakpointsActive;
+
     protected override void OnEnable() {
         base.OnEnable();
+
+        weakpointsActive = Guns.Length;
 
         if (Projectile == null) {
 
@@ -30,7 +35,7 @@ public class KR2000 : Enemy {
 
         transform.position = Player.instance.transform.position + (Vector3)SpawnOffsetFromPlayer;
 
-        UIBossHealthBar.instance.Enable();
+        UIBossHealthBar.instance.Enable(Name);
     }
 
     protected override void FixedUpdate() {
@@ -83,6 +88,11 @@ public class KR2000 : Enemy {
 
             lastAttack = Time.time + FireRate;
         }
+
+        if (weakpointsActive == 0) {
+
+            Damagable = true;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
@@ -96,6 +106,8 @@ public class KR2000 : Enemy {
             wp.TakeDamage(dmg);
 
             TakeDamage(dmg);
+
+            weakpointsActive -= wp.CurrentHealth > dmg ? 0 : 1 ;
         }
     }
 
@@ -109,17 +121,19 @@ public class KR2000 : Enemy {
 
             float moveSpeed = distanceToPlayer - AttackRange > 0f ? distanceToPlayer * SlopeCoefficient : 0f;
 
-            //Debug.Log($"KR-2000's moveSpeed = {moveSpeed}");
-
             rigidbody.AddForce(velocityDir * moveSpeed * Time.fixedDeltaTime);
-
-            //rigidbody.velocity = velocityDir * moveSpeed * Time.fixedDeltaTime;
 
             Debug.DrawRay(transform.position, velocityDir * moveSpeed * Time.fixedDeltaTime);
         }
         else if (distanceToPlayer <= AttackRange && rotatingAroundPlayer == false && Player.instance.gameObject.activeSelf) {
 
             StartCoroutine(rotateAroundPlayer());
+        }
+        else if (Player.instance.gameObject.activeSelf == false) {
+
+            Vector2 velocityDir = (pointOfInterest - transform.position).normalized;
+
+            rigidbody.AddForce(velocityDir * WanderingSpeed * Time.fixedDeltaTime);
         }
     }
 

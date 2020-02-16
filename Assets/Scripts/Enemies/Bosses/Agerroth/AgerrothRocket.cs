@@ -12,6 +12,7 @@ public class AgerrothRocket : MonoBehaviour {
     public float RotationSmoothing = 2f;
 
     public AudioClip BoosterSFX = null;
+    public AudioClip[] ExplosionsSFX;
 
     public ParticleSystem ExhaustParticles = null;
 
@@ -67,6 +68,13 @@ public class AgerrothRocket : MonoBehaviour {
     void explode() {
 
         ParticlesPool.instance.RequestObject(transform.position, Quaternion.identity);
+
+        if (SoundManager.instance.PlaySFX) {
+
+            int randomExplosionSFXIndex = Random.Range(0, ExplosionsSFX.Length);
+
+            SoundSourcePool.instance.RequestObject(transform.position, transform.rotation).Play(ExplosionsSFX[randomExplosionSFXIndex]);
+        }
 
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
 
