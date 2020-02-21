@@ -74,6 +74,8 @@ public class Player : MonoBehaviour {
 
             Health = 0;
 
+            ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
+
             PlayerManager.instance.DespawnPlayer();
         }
         else {
@@ -98,7 +100,7 @@ public class Player : MonoBehaviour {
                 e.TakeDamage(collision.relativeVelocity.magnitude);
             }
 
-            ParticlesPool.instance.RequestObject((Vector3)collision.GetContact(0).point, Quaternion.identity);
+            CollisionParticlesPool.instance.RequestObject((Vector3)collision.GetContact(0).point, Quaternion.identity);
 
             nextParticleTime = Time.time + ParticleInterval;
         }

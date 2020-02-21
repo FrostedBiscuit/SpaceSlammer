@@ -67,7 +67,7 @@ public class AgerrothRocket : MonoBehaviour {
 
     void explode() {
 
-        ParticlesPool.instance.RequestObject(transform.position, Quaternion.identity);
+        CollisionParticlesPool.instance.RequestObject(transform.position, Quaternion.identity);
 
         if (SoundManager.instance.PlaySFX) {
 

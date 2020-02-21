@@ -4829,7 +4829,7 @@ MonoBehaviour:
   BoosterForce: 30
   DestroyAfter: 1.5
   ExplosionRadius: 3.75
-  RotationSmoothing: 5
+  RotationSmoothing: 10
   BoosterSFX: {fileID: 8300000, guid: 3f999877234f950419b21226b677e9fc, type: 3}
   ExplosionsSFX:
   - {fileID: 8300000, guid: a21e1a989caa2404d8d0ce5557c884c7, type: 3}

@@ -15,6 +15,6 @@ public class Particles : MonoBehaviour {
 
         yield return new WaitForSeconds(DestoryAfter);
 
-        ParticlesPool.instance.ReturnObject(this);
+        CollisionParticlesPool.instance.ReturnObject(this);
     }
 }

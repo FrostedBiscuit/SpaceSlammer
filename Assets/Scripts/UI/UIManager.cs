@@ -22,7 +22,8 @@ public class UIManager : MonoBehaviour {
     #endregion
     
     [SerializeField]
-    GameObject MainMenu = null;
+    CanvasGroup MainMenu = null;
+
     [SerializeField]
     GameObject HUD = null;
     [SerializeField]
@@ -48,7 +49,9 @@ public class UIManager : MonoBehaviour {
 
         if (MainMenu != null && HUD != null && EndScreen != null) {
 
-            MainMenu.SetActive(true);
+            MainMenu.interactable = true;
+            MainMenu.blocksRaycasts = true;
+            MainMenu.alpha = 1f;
 
             HUD.SetActive(false);
             EndScreen.SetActive(false);
@@ -62,7 +65,12 @@ public class UIManager : MonoBehaviour {
             HUD.SetActive(true);
 
             EndScreen.SetActive(false);
-            MainMenu.SetActive(false);
+
+            Debug.Log("Deactivating main menu");
+
+            MainMenu.interactable = false;
+            MainMenu.blocksRaycasts = false;
+            MainMenu.alpha = 0f;
         }
     }
 
@@ -73,7 +81,10 @@ public class UIManager : MonoBehaviour {
             EndScreen.SetActive(true);
 
             HUD.SetActive(false);
-            MainMenu.SetActive(false);
+
+            MainMenu.interactable = false;
+            MainMenu.blocksRaycasts = false;
+            MainMenu.alpha = 0f;
         }
     }
 }

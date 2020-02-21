@@ -30,6 +30,8 @@ public class FighterSpaceShip : Enemy {
     protected override void Die() {
         base.Die();
 
+        ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
+
         FighterSpaceShipPool.instance.ReturnObject(this);
     }
 

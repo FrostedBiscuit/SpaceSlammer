@@ -104,6 +104,8 @@ public class KamikazeShip : Enemy {
     protected override void Die() {
         base.Die();
 
+        ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
+
         KamikazeShipPool.instance.ReturnObject(this);
     }
 
@@ -118,8 +120,6 @@ public class KamikazeShip : Enemy {
     }
 
     private void explode() {
-
-        ParticlesPool.instance.RequestObject(transform.position, Quaternion.identity);
 
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
 

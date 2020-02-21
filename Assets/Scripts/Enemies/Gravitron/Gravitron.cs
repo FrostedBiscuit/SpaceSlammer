@@ -16,6 +16,12 @@ public class Gravitron : Enemy {
 
     bool isTargeting = false;
 
+    protected override void OnEnable() {
+        base.OnEnable();
+
+        isTargeting = false;
+    }
+
     public override void Dispose() {
 
         GravitronPool.instance.ReturnObject(this);
@@ -45,6 +51,8 @@ public class Gravitron : Enemy {
     
     protected override void Die() {
         base.Die();
+
+        ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
 
         GravitronPool.instance.ReturnObject(this);
     }

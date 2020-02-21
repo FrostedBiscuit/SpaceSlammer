@@ -48,6 +48,8 @@ public class TestBossShip : Enemy {
 
         UIBossHealthBar.instance.Disable();
 
+        ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
+
         Destroy(gameObject);
     }
 

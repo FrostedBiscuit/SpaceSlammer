@@ -88,7 +88,7 @@ public class Mine : MonoBehaviour {
             mineExplosionCallback(this);
         }
 
-        ParticlesPool.instance.RequestObject(transform.position, transform.rotation);
+        ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
 
         MinePool.instance.ReturnObject(this);
     }

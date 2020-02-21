@@ -75,6 +75,8 @@ public class KR2000 : Enemy {
 
         UIBossHealthBar.instance.Disable();
 
+        ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
+
         Destroy(gameObject);
     }
 

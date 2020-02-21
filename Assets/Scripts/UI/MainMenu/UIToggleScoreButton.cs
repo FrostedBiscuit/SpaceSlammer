@@ -63,7 +63,8 @@ public class UIToggleScoreButton : MonoBehaviour {
 
             TextBackgroundRect.sizeDelta = new Vector2(Mathf.Lerp(TextBackgroundRect.sizeDelta.x, ButtonSize + openPos.x, OpenSpeed * Time.deltaTime), TextBackgroundRect.sizeDelta.y);
 
-            if (openPos.x - TextBackgroundRect.sizeDelta.x <= 5f) {
+            if (openPos.x - TextBackgroundRect.sizeDelta.x <= 1f) {
+
                 TextCanvasGroup.alpha = 1f;
             }
         } 

@@ -35,5 +35,11 @@ public class UITapToContinue : MonoBehaviour, IPointerClickHandler {
 
             CameraFollow.enabled = true;
         }
+
+        CanvasAnimator.enabled = false;
+
+        UIManager.instance.ActivateMainMenu();
+
+        gameObject.SetActive(false);
     }
 }

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticlesPool : ObjectPool<Particles> {
+public class CollisionParticlesPool : ObjectPool<Particles> {
 
     #region Singelton
-    public static ParticlesPool instance = null;
+    public static CollisionParticlesPool instance = null;
 
     private void Awake() {
 

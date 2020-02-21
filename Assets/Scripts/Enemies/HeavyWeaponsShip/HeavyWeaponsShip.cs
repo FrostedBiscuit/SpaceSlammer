@@ -72,6 +72,8 @@ public class HeavyWeaponsShip : Enemy
     protected override void Die() {
         base.Die();
 
+        ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
+
         HeavyWeaponsShipPool.instance.ReturnObject(this);
     }
 
