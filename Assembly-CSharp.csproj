@@ -69,6 +69,8 @@
     <Compile Include="Assets\Scripts\Consumables\InvincibilityPickup.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bosses\Agerroth\Agerroth.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bosses\Agerroth\AgerrothRocket.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Bosses\Gravitron\Gravitron.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Bosses\Gravitron\GravitronProjectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bosses\KR-2000\KR2000.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bosses\KR-2000\KR2000Projectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bosses\TestBossShip\TestBossShip.cs" />
@@ -76,8 +78,6 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\FighterSpaceShip\FighterSpaceShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\FighterSpaceShip\FighterSpaceShipProjectile.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Gravitron\Gravitron.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Gravitron\GravitronProjectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\HeavyWeaponsShip\HeavyWeaponsShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\HeavyWeaponsShip\LaserBeam.cs" />
     <Compile Include="Assets\Scripts\Enemies\KamikazeShip\KamikazeShip.cs" />
@@ -90,7 +90,6 @@
     <Compile Include="Assets\Scripts\Managers\SkinManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\EnemyPools\FighterSpaceShipPool.cs" />
-    <Compile Include="Assets\Scripts\ObjectPools\EnemyPools\GravitronPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\EnemyPools\HeavyWeaponsShipPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\EnemyPools\KamikazeShipPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\ObjectPool.cs" />
@@ -102,7 +101,6 @@
     <Compile Include="Assets\Scripts\ObjectPools\PickupAndMinePools\HealthPickupPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\PickupAndMinePools\InvincibilityPickupPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\PickupAndMinePools\MinePool.cs" />
-    <Compile Include="Assets\Scripts\ObjectPools\ProjectilePools\GravitronProjectilePool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\ProjectilePools\ProjectilePool.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\RotatePlayerSprite.cs" />
