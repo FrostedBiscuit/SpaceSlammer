@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 255}
-  - component: {fileID: 399}
-  - component: {fileID: 319}
-  - component: {fileID: 307}
+  - component: {fileID: 258}
+  - component: {fileID: 409}
+  - component: {fileID: 325}
+  - component: {fileID: 313}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -19,7 +19,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &255
+--- !u!4 &258
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,12 +30,12 @@ Transform:
   m_LocalPosition: {x: -13.13, y: -0.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 247}
-  - {fileID: 262}
+  - {fileID: 250}
+  - {fileID: 265}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &399
+--- !u!114 &409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   ExplosionRadius: 3
   Timer: 1.5
   MaxDistanceFromPlayer: 40
---- !u!58 &319
+--- !u!58 &325
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +67,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.38
---- !u!50 &307
+--- !u!50 &313
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -96,9 +96,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 247}
-  - component: {fileID: 348}
-  - component: {fileID: 353}
+  - component: {fileID: 250}
+  - component: {fileID: 354}
+  - component: {fileID: 361}
   m_Layer: 0
   m_Name: Ping
   m_TagString: Untagged
@@ -106,7 +106,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &247
+--- !u!4 &250
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,10 +117,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 255}
+  m_Father: {fileID: 258}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!198 &348
+--- !u!198 &354
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4724,7 +4724,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &353
+--- !u!199 &361
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -4794,8 +4794,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 262}
-  - component: {fileID: 363}
+  - component: {fileID: 265}
+  - component: {fileID: 373}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -4803,7 +4803,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &262
+--- !u!4 &265
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4814,10 +4814,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
-  m_Father: {fileID: 255}
+  m_Father: {fileID: 258}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &363
+--- !u!212 &373
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

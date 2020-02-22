@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 751903025296275142}
-  - component: {fileID: 2879321290383208543}
+  - component: {fileID: 7271730212936238740}
   m_Layer: 0
   m_Name: ExplosionParticles
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2879321290383208543
+--- !u!114 &7271730212936238740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4195069503715047166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 671011571eb3cf743a6977ab5a2beee0, type: 3}
+  m_Script: {fileID: 11500000, guid: a1a3c66210209974684cb92be796315c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DestoryAfter: 2

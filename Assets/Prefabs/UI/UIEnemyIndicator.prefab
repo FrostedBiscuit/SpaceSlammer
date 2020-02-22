@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 384}
-  - component: {fileID: 382}
-  - component: {fileID: 390}
+  - component: {fileID: 394}
+  - component: {fileID: 392}
+  - component: {fileID: 400}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -18,7 +18,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &384
+--- !u!224 &394
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29,7 +29,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.65968716, y: 1.0554825, z: 1.0554825}
   m_Children: []
-  m_Father: {fileID: 383}
+  m_Father: {fileID: 393}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchoredPosition: {x: 175, y: 0}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &382
+--- !u!222 &392
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179}
   m_CullTransparentMesh: 0
---- !u!114 &390
+--- !u!114 &400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,9 +82,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 383}
-  - component: {fileID: 381}
-  - component: {fileID: 388}
+  - component: {fileID: 393}
+  - component: {fileID: 391}
+  - component: {fileID: 398}
   m_Layer: 5
   m_Name: UIEnemyIndicator
   m_TagString: Untagged
@@ -92,7 +92,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &383
+--- !u!224 &393
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,7 +103,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 384}
+  - {fileID: 394}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,7 +112,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &381
+--- !u!222 &391
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +120,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180}
   m_CullTransparentMesh: 0
---- !u!114 &388
+--- !u!114 &398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

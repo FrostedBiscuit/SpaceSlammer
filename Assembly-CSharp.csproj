@@ -129,7 +129,8 @@
     <Compile Include="Assets\Scripts\UI\StartScreen\UITapToContinue.cs" />
     <Compile Include="Assets\Scripts\UI\StartScreen\UITip.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
-    <Compile Include="Assets\Scripts\Utility\Particles.cs" />
+    <Compile Include="Assets\Scripts\Utility\CollisionParticles.cs" />
+    <Compile Include="Assets\Scripts\Utility\ExplosionParticles.cs" />
     <Compile Include="Assets\Scripts\Utility\SoundSource.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

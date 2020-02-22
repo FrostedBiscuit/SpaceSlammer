@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 261}
-  - component: {fileID: 361}
+  - component: {fileID: 264}
+  - component: {fileID: 371}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -17,7 +17,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &261
+--- !u!4 &264
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,10 +28,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 252}
+  m_Father: {fileID: 255}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &361
+--- !u!212 &371
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,11 +87,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 252}
-  - component: {fileID: 396}
-  - component: {fileID: 305}
-  - component: {fileID: 316}
-  - component: {fileID: 340}
+  - component: {fileID: 255}
+  - component: {fileID: 406}
+  - component: {fileID: 311}
+  - component: {fileID: 322}
+  - component: {fileID: 346}
   m_Layer: 0
   m_Name: KamikazeShip
   m_TagString: Enemy
@@ -99,7 +99,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &252
+--- !u!4 &255
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,12 +110,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 261}
-  - {fileID: 259}
+  - {fileID: 264}
+  - {fileID: 262}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &396
+--- !u!114 &406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   Damagable: 1
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
-  Source: {fileID: 340}
+  Source: {fileID: 346}
   Sounds:
   - {fileID: 8300000, guid: 744c0f266633db846a8e271e51c80eb4, type: 3}
   - {fileID: 8300000, guid: e583fb7ffa48f834cb5acc8332d03164, type: 3}
@@ -150,8 +150,8 @@ MonoBehaviour:
   PassiveCircleColor: {r: 0, g: 1, b: 0, a: 1}
   AimingCircleColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   HotCircleColor: {r: 1, g: 0, b: 0, a: 1}
-  ExplosionRadiusCircle: {fileID: 394}
---- !u!50 &305
+  ExplosionRadiusCircle: {fileID: 404}
+--- !u!50 &311
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &316
+--- !u!58 &322
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,7 +188,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.56
---- !u!82 &340
+--- !u!82 &346
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,11 +292,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 259}
-  - component: {fileID: 347}
-  - component: {fileID: 350}
-  - component: {fileID: 394}
-  - component: {fileID: 354}
+  - component: {fileID: 262}
+  - component: {fileID: 353}
+  - component: {fileID: 356}
+  - component: {fileID: 404}
+  - component: {fileID: 362}
   m_Layer: 0
   m_Name: AttackRadiusVisual
   m_TagString: Untagged
@@ -304,7 +304,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &259
+--- !u!4 &262
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,10 +315,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 252}
+  m_Father: {fileID: 255}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &347
+--- !u!120 &353
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -481,7 +481,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!198 &350
+--- !u!198 &356
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5085,7 +5085,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &394
+--- !u!114 &404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5097,8 +5097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e972f876a257f542a0ec57c72b7ffa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystem: {fileID: 350}
---- !u!199 &354
+  particleSystem: {fileID: 356}
+--- !u!199 &362
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0

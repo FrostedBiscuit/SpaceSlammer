@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionParticlesPool : ObjectPool<Particles> {
+public class CollisionParticlesPool : ObjectPool<CollisionParticles> {
 
     #region Singelton
     public static CollisionParticlesPool instance = null;

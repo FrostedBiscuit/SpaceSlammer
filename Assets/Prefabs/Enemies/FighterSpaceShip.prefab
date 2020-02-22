@@ -8,11 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 241}
-  - component: {fileID: 389}
-  - component: {fileID: 303}
-  - component: {fileID: 315}
-  - component: {fileID: 337}
+  - component: {fileID: 244}
+  - component: {fileID: 399}
+  - component: {fileID: 309}
+  - component: {fileID: 321}
+  - component: {fileID: 343}
   m_Layer: 0
   m_Name: FighterSpaceShip
   m_TagString: Enemy
@@ -20,7 +20,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &241
+--- !u!4 &244
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31,13 +31,13 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 242}
-  - {fileID: 243}
-  - {fileID: 250}
+  - {fileID: 245}
+  - {fileID: 246}
+  - {fileID: 253}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &389
+--- !u!114 &399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +60,7 @@ MonoBehaviour:
   Damagable: 1
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
-  Source: {fileID: 337}
+  Source: {fileID: 343}
   Sounds:
   - {fileID: 8300000, guid: c3f7a8a0b5d1e7243912eb4f85039d5d, type: 3}
   - {fileID: 8300000, guid: 0a5b62a89b30bf94087cd7c1b76ed07b, type: 3}
@@ -68,9 +68,9 @@ MonoBehaviour:
   SlopeCoefficient: 200
   WanderingSpeed: 50
   FireRate: 0.75
-  ProjectileSpawnPointLeft: {fileID: 243}
-  ProjectileSpawnPointRight: {fileID: 250}
---- !u!50 &303
+  ProjectileSpawnPointLeft: {fileID: 246}
+  ProjectileSpawnPointRight: {fileID: 253}
+--- !u!50 &309
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &315
+--- !u!58 &321
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +107,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.61
---- !u!82 &337
+--- !u!82 &343
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,8 +211,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 242}
-  - component: {fileID: 358}
+  - component: {fileID: 245}
+  - component: {fileID: 368}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -220,7 +220,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &242
+--- !u!4 &245
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,10 +231,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children: []
-  m_Father: {fileID: 241}
+  m_Father: {fileID: 244}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &358
+--- !u!212 &368
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 250}
+  - component: {fileID: 253}
   m_Layer: 0
   m_Name: GunRight
   m_TagString: Untagged
@@ -298,7 +298,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &250
+--- !u!4 &253
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,7 +309,7 @@ Transform:
   m_LocalPosition: {x: 0.4, y: 0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 241}
+  m_Father: {fileID: 244}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &189
@@ -320,7 +320,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 243}
+  - component: {fileID: 246}
   m_Layer: 0
   m_Name: GunLeft
   m_TagString: Untagged
@@ -328,7 +328,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &243
+--- !u!4 &246
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,6 +339,6 @@ Transform:
   m_LocalPosition: {x: -0.4, y: 0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 241}
+  m_Father: {fileID: 244}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
