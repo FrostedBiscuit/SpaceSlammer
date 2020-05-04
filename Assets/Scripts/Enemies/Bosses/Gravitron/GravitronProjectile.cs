@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravitronProjectile : MonoBehaviour {
+public class GravitronProjectile : MonoBehaviour, IDisposable {
 
     [SerializeField]
     float G = 6.67408f;
@@ -55,5 +55,12 @@ public class GravitronProjectile : MonoBehaviour {
 
             Player.instance.TakeDamage(Damage);
         }
+    }
+
+    public void Dispose() {
+
+        CancelInvoke();
+
+        Destroy();
     }
 }

@@ -6,6 +6,7 @@ public class KR2000 : Enemy {
 
     public float WanderingSpeed = 50f;
     public float SlopeCoefficient = 10f;
+    public float RotationRadius = 10f;
     public float RotationAngle = 90f;
     public float RotationDuration = 3f;
     public float RotationCooldown = 1.5f;
@@ -99,6 +100,11 @@ public class KR2000 : Enemy {
 
     private void OnCollisionEnter2D(Collision2D collision) {
 
+        if (Sounds.Length > 0 && SoundManager.instance.PlaySFX == true)
+        {
+            SoundManager.instance.PlayRemoteSFXClip(Sounds[0], transform.position);
+        }
+
         WeakPoint wp = collision.otherCollider.transform.GetComponent<WeakPoint>();
 
         if (wp != null) {
@@ -163,7 +169,9 @@ public class KR2000 : Enemy {
 
         while (endTime > Time.time) {
 
-            transform.RotateAround(playerPos, transform.forward, RotationAngle * (Time.deltaTime / RotationDuration));
+            Vector3 pointToRotateAround = transform.position + ((Player.instance.transform.position - transform.position).normalized * RotationRadius);
+
+            transform.RotateAround(pointToRotateAround, transform.forward, RotationAngle * (Time.deltaTime / RotationDuration));
             
             yield return null;
         }
@@ -181,6 +189,9 @@ public class KR2000 : Enemy {
 
     protected override void OnDrawGizmosSelected() {
         base.OnDrawGizmosSelected();
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, RotationRadius);
 
         if (rigidbody == null) {
             

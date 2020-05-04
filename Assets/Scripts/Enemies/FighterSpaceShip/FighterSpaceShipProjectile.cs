@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FighterSpaceShipProjectile : MonoBehaviour
+public class FighterSpaceShipProjectile : MonoBehaviour, IDisposable
 {
     [SerializeField]
     float Speed = 10f;
@@ -15,6 +15,13 @@ public class FighterSpaceShipProjectile : MonoBehaviour
     AudioClip ShootSound = null;
     [SerializeField]
     AudioClip ImpactSound = null;
+
+    public void Dispose() {
+
+        StopAllCoroutines();
+
+        ProjectilePool.instance.ReturnObject(this);
+    }
 
     // Start is called before the first frame update
     void OnEnable()

@@ -89,7 +89,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Attack() {
 #if UNITY_EDITOR
-        Debug.Log($"{name}'s fight bool: {DEBUG_Fight}");
+        //Debug.Log($"{name}'s fight bool: {DEBUG_Fight}");
 
         if (DEBUG_Fight == false) return;
 #endif

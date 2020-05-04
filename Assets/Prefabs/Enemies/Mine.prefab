@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.13, y: -0.46, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 250}
@@ -51,6 +51,7 @@ MonoBehaviour:
   ExplosionRadius: 3
   Timer: 1.5
   MaxDistanceFromPlayer: 40
+  ExplosionSFX: {fileID: 8300000, guid: a94c5b3bd461f684ba9ec34dbeaab345, type: 3}
 --- !u!58 &325
 CircleCollider2D:
   m_ObjectHideFlags: 0

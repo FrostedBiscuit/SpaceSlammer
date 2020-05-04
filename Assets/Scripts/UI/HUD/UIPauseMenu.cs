@@ -33,6 +33,8 @@ public class UIPauseMenu : MonoBehaviour {
         ConsumablesManager.instance.StopSpawningConsumables();
         ConsumablesManager.instance.ClearConsumables();
 
+        DisposableManager.instance.DisposeAll();
+
         UIManager.instance.ActivateMainMenu();
 
         PlayerManager.instance.SpawnPlayer();

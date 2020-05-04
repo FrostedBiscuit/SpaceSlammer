@@ -12,6 +12,8 @@ public class UIEndScreen : MonoBehaviour {
 
     public void RestartGame() {
 
+        DisposableManager.instance.DisposeAll();
+
         PlayerManager.instance.SpawnPlayer();
 
         UIManager.instance.ActivateHUD();
@@ -30,6 +32,8 @@ public class UIEndScreen : MonoBehaviour {
 
         EnemyManager.instance.EndSpawning();
         EnemyManager.instance.ClearEnemies();
+
+        DisposableManager.instance.DisposeAll();
 
         PlayerManager.instance.SpawnPlayer();
 

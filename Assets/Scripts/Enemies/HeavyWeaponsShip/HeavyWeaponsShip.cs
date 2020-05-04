@@ -57,7 +57,6 @@ public class HeavyWeaponsShip : Enemy
             distanceToPlayer < AttackRange                &&
             Beam.activeSelf == false) {
 
-
             //Debug.Log($"attacking distance to player: {distanceToPlayer}");
             StartCoroutine(attackSequence());
         }

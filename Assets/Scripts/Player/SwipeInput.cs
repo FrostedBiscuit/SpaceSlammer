@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler/*, IEndDragHandler*/{
+public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler {
 
     public float DefaultAccelerationMultiplier = 80f;
     public float MaxAccelerationMultiplier = 120f;
@@ -19,7 +19,7 @@ public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler/*, IEnd
 
         if (Player.instance.gameObject.activeSelf == false) { return; }
 
-        Player.instance.GetRigidbody().velocity = Vector2.zero;
+        Player.instance.Stop();
 
         lastDragPos = eventData.position;
     }
@@ -28,17 +28,8 @@ public class SwipeInput : MonoBehaviour, IBeginDragHandler, IDragHandler/*, IEnd
 
         if (Player.instance.gameObject.activeSelf == false) { return; }
 
-        Player.instance.GetRigidbody().AddForce((Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(lastDragPos)) * accelerationMultiplier);
-        Player.instance.GetRigidbody().velocity = Vector2.ClampMagnitude(Player.instance.GetRigidbody().velocity, Player.instance.Speed);
+        Player.instance.AddForce((Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(lastDragPos)) * accelerationMultiplier);
 
         lastDragPos = eventData.position;
     }
-
-    /*
-    public void OnEndDrag(PointerEventData eventData) {
-
-        if (Player.instance == null) { return; }
-
-        Player.instance.GetRigidbody().AddForce((Camera.main.ScreenToWorldPoint(eventData.position) - Camera.main.ScreenToWorldPoint(beginDragPosition)).normalized * Player.instance.Speed);
-    }*/
 }

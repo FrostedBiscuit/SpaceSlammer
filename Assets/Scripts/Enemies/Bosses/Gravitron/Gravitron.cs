@@ -111,8 +111,6 @@ public class Gravitron : Enemy {
 
         isTargeting = true;
 
-        Debug.Log("Targeting");
-
         for (int i = 0; i < TimesToFire; i++) {
 
             Attack();
@@ -121,7 +119,5 @@ public class Gravitron : Enemy {
         }
 
         isTargeting = false;
-
-        Debug.Log("Not targeting anymore");
     }
 }

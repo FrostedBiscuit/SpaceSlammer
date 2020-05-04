@@ -59,7 +59,9 @@ MonoBehaviour:
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 0}
-  Sounds: []
+  Sounds:
+  - {fileID: 8300000, guid: 745053b4643c6614dba6a19b9dea34ea, type: 3}
+  - {fileID: 8300000, guid: b9bd7972942f91a45af0eb5fda281052, type: 3}
   WanderingSpeed: 50
   SlowDownRate: 5
   TargetTime: 4

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class AgerrothRocket : MonoBehaviour {
+public class AgerrothRocket : MonoBehaviour, IDisposable {
 
     public float BoosterDelay = 3f;
     public float BoosterForce = 500f;
@@ -84,7 +84,7 @@ public class AgerrothRocket : MonoBehaviour {
                 continue;
             }
 
-            if (cols[i].name == "Player") {
+            if (cols[i].tag == "Player") {
                 Player.instance.TakeDamage(Damage);
             }
 
@@ -131,5 +131,12 @@ public class AgerrothRocket : MonoBehaviour {
         yield return new WaitForSeconds(DestroyAfter / 2f);
 
         explode();
+    }
+
+    public void Dispose() {
+
+        StopAllCoroutines();
+
+        Destroy(gameObject);
     }
 }

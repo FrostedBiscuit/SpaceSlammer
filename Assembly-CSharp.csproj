@@ -52,6 +52,9 @@
     <UnityVersion>2018.3.0f2</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2018.3.0f2\Data\Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -83,7 +86,10 @@
     <Compile Include="Assets\Scripts\Enemies\KamikazeShip\KamikazeShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\KamikazeShip\RadiusVisualizer.cs" />
     <Compile Include="Assets\Scripts\Enemies\Mine\Mine.cs" />
+    <Compile Include="Assets\Scripts\Enemies\StunnerShip\StunnerShip.cs" />
+    <Compile Include="Assets\Scripts\Enemies\StunnerShip\StunnerShipProjectile.cs" />
     <Compile Include="Assets\Scripts\Managers\ConsumablesManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\DisposableManager.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
@@ -92,6 +98,7 @@
     <Compile Include="Assets\Scripts\ObjectPools\EnemyPools\FighterSpaceShipPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\EnemyPools\HeavyWeaponsShipPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\EnemyPools\KamikazeShipPool.cs" />
+    <Compile Include="Assets\Scripts\ObjectPools\EnemyPools\StunnerShipPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\OtherPools\SoundSourcePool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\OtherPools\UIEnemyIndicatorPool.cs" />
@@ -102,12 +109,19 @@
     <Compile Include="Assets\Scripts\ObjectPools\PickupAndMinePools\InvincibilityPickupPool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\PickupAndMinePools\MinePool.cs" />
     <Compile Include="Assets\Scripts\ObjectPools\ProjectilePools\ProjectilePool.cs" />
+    <Compile Include="Assets\Scripts\ObjectPools\ProjectilePools\StunnerShipProjectilePool.cs" />
+    <Compile Include="Assets\Scripts\Particles\CollisionParticles.cs" />
+    <Compile Include="Assets\Scripts\Particles\ExplosionParticles.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\PowerUpEffect.cs" />
     <Compile Include="Assets\Scripts\Player\RotatePlayerSprite.cs" />
+    <Compile Include="Assets\Scripts\Player\SlingShotInput.cs" />
     <Compile Include="Assets\Scripts\Player\SwipeInput.cs" />
     <Compile Include="Assets\Scripts\UI\Debug\UIAccelerationInput.cs" />
     <Compile Include="Assets\Scripts\UI\Debug\UIDebugMenuButton.cs" />
+    <Compile Include="Assets\Scripts\UI\EndScreen\UICurrentScoreLabel.cs" />
     <Compile Include="Assets\Scripts\UI\EndScreen\UIEndScreen.cs" />
+    <Compile Include="Assets\Scripts\UI\EndScreen\UIHighScoreLabel.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\HUDConsumableIcons\UIConsumableIcon.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\HUDConsumableIcons\UIDamageBoostIcon.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\HUDConsumableIcons\UIInvincibilityIcon.cs" />
@@ -115,7 +129,6 @@
     <Compile Include="Assets\Scripts\UI\HUD\UIDamageMultiplierLabel.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\UIEnemyIndicator.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\UIPauseMenu.cs" />
-    <Compile Include="Assets\Scripts\UI\HUD\UIUpdateCurrentScore.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\UIUpdateHealthSlider.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\UICollapsablePanel.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\UIFollowPlayer.cs" />
@@ -127,8 +140,7 @@
     <Compile Include="Assets\Scripts\UI\StartScreen\UITapToContinue.cs" />
     <Compile Include="Assets\Scripts\UI\StartScreen\UITip.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
-    <Compile Include="Assets\Scripts\Utility\CollisionParticles.cs" />
-    <Compile Include="Assets\Scripts\Utility\ExplosionParticles.cs" />
+    <Compile Include="Assets\Scripts\Utility\IDisposable.cs" />
     <Compile Include="Assets\Scripts\Utility\SoundSource.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

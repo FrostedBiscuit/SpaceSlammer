@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
     public float MaxHealth = 50f;
     public float ParticleInterval = 1.25f;
 
+    public PowerUpEffect PlayerVFX { get; protected set; }
+
     [SerializeField]
     Rigidbody2D Rigidbody = null;
 
@@ -31,6 +33,8 @@ public class Player : MonoBehaviour {
 
     [HideInInspector]
     public bool CanTakeDamage = true;
+    [HideInInspector]
+    public bool CanMove = true;
 
     // Start is called before the first frame update
     void OnEnable() {
@@ -45,6 +49,8 @@ public class Player : MonoBehaviour {
         CanTakeDamage = true;
 
         Rigidbody.velocity = Vector2.zero;
+
+        PlayerVFX = PlayerVFX == null ? GetComponentInChildren<PowerUpEffect>() : PlayerVFX;
     }
 
     float lastGreatestVelocityMag;
@@ -61,7 +67,7 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate() {
 
-        Rigidbody.velocity = Vector2.ClampMagnitude(Rigidbody.velocity, 80f);
+        Rigidbody.velocity = Vector2.ClampMagnitude(Rigidbody.velocity, Speed);
     }
 
     public void TakeDamage(float dmg) {
@@ -84,8 +90,21 @@ public class Player : MonoBehaviour {
     }
 
     public Rigidbody2D GetRigidbody() {
-
         return Rigidbody;
+    }
+
+    public void AddForce(Vector2 force) {
+
+        if (CanMove == false) { return; }
+
+        Rigidbody.AddForce(force);
+    }
+
+    public void Stop() {
+
+        if (CanMove == false) { return; }
+
+        Rigidbody.velocity = Vector2.zero;
     }
 
     float nextParticleTime;

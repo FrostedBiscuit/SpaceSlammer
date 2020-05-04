@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     public enum Effect {
-        HEAL, DAMAGEBOOST, INVINCIBILITY
+        HEAL, DAMAGEBOOST, INVINCIBILITY, STUN
     }
 
     #region Singelton
@@ -36,8 +36,14 @@ public class PlayerManager : MonoBehaviour {
         SpawnPlayer();
     }
 
+    float invincibilityTime = 0f;
+    float stunnedTime = 0f;
+
     // Update is called once per frame
     void Update() {
+
+        invincibilityTime = Mathf.Clamp(invincibilityTime - Time.deltaTime, 0f, float.MaxValue);
+        stunnedTime = Mathf.Clamp(stunnedTime - Time.deltaTime, 0f, float.MaxValue);
 
         if (Player.instance.gameObject.activeSelf == false) {
             // Player has died, do something
@@ -47,6 +53,20 @@ public class PlayerManager : MonoBehaviour {
             ConsumablesManager.instance.StopSpawningConsumables();
 
             UIManager.instance.ActivateEndScreen();
+        }
+        else {
+
+            Player.instance.CanTakeDamage = invincibilityTime > 0f ? false : true;
+            Player.instance.CanMove = stunnedTime > 0f ? false : true;
+
+            if (Player.instance.CanTakeDamage == false) {
+
+                UIInvincibilityIcon.instance.Activate();
+            }
+            else {
+
+                UIInvincibilityIcon.instance?.Deactivate();
+            }
         }
     }
 
@@ -72,7 +92,7 @@ public class PlayerManager : MonoBehaviour {
         PlayerGO.SetActive(false);
     }
 
-    public void ApplyEffect(Effect effect, float amount, float duration = 0f) {
+    public void ApplyEffect(Effect effect, float amount = 0f, float duration = 0f) {
 
         switch(effect) {
             case Effect.DAMAGEBOOST:
@@ -82,7 +102,10 @@ public class PlayerManager : MonoBehaviour {
                 Player.instance.Health += amount;
             break;
             case Effect.INVINCIBILITY:
-                StartCoroutine(playerInvincibleForSeconds(duration));
+                playerInvincibleForSeconds(duration);
+            break;
+            case Effect.STUN:
+                playerStunnedForSeconds(duration);
             break;
         }
     }
@@ -92,6 +115,7 @@ public class PlayerManager : MonoBehaviour {
         UIDamageBoostIcon.instance.Activate();
 
         Player.instance.DamageMultiplier += amount;
+        Player.instance.PlayerVFX.Enable(Effect.DAMAGEBOOST, duration);
 
         yield return new WaitForSeconds(duration);
 
@@ -104,20 +128,15 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    IEnumerator playerInvincibleForSeconds(float duration) {
+    void playerInvincibleForSeconds(float duration) {
 
-        UIInvincibilityIcon.instance.Activate();
+        invincibilityTime += duration;
 
-        Player.instance.CanTakeDamage = false;
+        Player.instance.PlayerVFX.Enable(Effect.INVINCIBILITY, duration);
+    }
 
-        Debug.Log("invincibility started");
+    void playerStunnedForSeconds(float duration) {
 
-        yield return new WaitForSeconds(duration);
-
-        Player.instance.CanTakeDamage = true;
-
-        Debug.Log("invincibility wore off");
-
-        UIInvincibilityIcon.instance.Deactivate();
+        stunnedTime += duration;
     }
 }

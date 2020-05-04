@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class KR2000Projectile : MonoBehaviour {
+public class KR2000Projectile : MonoBehaviour, IDisposable {
 
     public float DestroyAfter = 3f;
     public float Speed = 10f;
@@ -50,6 +50,13 @@ public class KR2000Projectile : MonoBehaviour {
     IEnumerator destroyAfter(float time) {
 
         yield return new WaitForSeconds(time);
+
+        Destroy(gameObject);
+    }
+
+    public void Dispose() {
+
+        StopAllCoroutines();
 
         Destroy(gameObject);
     }

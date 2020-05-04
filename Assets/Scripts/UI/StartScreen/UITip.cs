@@ -8,7 +8,9 @@ public class UITip : MonoBehaviour {
 
     [System.Serializable]
     public class Tip {
+        [TextArea]
         public string TipText;
+
         public Sprite TipSprite;
     }
 

@@ -15,6 +15,9 @@ public class Mine : MonoBehaviour {
     [SerializeField]
     private float MaxDistanceFromPlayer = 40f;
 
+    [SerializeField]
+    private AudioClip ExplosionSFX = null;
+
     private float distanceCheckInterval = 5f;
 
     private Action<Mine> mineExplosionCallback;
@@ -89,6 +92,9 @@ public class Mine : MonoBehaviour {
         }
 
         ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
+
+        // Play SFX
+        SoundSourcePool.instance.RequestObject(transform.position, transform.rotation).GetComponent<SoundSource>().Play(ExplosionSFX);
 
         MinePool.instance.ReturnObject(this);
     }
