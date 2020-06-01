@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class ScoreManager : MonoBehaviour {
 
@@ -21,8 +20,6 @@ public class ScoreManager : MonoBehaviour {
     }
     #endregion
 
-    public TextMeshProUGUI score;
-
     int currScore;
     int highScore;
 
@@ -39,11 +36,6 @@ public class ScoreManager : MonoBehaviour {
             highScore = 0;
         }
      }
-
-    void Update() {
-
-        score.text = currScore.ToString();
-    }
 
     public int GetHighScore() {
 

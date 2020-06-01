@@ -111,7 +111,7 @@ public class Agerroth : Enemy {
             }
             else if (onDodgeCooldown == false) {
 
-                force = -(BackoffRange - distanceToPlayer) * (SlopeCoefficient * 100f);
+                force = -(BackoffRange - distanceToPlayer) * (SlopeCoefficient * 20f);
 
                 // Dodge timing and counting
                 if (lastDodgeTime < Time.time) {

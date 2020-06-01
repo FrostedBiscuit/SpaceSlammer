@@ -21,7 +21,7 @@ public class StunnerShip : Enemy {
     Transform ProjectileLauncher;
 
     [SerializeField]
-    Animator Animator;
+    Animator Animator = null;
 
     float lastShot;
 

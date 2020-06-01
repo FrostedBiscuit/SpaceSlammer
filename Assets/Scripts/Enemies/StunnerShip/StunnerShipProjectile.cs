@@ -13,6 +13,8 @@ public class StunnerShipProjectile : MonoBehaviour, IDisposable {
     float StunRadius = 3f;
     [SerializeField]
     float StunDuration = 3f;
+    [SerializeField]
+    float Damage = 15f;
 
     [SerializeField]
     AudioClip ExplosionSFX = null;
@@ -66,7 +68,15 @@ public class StunnerShipProjectile : MonoBehaviour, IDisposable {
 
             if (cols[i].tag == "Player") {
 
+                Player.instance.TakeDamage(Damage);
+
+                CameraShake.instance.Shake();
+
                 PlayerManager.instance.ApplyEffect(PlayerManager.Effect.STUN, duration: StunDuration);
+            }
+            else if (cols[i].tag == "Enemy")
+            {
+                cols[i].transform.GetComponent<Enemy>().TakeDamage(Damage);
             }
         }
 

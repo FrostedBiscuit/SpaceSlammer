@@ -47,8 +47,10 @@ MonoBehaviour:
   VFX:
   - EffectType: 1
     EffectSprite: {fileID: 21300000, guid: e0a66c79d8e915148b26599976ab7ada, type: 3}
+    IsRunning: 0
   - EffectType: 2
     EffectSprite: {fileID: 21300000, guid: a34f1f134b1d8854c89cdbbeeb7c2ccc, type: 3}
+    IsRunning: 0
 --- !u!212 &7169891241149403767
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -153,6 +155,7 @@ MonoBehaviour:
   Health: 0
   DamageMultiplier: 1
   CanTakeDamage: 1
+  CanMove: 1
 --- !u!50 &6698449171826953434
 Rigidbody2D:
   serializedVersion: 4
@@ -279,7 +282,7 @@ SpriteRenderer:
   m_SortingLayerID: 665122077
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a3f54915c722bc0409be41039f541f8b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ea0e233ba89d77459c5956d6e0de7d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -358,8 +361,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key0: {r: 0.007843138, g: 0.45882356, b: 0.45882356, a: 1}
+      key1: {r: 0.007843138, g: 0.45882356, b: 0.45882356, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -406,3 +409,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54065b35149857744b05c6f7dd8d19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerRB: {fileID: 0}

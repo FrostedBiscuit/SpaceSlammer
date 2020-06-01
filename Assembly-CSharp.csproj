@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraZoom.cs" />
     <Compile Include="Assets\Scripts\Camera\ParallaxBackground.cs" />
     <Compile Include="Assets\Scripts\Consumables\Consumable.cs" />
@@ -119,9 +120,9 @@
     <Compile Include="Assets\Scripts\Player\SwipeInput.cs" />
     <Compile Include="Assets\Scripts\UI\Debug\UIAccelerationInput.cs" />
     <Compile Include="Assets\Scripts\UI\Debug\UIDebugMenuButton.cs" />
-    <Compile Include="Assets\Scripts\UI\EndScreen\UICurrentScoreLabel.cs" />
     <Compile Include="Assets\Scripts\UI\EndScreen\UIEndScreen.cs" />
-    <Compile Include="Assets\Scripts\UI\EndScreen\UIHighScoreLabel.cs" />
+    <Compile Include="Assets\Scripts\UI\General\UICurrentScoreLabel.cs" />
+    <Compile Include="Assets\Scripts\UI\General\UIHighScoreLabel.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\HUDConsumableIcons\UIConsumableIcon.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\HUDConsumableIcons\UIDamageBoostIcon.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\HUDConsumableIcons\UIInvincibilityIcon.cs" />
@@ -134,9 +135,9 @@
     <Compile Include="Assets\Scripts\UI\MainMenu\UIFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\UIPlayButton.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\UISkinMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\UISocialLinks.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\UIToggleScoreButton.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\UIToggleSwitch.cs" />
-    <Compile Include="Assets\Scripts\UI\MainMenu\UIUpdateHighScore.cs" />
     <Compile Include="Assets\Scripts\UI\StartScreen\UITapToContinue.cs" />
     <Compile Include="Assets\Scripts\UI\StartScreen\UITip.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />

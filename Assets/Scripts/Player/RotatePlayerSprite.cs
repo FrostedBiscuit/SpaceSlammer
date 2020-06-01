@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotatePlayerSprite : MonoBehaviour {
 
     [SerializeField]
-    Rigidbody2D PlayerRB;
+    Rigidbody2D PlayerRB = null;
 
     private void OnEnable() {
 

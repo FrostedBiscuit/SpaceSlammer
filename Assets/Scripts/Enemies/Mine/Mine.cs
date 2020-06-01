@@ -94,7 +94,10 @@ public class Mine : MonoBehaviour {
         ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
 
         // Play SFX
-        SoundSourcePool.instance.RequestObject(transform.position, transform.rotation).GetComponent<SoundSource>().Play(ExplosionSFX);
+        if (SoundManager.instance.PlaySFX)
+        {
+            SoundSourcePool.instance.RequestObject(transform.position, transform.rotation).GetComponent<SoundSource>().Play(ExplosionSFX);
+        }
 
         MinePool.instance.ReturnObject(this);
     }
