@@ -165,7 +165,7 @@ MonoBehaviour:
   AttackRange: 20
   RotationSmoothing: 5
   MaxDistanceFromPlayer: 30
-  ScoreValue: 60
+  ScoreValue: 130
   LookAtPlayerOnSpawn: 1
   Damagable: 1
   DEBUG_Fight: 1

@@ -118,7 +118,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.2.3 - pre release
+  bundleVersion: 0.2.5 - pre release
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -245,7 +245,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 2800000, guid: e306dad6794786944bc447659d964173, type: 3}
-  AndroidKeystoreName: D:/Personal/Documents/AndroidKeystore/user.keystore
+  AndroidKeystoreName: D:/Personal/Documents/AndroidKeystore/frost.keystore
   AndroidKeyaliasName: spaceslammer
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1

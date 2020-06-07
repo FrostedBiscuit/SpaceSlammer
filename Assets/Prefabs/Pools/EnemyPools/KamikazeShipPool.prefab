@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NumToSpawn: 5
-  PooledObject: {fileID: 487, guid: 62f9703242603784087fdab26fd75c94, type: 3}
+  PooledObject: {fileID: 498, guid: 62f9703242603784087fdab26fd75c94, type: 3}

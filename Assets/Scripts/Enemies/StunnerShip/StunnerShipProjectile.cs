@@ -82,6 +82,8 @@ public class StunnerShipProjectile : MonoBehaviour, IDisposable {
 
         // TODO: make and spawn explosion partilces
 
+        transform.SetParent(StunnerShipProjectilePool.instance.transform);
+
         StunnerShipProjectilePool.instance.ReturnObject(this);
     }
 
