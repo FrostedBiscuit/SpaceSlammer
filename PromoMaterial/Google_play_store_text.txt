@@ -1,0 +1,9 @@
+Title: 
+SpaceSlammer
+
+Short desc.:
+SpaceSlammer is a top down game about bashing the heck out of earthian ships with your own UFO.
+
+Long desc.:
+SpaceSlammer is a 2D, top down, wave survival game where you are tasked with achieving the highest score possible. The way to get score is to either destory enemy ships or survive as long as possible.
+There are currently 4 different types of normal enemies in the game along with 4 bosses which spawn every 4th round.
