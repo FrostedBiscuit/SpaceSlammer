@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Agerroth : Enemy {
@@ -135,7 +134,7 @@ public class Agerroth : Enemy {
 
             rigidbody.AddForce(transform.up * force * Time.fixedDeltaTime);
 
-            Debug.DrawRay(transform.position, transform.up * force * Time.fixedDeltaTime);
+            //Debug.DrawRay(transform.position, transform.up * force * Time.fixedDeltaTime);
         }
 
     }

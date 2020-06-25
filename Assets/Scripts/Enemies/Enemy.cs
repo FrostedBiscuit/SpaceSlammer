@@ -164,7 +164,11 @@ public abstract class Enemy : MonoBehaviour
 
         Vector3 dir = (pointOfInterest - transform.position).normalized;
 
-        rigidbody.MoveRotation(Mathf.LerpAngle(rigidbody.rotation, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f, Time.deltaTime * RotationSmoothing));//= Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f), Time.deltaTime * RotationSmoothing);
+        float calculatedSmoothing = RotationSmoothing * Mathf.Clamp01(distanceToPlayer / AttackRange);
+
+        //Debug.Log($"Rotation smoothing: {RotationSmoothing}, calculated rotation smoothing: {calculatedSmoothing}");
+
+        rigidbody.MoveRotation(Mathf.LerpAngle(rigidbody.rotation, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f, Time.deltaTime * calculatedSmoothing));//= Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f), Time.deltaTime * RotationSmoothing);
     }
 
     float currentPointOfInterestTime;
