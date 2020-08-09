@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KamikazeShip : Enemy {
-
+public class KamikazeShip : Enemy 
+{
     public float BombTimer = 3f;
     public float FocusTimer = 3f;
     public float Speed = 30f;
@@ -20,18 +20,21 @@ public class KamikazeShip : Enemy {
     [SerializeField]
     RadiusVisualizer ExplosionRadiusCircle = null;
 
-    public override void Dispose() {
-
+    public override void Dispose() 
+    {
         KamikazeShipPool.instance.ReturnObject(this);
     }
 
-    protected override void OnEnable() {
+    protected override void OnEnable() 
+    {
         base.OnEnable();
 
-        if (ExplosionRadiusCircle == null) {
+        if (ExplosionRadiusCircle == null) 
+        {
             Debug.LogError("KamikazeShip::OnEnable() => No RadiusVisualizer found!!!");
         }
-        else {
+        else 
+        {
             ExplosionRadiusCircle.SetColor(PassiveCircleColor);
             ExplosionRadiusCircle.SetRange(AttackRange);
         }
@@ -40,9 +43,10 @@ public class KamikazeShip : Enemy {
         hot = false;
     }
 
-    protected override void FixedUpdate() {
-
-        if (hot == true) {
+    protected override void FixedUpdate() 
+    {
+        if (hot == true) 
+        {
             return;
         }
 
@@ -51,17 +55,19 @@ public class KamikazeShip : Enemy {
         move();
     }
 
-    protected override void Update() {
-
-        if (hot == true) {
+    protected override void Update() 
+    {
+        if (hot == true) 
+        {
             return;
         }
 
-        if (distanceToPlayer <= AttackRange && focusingTarget == false) {
-
+        if (distanceToPlayer <= AttackRange && focusingTarget == false) 
+        {
             focusingTarget = true;
 
-            if (ExplosionRadiusCircle != null) {
+            if (ExplosionRadiusCircle != null) 
+            {
                 ExplosionRadiusCircle.SetColor(AimingCircleColor);
             }
 
@@ -71,21 +77,25 @@ public class KamikazeShip : Enemy {
         }
     }
 
-    protected override void CheckForReposition() {
-
-        if (hot == false) {
+    protected override void CheckForReposition() 
+    {
+        if (hot == false) 
+        {
             base.CheckForReposition();
         }
     }
 
-    protected override void Attack() {
+    protected override void Attack() 
+    {
         base.Attack();
 
-        if (hot == true) {
+        if (hot == true)
+        {
             return;
         }
 
-        if (ExplosionRadiusCircle != null) {
+        if (ExplosionRadiusCircle != null)
+        {
             ExplosionRadiusCircle.SetColor(HotCircleColor);
         }
 
@@ -101,7 +111,8 @@ public class KamikazeShip : Enemy {
         Invoke("explode", BombTimer);
     }
 
-    protected override void Die() {
+    protected override void Die()
+    {
         base.Die();
 
         ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
@@ -109,31 +120,32 @@ public class KamikazeShip : Enemy {
         KamikazeShipPool.instance.ReturnObject(this);
     }
 
-    private void move() {
-        
-        if (focusingTarget == false) { 
-            
+    private void move() 
+    {        
+        if (focusingTarget == false)
+        { 
             rigidbody.AddForce(transform.up * Speed * Time.fixedDeltaTime);
         }
 
         rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Speed);
     }
 
-    private void explode() {
-
+    private void explode() 
+    {
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
 
-        for (int i = 0; i < cols.Length; i++) {
-
-            if (cols[i].transform.tag == "Player") {
+        for (int i = 0; i < cols.Length; i++) 
+        {
+            if (cols[i].transform.tag == "Player") 
+            {
                 Player.instance.TakeDamage(AttackDamage);
             }
-            else if (cols[i] != null) {
-
+            else if (cols[i] != null) 
+            {
                 Enemy e = cols[i].gameObject.GetComponent<Enemy>();
 
-                if (e != null) {
-
+                if (e != null) 
+                {
                     e.TakeDamage(AttackDamage);
                 }
             }
@@ -142,29 +154,36 @@ public class KamikazeShip : Enemy {
         Die();
     }
 
-    private void OnCollisionEnter2D() {
+    private void OnCollisionEnter2D() 
+    {
+        if (hot == false) 
+        {
+            if (Sounds.HasSounds)
+            {
+                SoundManager.instance.PlayRemoteSFXClip(Sounds.RandomImpactSound, transform.position);
+            }
 
-        if (hot == false) {
             return;
         }
 
-        if (Sounds.Length > 0 && SoundManager.instance.PlaySFX == true) {
-
-            SoundManager.instance.PlayRemoteSFXClip(Sounds[0], transform.position);
+        if (Sounds.HasSounds && SoundManager.instance.PlaySFX == true) 
+        {
+            SoundManager.instance.PlayRemoteSFXClip(Sounds.RandomExplosionSound, transform.position);
         }
 
         explode();
     }
 
-    protected override void OnDrawGizmosSelected() {
-
+    protected override void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, ExplosionRadius);
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, AttackRange);
 
-        if (rigidbody == null) {
+        if (rigidbody == null) 
+        {
             return;
         }
 

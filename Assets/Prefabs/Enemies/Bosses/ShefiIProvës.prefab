@@ -60,7 +60,14 @@ MonoBehaviour:
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 0}
-  Sounds: []
+  Sounds:
+    ImpactSounds:
+    - {fileID: 8300000, guid: 3ceb484d7b68bdb43a49621a8a558243, type: 3}
+    - {fileID: 8300000, guid: bb1d53de16b364d449aee4a2cd810c05, type: 3}
+    ExplosionSounds:
+    - {fileID: 8300000, guid: f1a0158f634216b438c2ba8ac7c8aa07, type: 3}
+    - {fileID: 8300000, guid: 368e8d54544dc7040930893ece259784, type: 3}
+    - {fileID: 8300000, guid: 02f3e6aa1ca69bf49910ea857b403e2c, type: 3}
   FireRate: 0.5
   SlopeMultiplier: 0.5
   BackoffRange: 4

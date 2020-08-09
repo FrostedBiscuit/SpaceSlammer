@@ -51,7 +51,13 @@ MonoBehaviour:
   ExplosionRadius: 3
   Timer: 1.5
   MaxDistanceFromPlayer: 40
-  ExplosionSFX: {fileID: 8300000, guid: a94c5b3bd461f684ba9ec34dbeaab345, type: 3}
+  ExplosionSFX:
+  - {fileID: 8300000, guid: ccf544e558b3a4043bc3e88c9ed454bf, type: 3}
+  - {fileID: 8300000, guid: 4e8d0af4bb80d0f4da2e095a6b32b26d, type: 3}
+  - {fileID: 8300000, guid: 28d0590d0f4051c4291c6e90cb7fdd64, type: 3}
+  - {fileID: 8300000, guid: d8fee6dad3d197949ad2048190e952b4, type: 3}
+  - {fileID: 8300000, guid: 1fc3b718df754ab418a3fbec9c30d874, type: 3}
+  - {fileID: 8300000, guid: ca496f61d81f7b84dbd5403b2804349e, type: 3}
 --- !u!58 &404
 CircleCollider2D:
   m_ObjectHideFlags: 0

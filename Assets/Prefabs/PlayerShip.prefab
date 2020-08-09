@@ -151,8 +151,11 @@ MonoBehaviour:
   FollowSpeed: 15
   MaxHealth: 100
   ParticleInterval: 1.25
+  ExplosionSounds:
+  - {fileID: 8300000, guid: 31e5fd421c47f9c4f9889a07a1b37b31, type: 3}
+  - {fileID: 8300000, guid: f41b0c1ec90677b4bb92b5a831153db6, type: 3}
+  - {fileID: 8300000, guid: 1fc3b718df754ab418a3fbec9c30d874, type: 3}
   Rigidbody: {fileID: 6698449171826953434}
-  Health: 0
   DamageMultiplier: 1
   CanTakeDamage: 1
   CanMove: 1

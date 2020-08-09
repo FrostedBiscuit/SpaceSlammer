@@ -12,9 +12,9 @@ public class FighterSpaceShipProjectile : MonoBehaviour, IDisposable
     float DestroyAfter = 5f;
 
     [SerializeField]
-    AudioClip ShootSound = null;
+    AudioClip[] ShootSounds = null;
     [SerializeField]
-    AudioClip ImpactSound = null;
+    AudioClip[] ImpactSounds = null;
 
     public void Dispose() {
 
@@ -28,7 +28,12 @@ public class FighterSpaceShipProjectile : MonoBehaviour, IDisposable
     {
         GetComponent<Rigidbody2D>().AddForce(transform.up * Speed, ForceMode2D.Force);
 
-        SoundManager.instance.PlayRemoteSFXClip(ShootSound, transform.position);
+        if (ShootSounds.Length > 0)
+        {
+            var randomShootSoundIndex = Random.Range(0, ShootSounds.Length);
+
+            SoundManager.instance.PlayRemoteSFXClip(ShootSounds[randomShootSoundIndex], transform.position);
+        }
 
         StartCoroutine(SelfDestruct(DestroyAfter));
     }
@@ -41,7 +46,12 @@ public class FighterSpaceShipProjectile : MonoBehaviour, IDisposable
 
         if (collider.isTrigger == false) {
 
-            SoundManager.instance.PlayRemoteSFXClip(ImpactSound, transform.position);
+            if (ImpactSounds.Length > 0)
+            {
+                var randomImpactSoundIndex = Random.Range(0, ImpactSounds.Length);
+
+                SoundManager.instance.PlayRemoteSFXClip(ImpactSounds[randomImpactSoundIndex], transform.position);
+            }
 
             StopCoroutine(SelfDestruct(DestroyAfter));
 

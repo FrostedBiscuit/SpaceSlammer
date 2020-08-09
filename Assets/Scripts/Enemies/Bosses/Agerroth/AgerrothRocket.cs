@@ -11,7 +11,7 @@ public class AgerrothRocket : MonoBehaviour, IDisposable {
     public float ExplosionRadius = 3f;
     public float RotationSmoothing = 2f;
 
-    public AudioClip BoosterSFX = null;
+    public AudioClip[] BoosterSFX;
     public AudioClip[] ExplosionsSFX;
 
     public ParticleSystem ExhaustParticles = null;
@@ -26,8 +26,8 @@ public class AgerrothRocket : MonoBehaviour, IDisposable {
     private bool agerrothProtected = true;
 
     // Start is called before the first frame update
-    void Start() {
-
+    void Start() 
+    {
         rigidbody = GetComponent<Rigidbody2D>();
 
         StartCoroutine(startBoosters());
@@ -35,9 +35,11 @@ public class AgerrothRocket : MonoBehaviour, IDisposable {
 
     bool flying = false;
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    { 
 
-        if (Player.instance == null) {
+        if (Player.instance == null) 
+        {
             return;
         }
 
@@ -45,32 +47,34 @@ public class AgerrothRocket : MonoBehaviour, IDisposable {
 
         rigidbody.MoveRotation(Mathf.LerpAngle(rigidbody.rotation, (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90f, Time.fixedDeltaTime * RotationSmoothing));
 
-        if (flying == true) {
+        if (flying == true) 
+        {
             rigidbody.AddForce(transform.up * BoosterForce);
         }
 
         RotationSmoothing = Mathf.Lerp(RotationSmoothing, 0f, Time.fixedDeltaTime / (BoosterDelay + DestroyAfter));
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        
-        if (collision.isTrigger == false && (collision.transform.GetComponent<Agerroth>() == null || agerrothProtected == false)) {
+    private void OnTriggerEnter2D(Collider2D collision) 
+    {
+        if (collision.isTrigger == false && (collision.transform.GetComponent<Agerroth>() == null || agerrothProtected == false)) 
+        {
             explode();
         }
     }
 
-    private void OnDrawGizmosSelected() {
-
+    private void OnDrawGizmosSelected() 
+    {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, ExplosionRadius);
     }
 
-    void explode() {
-
+    void explode() 
+    {
         CollisionParticlesPool.instance.RequestObject(transform.position, Quaternion.identity);
 
-        if (SoundManager.instance.PlaySFX) {
-
+        if (SoundManager.instance.PlaySFX) 
+        {
             int randomExplosionSFXIndex = Random.Range(0, ExplosionsSFX.Length);
 
             SoundSourcePool.instance.RequestObject(transform.position, transform.rotation).Play(ExplosionsSFX[randomExplosionSFXIndex]);
@@ -78,27 +82,29 @@ public class AgerrothRocket : MonoBehaviour, IDisposable {
 
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
 
-        for (int i = 0; i < cols.Length; i++) {
-
-            if (cols[i].name == name) {
+        for (int i = 0; i < cols.Length; i++) 
+        {
+            if (cols[i].name == name) 
+            {
                 continue;
             }
 
-            if (cols[i].tag == "Player") {
+            if (cols[i].tag == "Player") 
+            {
                 Player.instance.TakeDamage(Damage);
             }
 
             Enemy e = cols[i].GetComponent<Enemy>();
 
-            if (e != null) {
-
+            if (e != null) 
+            {
                 e.TakeDamage(Damage);
             }
 
             Rigidbody2D colRB = cols[i].GetComponent<Rigidbody2D>();
 
-            if (colRB != null) {
-
+            if (colRB != null) 
+            {
                 colRB.AddForce((cols[i].transform.position - transform.position).normalized * Damage);
             }
         }
@@ -106,24 +112,26 @@ public class AgerrothRocket : MonoBehaviour, IDisposable {
         Destroy(gameObject);
     }
  
-    IEnumerator startBoosters() {
-
+    IEnumerator startBoosters() 
+    {
         yield return new WaitForSeconds(BoosterDelay);
 
         ExhaustParticles.Play();
 
         flying = true;
 
-        if (SoundManager.instance.PlaySFX == true) {
+        if (SoundManager.instance.PlaySFX == true && BoosterSFX.Length > 0) 
+        {
+            var randomBoosterSFX = Random.Range(0, BoosterSFX.Length);
 
-            audioSource.PlayOneShot(BoosterSFX);
+            audioSource.PlayOneShot(BoosterSFX[randomBoosterSFX]);
         }
 
         StartCoroutine(destroyAfter());
     }
 
-    IEnumerator destroyAfter() {
-
+    IEnumerator destroyAfter() 
+    {
         yield return new WaitForSeconds(DestroyAfter / 2f);
 
         agerrothProtected = false;
@@ -133,8 +141,8 @@ public class AgerrothRocket : MonoBehaviour, IDisposable {
         explode();
     }
 
-    public void Dispose() {
-
+    public void Dispose() 
+    {
         StopAllCoroutines();
 
         Destroy(gameObject);

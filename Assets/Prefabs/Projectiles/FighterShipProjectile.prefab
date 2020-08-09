@@ -87,8 +87,16 @@ MonoBehaviour:
   Speed: 500
   Damage: 15
   DestroyAfter: 5
-  ShootSound: {fileID: 8300000, guid: a89a3e74cd555954381c725ddd44d7f9, type: 3}
-  ImpactSound: {fileID: 8300000, guid: e583fb7ffa48f834cb5acc8332d03164, type: 3}
+  ShootSounds:
+  - {fileID: 8300000, guid: 4ed31dc86c8816446a3f2aff23b1074f, type: 3}
+  - {fileID: 8300000, guid: 6174b17bcd3ee2c44b40fbf300bf5112, type: 3}
+  - {fileID: 8300000, guid: 9f4ab430e7166ca4bb72ab1fa210265e, type: 3}
+  - {fileID: 8300000, guid: 9efe0471e7fd12346a8beab318492952, type: 3}
+  - {fileID: 8300000, guid: a770d1bc4f32ac64dafd9a957cc23c2a, type: 3}
+  ImpactSounds:
+  - {fileID: 8300000, guid: f8e6468180202dd4b810bb0dfaeed5f3, type: 3}
+  - {fileID: 8300000, guid: e08205af013a2964a92f2b985f0c1476, type: 3}
+  - {fileID: 8300000, guid: 487744e55d2fe7344b5242c8108453bd, type: 3}
 --- !u!82 &430
 AudioSource:
   m_ObjectHideFlags: 0

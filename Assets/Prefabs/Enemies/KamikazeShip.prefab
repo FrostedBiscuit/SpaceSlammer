@@ -243,10 +243,11 @@ MonoBehaviour:
   Damagable: 1
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
-  Source: {fileID: 429}
   Sounds:
-  - {fileID: 8300000, guid: 744c0f266633db846a8e271e51c80eb4, type: 3}
-  - {fileID: 8300000, guid: e583fb7ffa48f834cb5acc8332d03164, type: 3}
+    ImpactSounds:
+    - {fileID: 8300000, guid: fb84267ddb45ec549a2aaaf5dcedcda5, type: 3}
+    ExplosionSounds:
+    - {fileID: 8300000, guid: a3e799bebc281594ea99d91bfa1dd63e, type: 3}
   BombTimer: 0.5
   FocusTimer: 1
   Speed: 100

@@ -8,37 +8,41 @@ public class KR2000Projectile : MonoBehaviour, IDisposable {
     public float DestroyAfter = 3f;
     public float Speed = 10f;
 
-    public AudioClip ShootSound;
-    public AudioClip ImpactSound;
+    public AudioClip[] ShootSounds;
+    public AudioClip[] ImpactSounds;
 
     [HideInInspector]
     public float Damage;
 
     // Start is called before the first frame update
-    void Start() {
-
+    void Start() 
+    {
         GetComponent<Rigidbody2D>().AddForce(transform.up * Speed, ForceMode2D.Force);
 
-        if (ShootSound != null) {
+        if (ShootSounds.Length > 0) 
+        {
+            var randomShootSoundIndex = Random.Range(0, ShootSounds.Length);
 
-            SoundManager.instance.PlayRemoteSFXClip(ShootSound, transform.position);
+            SoundManager.instance.PlayRemoteSFXClip(ShootSounds[randomShootSoundIndex], transform.position);
         }
 
         StartCoroutine(destroyAfter(DestroyAfter));
     }
 
-    private void OnTriggerEnter2D(Collider2D collider) {
-
-        if (collider.tag == "Player") {
-
+    private void OnTriggerEnter2D(Collider2D collider) 
+    {
+        if (collider.tag == "Player") 
+        {
             Player.instance.TakeDamage(Damage);
         }
 
-        if (collider.isTrigger == false) {
+        if (collider.isTrigger == false) 
+        {
+            if (ImpactSounds != null) 
+            {
+                var randomImpactIndex = Random.Range(0, ImpactSounds.Length);
 
-            if (ImpactSound != null) {
-
-                SoundManager.instance.PlayRemoteSFXClip(ImpactSound, transform.position);
+                SoundManager.instance.PlayRemoteSFXClip(ImpactSounds[randomImpactIndex], transform.position);
             }
 
             StopAllCoroutines();
@@ -47,15 +51,15 @@ public class KR2000Projectile : MonoBehaviour, IDisposable {
         }
     }
 
-    IEnumerator destroyAfter(float time) {
-
+    IEnumerator destroyAfter(float time) 
+    {
         yield return new WaitForSeconds(time);
 
         Destroy(gameObject);
     }
 
-    public void Dispose() {
-
+    public void Dispose() 
+    {
         StopAllCoroutines();
 
         Destroy(gameObject);

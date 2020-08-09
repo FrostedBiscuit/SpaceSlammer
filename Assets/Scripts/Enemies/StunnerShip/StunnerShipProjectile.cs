@@ -17,26 +17,38 @@ public class StunnerShipProjectile : MonoBehaviour, IDisposable {
     float Damage = 15f;
 
     [SerializeField]
-    AudioClip ExplosionSFX = null;
+    AudioClip[] ShotSFX = null;
+    [SerializeField]
+    AudioClip[] ExplosionSFX = null;
+
+    [SerializeField]
+    AudioSource Source;
 
     bool isFlying = false;
 
-    private void OnEnable() {
+    private void OnEnable() 
+    {
+        if (SoundManager.instance.PlaySFX && ShotSFX.Length > 0)
+        {
+            var randomShotSound = Random.Range(0, ShotSFX.Length);
+
+            Source.PlayOneShot(ShotSFX[randomShotSound]);
+        }
 
         isFlying = false;
 
         StartCoroutine(DestroyAfter());
     }
 
-    IEnumerator DestroyAfter() {
-
+    IEnumerator DestroyAfter() 
+    {
         yield return new WaitForSeconds(ProjectileLifetime);
 
         Explode();
     }
 
-    public void Boost() {
-
+    public void Boost() 
+    {
         isFlying = true;
 
         transform.parent = null;
@@ -44,9 +56,10 @@ public class StunnerShipProjectile : MonoBehaviour, IDisposable {
         GetComponent<Rigidbody2D>().velocity = transform.up * Speed;
     }
 
-    private void OnTriggerEnter2D() {
-
-        if (isFlying == false) {
+    private void OnTriggerEnter2D() 
+    {
+        if (isFlying == false) 
+        {
             return;
         }
 
@@ -55,19 +68,21 @@ public class StunnerShipProjectile : MonoBehaviour, IDisposable {
         Explode();
     }
 
-    private void Explode() {
-
-        if (SoundManager.instance.PlaySFX)
+    private void Explode() 
+    {
+        if (SoundManager.instance.PlaySFX && ExplosionSFX.Length > 0)
         {
-            SoundSourcePool.instance.RequestObject(transform.position, transform.rotation).GetComponent<SoundSource>().Play(ExplosionSFX);
+            var randomExplosionSFX = Random.Range(0, ExplosionSFX.Length);
+
+            SoundSourcePool.instance.RequestObject(transform.position, transform.rotation).GetComponent<SoundSource>().Play(ExplosionSFX[randomExplosionSFX]);
         }
 
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, StunRadius);
 
-        for (int i = 0; i < cols.Length; i++) {
-
-            if (cols[i].tag == "Player") {
-
+        for (int i = 0; i < cols.Length; i++) 
+        {
+            if (cols[i].tag == "Player") 
+            {
                 Player.instance.TakeDamage(Damage);
 
                 CameraShake.instance.Shake();
@@ -87,15 +102,15 @@ public class StunnerShipProjectile : MonoBehaviour, IDisposable {
         StunnerShipProjectilePool.instance.ReturnObject(this);
     }
 
-    public void Dispose() {
-
+    public void Dispose() 
+    {
         StopAllCoroutines();
 
         StunnerShipProjectilePool.instance.ReturnObject(this);
     }
 
-    private void OnDrawGizmosSelected() {
-
+    private void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, StunRadius);
     }

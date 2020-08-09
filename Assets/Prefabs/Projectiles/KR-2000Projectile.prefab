@@ -128,8 +128,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyAfter: 3
   Speed: 1000
-  ShootSound: {fileID: 8300000, guid: 87260285f867532488fe7d97139171f2, type: 3}
-  ImpactSound: {fileID: 8300000, guid: a510af8ef7140e74f800e83713d64f40, type: 3}
+  ShootSounds:
+  - {fileID: 8300000, guid: 7bae9648c3d2fcf47a3221e9214b0290, type: 3}
+  - {fileID: 8300000, guid: 3f5e79fa2b1d5c645a0e55addff2fa80, type: 3}
+  - {fileID: 8300000, guid: 05aa10b820ac57c41be1df7c05f16985, type: 3}
+  - {fileID: 8300000, guid: 0a2a2341b14d7e84888ed5f1434be6e1, type: 3}
+  - {fileID: 8300000, guid: 14903de234b60ba4abf9adf00cd8e712, type: 3}
+  - {fileID: 8300000, guid: 1d7486a9c8e51b840ac064f14ed1478a, type: 3}
+  ImpactSounds:
+  - {fileID: 8300000, guid: 0c785023ba99a22489945d44e8aa510d, type: 3}
+  - {fileID: 8300000, guid: 62706957111f6c64c842ffd74e63d677, type: 3}
+  - {fileID: 8300000, guid: 5ef51db651f76354288f17045c272e59, type: 3}
   Damage: 0
 --- !u!50 &2280461845363648000
 Rigidbody2D:

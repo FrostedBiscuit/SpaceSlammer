@@ -100,9 +100,9 @@ public class KR2000 : Enemy {
 
     private void OnCollisionEnter2D(Collision2D collision) {
 
-        if (Sounds.Length > 0 && SoundManager.instance.PlaySFX == true)
+        if (Sounds.HasSounds && SoundManager.instance.PlaySFX == true)
         {
-            SoundManager.instance.PlayRemoteSFXClip(Sounds[0], transform.position);
+            SoundManager.instance.PlayRemoteSFXClip(Sounds.RandomImpactSound, transform.position);
         }
 
         WeakPoint wp = collision.otherCollider.transform.GetComponent<WeakPoint>();

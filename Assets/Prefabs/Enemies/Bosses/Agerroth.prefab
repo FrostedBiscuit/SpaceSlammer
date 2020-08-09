@@ -172,8 +172,15 @@ MonoBehaviour:
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 1106760548554929329}
   Sounds:
-  - {fileID: 8300000, guid: 91c608c05334a40499536f7c6125410c, type: 3}
-  - {fileID: 8300000, guid: c852ee9b2e56374498b0b097a28be9c9, type: 3}
+    ImpactSounds:
+    - {fileID: 8300000, guid: af03f33d24a06564e89d4a582bbd23c6, type: 3}
+    - {fileID: 8300000, guid: 3ceb484d7b68bdb43a49621a8a558243, type: 3}
+    ExplosionSounds:
+    - {fileID: 8300000, guid: e4f1253d612714c47b446306e47ca46c, type: 3}
+    - {fileID: 8300000, guid: 63bff301294671f48a8e0a6bd94eb875, type: 3}
+    - {fileID: 8300000, guid: 31e5fd421c47f9c4f9889a07a1b37b31, type: 3}
+    - {fileID: 8300000, guid: ae98654295a844e458cc46da6f481360, type: 3}
+    - {fileID: 8300000, guid: 489107f273add3e4aa73bf481e03f0da, type: 3}
   BackoffRange: 5
   SlopeCoefficient: 150
   RocketFiringPeriod: 1.5

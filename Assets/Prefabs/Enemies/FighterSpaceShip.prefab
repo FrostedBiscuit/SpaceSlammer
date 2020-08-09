@@ -60,10 +60,14 @@ MonoBehaviour:
   Damagable: 1
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
-  Source: {fileID: 414}
   Sounds:
-  - {fileID: 8300000, guid: c3f7a8a0b5d1e7243912eb4f85039d5d, type: 3}
-  - {fileID: 8300000, guid: 0a5b62a89b30bf94087cd7c1b76ed07b, type: 3}
+    ImpactSounds:
+    - {fileID: 8300000, guid: fb84267ddb45ec549a2aaaf5dcedcda5, type: 3}
+    - {fileID: 8300000, guid: 0aed8b7c92b6e56489fa0e52d3c137ed, type: 3}
+    ExplosionSounds:
+    - {fileID: 8300000, guid: cc349366c86577a4ab0b124b41e073a1, type: 3}
+    - {fileID: 8300000, guid: f1a0158f634216b438c2ba8ac7c8aa07, type: 3}
+    - {fileID: 8300000, guid: b4e0dcba4789ffd4b975c590c0545d1f, type: 3}
   BackoffRange: 3.5
   SlopeCoefficient: 200
   WanderingSpeed: 50

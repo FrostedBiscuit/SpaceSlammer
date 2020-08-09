@@ -30,10 +30,7 @@ public abstract class Enemy : MonoBehaviour
     float DEBUG_newRandomDestinationTime = 2f;
 
     [SerializeField]
-    protected AudioSource Source = null;
-
-    [SerializeField]
-    protected AudioClip[] Sounds;
+    protected EnemySounds Sounds;
 
     new protected Rigidbody2D rigidbody;
 
@@ -105,13 +102,13 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    protected virtual void Die() {
-
+    protected virtual void Die() 
+    {
         if (enemyDeathCallback != null) enemyDeathCallback(this);
 
-        if (Sounds.Length > 0) {
-
-            SoundManager.instance.PlayRemoteSFXClip(Sounds[1], transform.position);
+        if (Sounds.HasSounds)
+        { 
+            SoundManager.instance.PlayRemoteSFXClip(Sounds.RandomExplosionSound, transform.position);
         }
     }
 
@@ -152,9 +149,9 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
 
-        if (Sounds.Length > 0 && SoundManager.instance.PlaySFX == true) {
+        if (Sounds.HasSounds && SoundManager.instance.PlaySFX == true) {
 
-            SoundManager.instance.PlayRemoteSFXClip(Sounds[0], transform.position);
+            SoundManager.instance.PlayRemoteSFXClip(Sounds.RandomImpactSound, transform.position);
         }
 
         rigidbody.AddForce(collision.relativeVelocity, ForceMode2D.Impulse);
@@ -182,5 +179,38 @@ public abstract class Enemy : MonoBehaviour
         currentPointOfInterestTime = Time.time + DEBUG_newRandomDestinationTime;
 
         return new Vector3(newX, newY) * randomDistanceMultiplier;
+    }
+
+    [Serializable]
+    protected class EnemySounds
+    {
+        public bool HasSounds
+        {
+            get
+            {
+                return ImpactSounds.Length > 0 && ExplosionSounds.Length > 0;
+            }
+        }
+
+        public AudioClip RandomImpactSound
+        {
+            get
+            {
+                return ImpactSounds[UnityEngine.Random.Range(0, ImpactSounds.Length)];
+            }
+        }
+
+        public AudioClip RandomExplosionSound
+        {
+            get
+            {
+                return ExplosionSounds[UnityEngine.Random.Range(0, ExplosionSounds.Length)];
+            }
+        }
+
+        [SerializeField]
+        private AudioClip[] ImpactSounds;
+        [SerializeField]
+        private AudioClip[] ExplosionSounds;
     }
 }

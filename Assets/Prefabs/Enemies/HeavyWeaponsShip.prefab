@@ -60,10 +60,16 @@ MonoBehaviour:
   Damagable: 1
   DEBUG_Fight: 1
   DEBUG_newRandomDestinationTime: 2
-  Source: {fileID: 416}
   Sounds:
-  - {fileID: 8300000, guid: 744c0f266633db846a8e271e51c80eb4, type: 3}
-  - {fileID: 8300000, guid: d71b9fa01d812324a918073de009827e, type: 3}
+    ImpactSounds:
+    - {fileID: 8300000, guid: 0b18bf81c310a994b80f2b74561853f1, type: 3}
+    - {fileID: 8300000, guid: 1a417c0ead7987840922003a02b297db, type: 3}
+    - {fileID: 8300000, guid: bb1d53de16b364d449aee4a2cd810c05, type: 3}
+    - {fileID: 8300000, guid: 852897a7ba8e2784dbd4a012ddb06bcd, type: 3}
+    - {fileID: 8300000, guid: 960e9d0759cee3c4ba3b668c628fa9fc, type: 3}
+    ExplosionSounds:
+    - {fileID: 8300000, guid: 5a07228f2023229478fed72f3cdf7b57, type: 3}
+    - {fileID: 8300000, guid: df9dd20f7ecfb1543a951d728a08f964, type: 3}
   BackoffRange: 3
   SlopeCoefficient: 150
   WanderingSpeed: 10
@@ -355,7 +361,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentShip: {fileID: 482}
   Source: {fileID: 415}
-  BeamSound: {fileID: 8300000, guid: ac8930bd78d5a7f4b92d84e5abcd51f2, type: 3}
+  BeamSounds:
+  - {fileID: 8300000, guid: 49120645a6b9f71468e021c0a96c52d2, type: 3}
+  - {fileID: 8300000, guid: 45c11d1d766486441872e21b05b323c2, type: 3}
+  - {fileID: 8300000, guid: 80373fe70de876640bfa35a59ab0d953, type: 3}
+  - {fileID: 8300000, guid: 293437f7c0707674ca9c1dd68e216e61, type: 3}
+  - {fileID: 8300000, guid: 590a3a92643d4444dba9a9e6802bd5f5, type: 3}
 --- !u!61 &403
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -4830,11 +4830,14 @@ MonoBehaviour:
   DestroyAfter: 1.5
   ExplosionRadius: 3.75
   RotationSmoothing: 10
-  BoosterSFX: {fileID: 8300000, guid: 3f999877234f950419b21226b677e9fc, type: 3}
+  BoosterSFX:
+  - {fileID: 8300000, guid: 5cc77ba9f91e8d849babf2238c2e558f, type: 3}
+  - {fileID: 8300000, guid: d46acac90cfa10b4ba861fff930a21b2, type: 3}
+  - {fileID: 8300000, guid: 9e54e3b0ee43a9649ab1ad550d4f6ed9, type: 3}
   ExplosionsSFX:
-  - {fileID: 8300000, guid: a21e1a989caa2404d8d0ce5557c884c7, type: 3}
-  - {fileID: 8300000, guid: 1b0a8f5e6bc9a624cb4c124b3aaa7037, type: 3}
-  - {fileID: 8300000, guid: 5512ec02640e8ce4c90fc268a33c31ef, type: 3}
+  - {fileID: 8300000, guid: acd3dcd8172856e4c91aeda5792cb428, type: 3}
+  - {fileID: 8300000, guid: 7f89d97e6ba8ea54d9bf9c6df4e42096, type: 3}
+  - {fileID: 8300000, guid: 6d797217ccf9f974abdf597ffbaadbcc, type: 3}
   ExhaustParticles: {fileID: 4984637604594047453}
   audioSource: {fileID: 4194630516171871800}
   Damage: 40

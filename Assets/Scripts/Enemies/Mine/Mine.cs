@@ -16,7 +16,7 @@ public class Mine : MonoBehaviour {
     private float MaxDistanceFromPlayer = 40f;
 
     [SerializeField]
-    private AudioClip ExplosionSFX = null;
+    private AudioClip[] ExplosionSFX = null;
 
     private float distanceCheckInterval = 5f;
 
@@ -94,9 +94,11 @@ public class Mine : MonoBehaviour {
         ExplosionParticlesPool.instance.RequestObject(transform.position, transform.rotation);
 
         // Play SFX
-        if (SoundManager.instance.PlaySFX)
+        if (SoundManager.instance.PlaySFX && ExplosionSFX.Length > 0)
         {
-            SoundSourcePool.instance.RequestObject(transform.position, transform.rotation).GetComponent<SoundSource>().Play(ExplosionSFX);
+            var randomSongIndex = UnityEngine.Random.Range(0, ExplosionSFX.Length);
+
+            SoundSourcePool.instance.RequestObject(transform.position, transform.rotation).GetComponent<SoundSource>().Play(ExplosionSFX[randomSongIndex]);
         }
 
         MinePool.instance.ReturnObject(this);

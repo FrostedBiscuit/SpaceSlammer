@@ -11,50 +11,55 @@ public class LaserBeam : MonoBehaviour {
     AudioSource Source = null;
 
     [SerializeField]
-    AudioClip BeamSound = null;
+    AudioClip[] BeamSounds = null;
 
     bool damagePlayer = false;
 
     float nextDamageTime;
     float lifetime;
 
-    private void Update() {
-
-        if (lifetime < Time.time) {
-
+    private void Update() 
+    {
+        if (lifetime < Time.time) 
+        {
             gameObject.SetActive(false);
 
             return;
         }
         
-        if (damagePlayer == true && nextDamageTime <= Time.time && Player.instance.gameObject.activeSelf == true) {
-
+        if (damagePlayer == true && nextDamageTime <= Time.time && Player.instance.gameObject.activeSelf == true) 
+        {
             Player.instance.TakeDamage(ParentShip.AttackDamage * Random.Range(0f, 1f));
 
             nextDamageTime = Time.time + ParentShip.BeamDamageInterval;
         }
 
-        if (SoundManager.instance.PlaySFX == true && Source.isPlaying == false) {
-            Source.PlayOneShot(BeamSound);
+        if (SoundManager.instance.PlaySFX == true &&  BeamSounds.Length > 0 && Source.isPlaying == false) 
+        {
+            var randomBeamSoundIndex = Random.Range(0, BeamSounds.Length);
+
+            Source.PlayOneShot(BeamSounds[randomBeamSoundIndex]);
         }
     }
 
-    private void OnEnable() {
-
+    private void OnEnable() 
+    {
         nextDamageTime = 0f;
         lifetime = Time.time + ParentShip.BeamDuration;
     }
 
-    private void OnTriggerEnter2D(Collider2D collider) {
-
-        if (collider.transform.tag == "Player") {
+    private void OnTriggerEnter2D(Collider2D collider) 
+    {
+        if (collider.transform.tag == "Player")
+        { 
             damagePlayer = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-
-        if (collision.transform.tag == "Player") {
+    private void OnTriggerExit2D(Collider2D collision) 
+    {
+        if (collision.transform.tag == "Player")
+        {
             damagePlayer = false;
         }
     }

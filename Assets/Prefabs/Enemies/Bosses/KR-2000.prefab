@@ -521,8 +521,14 @@ MonoBehaviour:
   DEBUG_newRandomDestinationTime: 2
   Source: {fileID: 5610560921351333414}
   Sounds:
-  - {fileID: 8300000, guid: 641507d399f1bfe46beb577168e5e907, type: 3}
-  - {fileID: 8300000, guid: e337414973ac56140b0a559c8d54d15a, type: 3}
+    ImpactSounds:
+    - {fileID: 8300000, guid: 1670d343910683a4eae9f2e452064443, type: 3}
+    - {fileID: 8300000, guid: 96c1b7aceb2d2ef4481b364a0ad43ff6, type: 3}
+    - {fileID: 8300000, guid: f9b923c87fb562c41afe973114408e4f, type: 3}
+    - {fileID: 8300000, guid: 0898cd0e99ed40a4693778b6f34491f9, type: 3}
+    ExplosionSounds:
+    - {fileID: 8300000, guid: f41b0c1ec90677b4bb92b5a831153db6, type: 3}
+    - {fileID: 8300000, guid: e69c6a1fd0dbd5949a657c5e489b07bb, type: 3}
   WanderingSpeed: 50
   SlopeCoefficient: 10
   RotationRadius: 10

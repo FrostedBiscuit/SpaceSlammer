@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestBossShip : Enemy {
-
+public class TestBossShip : Enemy 
+{
     public float FireRate = 0.5f;
     public float SlopeMultiplier = 2.7f;
     public float BackoffRange = 4f;
@@ -14,28 +14,32 @@ public class TestBossShip : Enemy {
 
     public Transform[] Guns = null;
 
-    protected override void OnEnable() {
+    protected override void OnEnable() 
+    {
         base.OnEnable();
 
         UIBossHealthBar.instance.Enable(Name);
     }
 
-    protected override void FixedUpdate() {
+    protected override void FixedUpdate() 
+    {
         base.FixedUpdate();
 
         move();
     }
 
-    protected override void Attack() {
+    protected override void Attack() 
+    {
         base.Attack();
 
-        for (int i = 0; i < Guns.Length; i++) {
-
+        for (int i = 0; i < Guns.Length; i++) 
+        {
             ProjectilePool.instance.RequestObject(Guns[i].position, Guns[i].rotation);
         }
     }
 
-    public override void TakeDamage(float dmg) {
+    public override void TakeDamage(float dmg) 
+    {
         base.TakeDamage(dmg);
 
         UIBossHealthBar.instance.UpdateHealth(currentHealth, MaxHealth);
@@ -43,8 +47,14 @@ public class TestBossShip : Enemy {
         Debug.Log($"Boss has been hit for {dmg}");
     }
 
-    protected override void Die() {
+    protected override void Die() 
+    {
         base.Die();
+
+        if (SoundManager.instance.PlaySFX && Sounds.HasSounds)
+        {
+            SoundManager.instance.PlayRemoteSFXClip(Sounds.RandomExplosionSound, transform.position);
+        }
 
         UIBossHealthBar.instance.Disable();
 
@@ -53,8 +63,8 @@ public class TestBossShip : Enemy {
         Destroy(gameObject);
     }
 
-    public override void Dispose() {
-
+    public override void Dispose() 
+    {
         UIBossHealthBar.instance.Disable();
 
         Destroy(gameObject);
@@ -62,22 +72,27 @@ public class TestBossShip : Enemy {
 
     float lastAttack;
 
-    protected override void Update() {
-        
-        if (lastAttack < Time.time && distanceToPlayer < AttackRange) {
-
+    protected override void Update() 
+    {        
+        if (lastAttack < Time.time && distanceToPlayer < AttackRange) 
+        {
             lastAttack = Time.time + FireRate;
 
             Attack();
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
         WeakPoint wp = collision.otherCollider.GetComponent<WeakPoint>();
 
-        if (wp != null) {
+        if (SoundManager.instance.PlaySFX && Sounds.HasSounds)
+        {
+            SoundManager.instance.PlayRemoteSFXClip(Sounds.RandomImpactSound, transform.position);
+        }
 
+        if (wp != null) 
+        {
             float dmg = collision.relativeVelocity.magnitude * wp.WeakPointDamageMultiplier * Player.instance.DamageMultiplier;
 
             wp.TakeDamage(dmg);
@@ -86,16 +101,16 @@ public class TestBossShip : Enemy {
         }
     }
 
-    void move() {
-
-        if (Player.instance.gameObject.activeSelf) {
-
+    void move() 
+    {
+        if (Player.instance.gameObject.activeSelf) 
+        {
             float speed = SlopeMultiplier * Mathf.Pow(distanceToPlayer - BackoffRange, 3f);
 
             rigidbody.AddForce(transform.up * speed * Time.fixedDeltaTime);
         }
-        else {
-
+        else 
+        {
             rigidbody.AddForce(transform.up * WanderingSpeed * Time.fixedDeltaTime);
         }
 
